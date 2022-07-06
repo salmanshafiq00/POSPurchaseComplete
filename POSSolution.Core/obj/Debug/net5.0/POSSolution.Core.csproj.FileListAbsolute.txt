@@ -1,0 +1,189 @@
+C:\Users\D3\source\repos\POSSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.deps.json
+C:\Users\D3\source\repos\POSSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.dll
+C:\Users\D3\source\repos\POSSolution\POSSolution.Core\bin\Debug\net5.0\ref\POSSolution.Core.dll
+C:\Users\D3\source\repos\POSSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.pdb
+C:\Users\D3\source\repos\POSSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.AssemblyReference.cache
+C:\Users\D3\source\repos\POSSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\D3\source\repos\POSSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfoInputs.cache
+C:\Users\D3\source\repos\POSSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfo.cs
+C:\Users\D3\source\repos\POSSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.CoreCompileInputs.cache
+C:\Users\D3\source\repos\POSSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.dll
+C:\Users\D3\source\repos\POSSolution\POSSolution.Core\obj\Debug\net5.0\ref\POSSolution.Core.dll
+C:\Users\D3\source\repos\POSSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.pdb
+F:\Project\New folder\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.deps.json
+F:\Project\New folder\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.dll
+F:\Project\New folder\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\ref\POSSolution.Core.dll
+F:\Project\New folder\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.pdb
+F:\Project\New folder\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.AssemblyReference.cache
+F:\Project\New folder\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.GeneratedMSBuildEditorConfig.editorconfig
+F:\Project\New folder\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfoInputs.cache
+F:\Project\New folder\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfo.cs
+F:\Project\New folder\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.CoreCompileInputs.cache
+F:\Project\New folder\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.dll
+F:\Project\New folder\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\ref\POSSolution.Core.dll
+F:\Project\New folder\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.pdb
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.deps.json
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.dll
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\ref\POSSolution.Core.dll
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.pdb
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.AssemblyReference.cache
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfoInputs.cache
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfo.cs
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.CoreCompileInputs.cache
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.dll
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\ref\POSSolution.Core.dll
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.pdb
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.json
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.dev.json
+C:\Users\D3\Downloads\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.genruntimeconfig.cache
+F:\VisualStudio\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.deps.json
+F:\VisualStudio\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.json
+F:\VisualStudio\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.dev.json
+F:\VisualStudio\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.dll
+F:\VisualStudio\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\ref\POSSolution.Core.dll
+F:\VisualStudio\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.pdb
+F:\VisualStudio\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.AssemblyReference.cache
+F:\VisualStudio\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.GeneratedMSBuildEditorConfig.editorconfig
+F:\VisualStudio\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfoInputs.cache
+F:\VisualStudio\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfo.cs
+F:\VisualStudio\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.CoreCompileInputs.cache
+F:\VisualStudio\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.dll
+F:\VisualStudio\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\ref\POSSolution.Core.dll
+F:\VisualStudio\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.pdb
+F:\VisualStudio\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.genruntimeconfig.cache
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.deps.json
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.json
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.dev.json
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.dll
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\ref\POSSolution.Core.dll
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.pdb
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.AssemblyReference.cache
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfoInputs.cache
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfo.cs
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.CoreCompileInputs.cache
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.dll
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\ref\POSSolution.Core.dll
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.pdb
+D:\FinalProject-main (2)\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.genruntimeconfig.cache
+D:\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.deps.json
+D:\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.json
+D:\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.dev.json
+D:\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.dll
+D:\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\ref\POSSolution.Core.dll
+D:\FinalProject-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.pdb
+D:\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.AssemblyReference.cache
+D:\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfoInputs.cache
+D:\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfo.cs
+D:\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.CoreCompileInputs.cache
+D:\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.dll
+D:\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\ref\POSSolution.Core.dll
+D:\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.pdb
+D:\FinalProject-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.genruntimeconfig.cache
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.deps.json
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.json
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.dev.json
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.dll
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\bin\Debug\net5.0\ref\POSSolution.Core.dll
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.pdb
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.AssemblyReference.cache
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.GeneratedMSBuildEditorConfig.editorconfig
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfoInputs.cache
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfo.cs
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.CoreCompileInputs.cache
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.dll
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\obj\Debug\net5.0\ref\POSSolution.Core.dll
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.pdb
+F:\VisualStudio\PosSolution\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.genruntimeconfig.cache
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.deps.json
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.json
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.dev.json
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.dll
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\bin\Debug\net5.0\ref\POSSolution.Core.dll
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.pdb
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.AssemblyReference.cache
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfoInputs.cache
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfo.cs
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.CoreCompileInputs.cache
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.dll
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\ref\POSSolution.Core.dll
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.pdb
+C:\Users\D3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.genruntimeconfig.cache
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.deps.json
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.json
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.dev.json
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.dll
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\bin\Debug\net5.0\ref\POSSolution.Core.dll
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.pdb
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.AssemblyReference.cache
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfoInputs.cache
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfo.cs
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.CoreCompileInputs.cache
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.dll
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\ref\POSSolution.Core.dll
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.pdb
+C:\Users\G3\Desktop\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.genruntimeconfig.cache
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.deps.json
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.json
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.dev.json
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.dll
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\ref\POSSolution.Core.dll
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.pdb
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfoInputs.cache
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfo.cs
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.CoreCompileInputs.cache
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.dll
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\ref\POSSolution.Core.dll
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.pdb
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.genruntimeconfig.cache
+C:\Users\LAB-3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.AssemblyReference.cache
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.deps.json
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.json
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.dev.json
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.dll
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\ref\POSSolution.Core.dll
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.pdb
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.AssemblyReference.cache
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfoInputs.cache
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfo.cs
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.CoreCompileInputs.cache
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.dll
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\ref\POSSolution.Core.dll
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.pdb
+D:\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.genruntimeconfig.cache
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.deps.json
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.json
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.dev.json
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.dll
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\ref\POSSolution.Core.dll
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.pdb
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfoInputs.cache
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfo.cs
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.CoreCompileInputs.cache
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.dll
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\ref\POSSolution.Core.dll
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.pdb
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.genruntimeconfig.cache
+C:\Users\D3\Desktop\FinalSolutionToday\FinalSolution\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.AssemblyReference.cache
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.deps.json
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.json
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.runtimeconfig.dev.json
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.dll
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\bin\Debug\net5.0\ref\POSSolution.Core.dll
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\bin\Debug\net5.0\POSSolution.Core.pdb
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfoInputs.cache
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.AssemblyInfo.cs
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.CoreCompileInputs.cache
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.dll
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\obj\Debug\net5.0\ref\POSSolution.Core.dll
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.pdb
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.genruntimeconfig.cache
+C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Core\obj\Debug\net5.0\POSSolution.Core.csproj.AssemblyReference.cache
