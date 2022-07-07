@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = POSSolution.Application
-build_property.ProjectDir = F:\PosPurchaseComplete\POSPurchaseComplete\POSSolution.Application\
+build_property.ProjectDir = C:\Users\D3\Desktop\PosBackEnd-main\POSSolution.Application\

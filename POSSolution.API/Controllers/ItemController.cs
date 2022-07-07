@@ -25,13 +25,12 @@ namespace POSSolution.API.Controllers
             return base.GetAsync(id);
         }
         [HttpGet("{id}")]
-        public new async Task<ActionResult<ItemDetails>> ItemDetailsAsync([FromRoute] int id)
+        public async Task<IActionResult> ItemDetailsAsync([FromRoute] int id)
         {
             try
             {
               var result =  _context.Items.Join(
                    _context.PurchaseDetails,
-
                    item => item.Id,
                    purchaseDetails => purchaseDetails.ItemId,
                    (item, PurchaseDetails) => new { item, PurchaseDetails }
@@ -39,7 +38,7 @@ namespace POSSolution.API.Controllers
                         _context.StockCounts,
                         itemCombined => itemCombined.item.Id,
                         stock => stock.ItemId,
-                        (itemCombined, stock) => new ItemDetails{
+                        (itemCombined, stock) => new {
                             ItemId = itemCombined.item.Id,
                             ItemName = itemCombined.item.Name,
                             UnitPrice = 100,
@@ -62,9 +61,8 @@ namespace POSSolution.API.Controllers
                     return NotFound($"{id} not found");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception(ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     "Error retrieving data from the database");
             }

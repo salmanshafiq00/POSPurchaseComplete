@@ -721,23 +721,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Salman\\.nuget\\packages\\": {},
+    "C:\\Users\\D3\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\PosPurchaseComplete\\POSPurchaseComplete\\POSSolution.Core\\POSSolution.Core.csproj",
+      "projectUniqueName": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Core\\POSSolution.Core.csproj",
       "projectName": "POSSolution.Core",
-      "projectPath": "F:\\PosPurchaseComplete\\POSPurchaseComplete\\POSSolution.Core\\POSSolution.Core.csproj",
-      "packagesPath": "C:\\Users\\Salman\\.nuget\\packages\\",
-      "outputPath": "F:\\PosPurchaseComplete\\POSPurchaseComplete\\POSSolution.Core\\obj\\",
+      "projectPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Core\\POSSolution.Core.csproj",
+      "packagesPath": "C:\\Users\\D3\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Salman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\D3\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],

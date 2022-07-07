@@ -10,8 +10,8 @@ using POSSolution.Infrastructure;
 namespace POSSolution.Infrastructure.Migrations
 {
     [DbContext(typeof(POSContext))]
-    [Migration("20220630103022_initialize")]
-    partial class initialize
+    [Migration("20220707040915_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,30 +20,6 @@ namespace POSSolution.Infrastructure.Migrations
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
-
-            modelBuilder.Entity("POSSolution.Core.Common.Models.DiscountAndTax", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<decimal>("DiscountAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("DiscountRate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("IsPercentage")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("TaxRate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DiscountAndTaxes");
-                });
 
             modelBuilder.Entity("POSSolution.Core.Models.Brand", b =>
                 {
@@ -615,6 +591,30 @@ namespace POSSolution.Infrastructure.Migrations
                     b.ToTable("SalesDetails");
                 });
 
+            modelBuilder.Entity("POSSolution.Core.Models.SalesDiscountTax", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<decimal>("DiscountAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("DiscountRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("IsPercentage")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("TaxRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SalesDiscountTaxes");
+                });
+
             modelBuilder.Entity("POSSolution.Core.Models.SalesPayment", b =>
                 {
                     b.Property<int>("Id")
@@ -949,7 +949,7 @@ namespace POSSolution.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("POSSolution.Core.Common.Models.DiscountAndTax", "DiscountAndTax")
+                    b.HasOne("POSSolution.Core.Models.SalesDiscountTax", "SalesDiscountTax")
                         .WithMany("Item")
                         .HasForeignKey("DiscountId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -965,7 +965,7 @@ namespace POSSolution.Infrastructure.Migrations
 
                     b.Navigation("Category");
 
-                    b.Navigation("DiscountAndTax");
+                    b.Navigation("SalesDiscountTax");
 
                     b.Navigation("Unit");
                 });
@@ -1140,11 +1140,6 @@ namespace POSSolution.Infrastructure.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("POSSolution.Core.Common.Models.DiscountAndTax", b =>
-                {
-                    b.Navigation("Item");
-                });
-
             modelBuilder.Entity("POSSolution.Core.Models.Brand", b =>
                 {
                     b.Navigation("Items");
@@ -1190,6 +1185,11 @@ namespace POSSolution.Infrastructure.Migrations
                     b.Navigation("SalesDetails");
 
                     b.Navigation("SalesPayments");
+                });
+
+            modelBuilder.Entity("POSSolution.Core.Models.SalesDiscountTax", b =>
+                {
+                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("POSSolution.Core.Models.SalesReturn", b =>

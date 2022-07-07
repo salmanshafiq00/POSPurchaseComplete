@@ -56,12 +56,11 @@ namespace POSSolution.API.Controllers
 
                     foreach (PurchaseDetails details in purchase.PurchaseDetails)
                     {
-
-                        int discountId = _context.Items.Single(i => i.Id == details.ItemId).DiscountId;
+                        Item purchaseItem = _context.Items.Include(i => i.SalesDiscountTax).SingleOrDefault(it => it.Id == details.ItemId);
+                        SalesDiscountTax dt = purchaseItem.SalesDiscountTax;
                         decimal discountAmount = 0;
                         decimal taxAmount = 0;
 
-                        SalesDiscountTax dt = await _context.SalesDiscountTaxes.FirstOrDefaultAsync(d => d.Id == discountId);
 
                         if (dt.IsPercentage)
                         {
@@ -136,7 +135,6 @@ namespace POSSolution.API.Controllers
                             int discountId = _context.Items.Single(i => i.Id == details.ItemId).DiscountId;
                             decimal discountAmount = 0;
                             decimal taxAmount = 0;
-
                             SalesDiscountTax dt = await _context.SalesDiscountTaxes.FirstOrDefaultAsync(d => d.Id == discountId);
                             if (dt.IsPercentage)
                             {

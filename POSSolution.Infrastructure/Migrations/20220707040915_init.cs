@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace POSSolution.Infrastructure.Migrations
 {
-    public partial class initialize : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,22 +49,6 @@ namespace POSSolution.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DiscountAndTaxes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IsPercentage = table.Column<bool>(type: "bit", nullable: false),
-                    DiscountRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DiscountAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    TaxRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DiscountAndTaxes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ExpenseCategories",
                 columns: table => new
                 {
@@ -107,6 +91,22 @@ namespace POSSolution.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SalesDiscountTaxes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsPercentage = table.Column<bool>(type: "bit", nullable: false),
+                    DiscountRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DiscountAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TaxRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SalesDiscountTaxes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -242,9 +242,9 @@ namespace POSSolution.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Items_DiscountAndTaxes_DiscountId",
+                        name: "FK_Items_SalesDiscountTaxes_DiscountId",
                         column: x => x.DiscountId,
-                        principalTable: "DiscountAndTaxes",
+                        principalTable: "SalesDiscountTaxes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -861,7 +861,7 @@ namespace POSSolution.Infrastructure.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "DiscountAndTaxes");
+                name: "SalesDiscountTaxes");
 
             migrationBuilder.DropTable(
                 name: "Units");
