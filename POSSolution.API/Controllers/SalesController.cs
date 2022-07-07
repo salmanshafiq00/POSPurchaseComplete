@@ -21,6 +21,28 @@ namespace POSSolution.API.Controllers
             _context = context;
         }
 
+        public override async Task<ActionResult<Sales>> GetAsync([FromRoute] int id)
+        {
+            try
+            {
+
+                var result = await _dbSet.Include(sd => sd.SalesDetails).Where(e => e.Id == id).FirstOrDefaultAsync();
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return NotFound($"{id} not found");
+                }
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
 
         public override async Task<ActionResult<Sales>> CreateAsync([FromBody] Sales sales)
         {
@@ -75,6 +97,67 @@ namespace POSSolution.API.Controllers
             return Created("api/Sales/" + sales.Id, sales);
         }
 
+
+        public override async Task<ActionResult<Sales>> UpdateAsync([FromRoute] int id, [FromBody] Sales sales)
+        {
+            if (id != sales.Id)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                using (var transection = await _context.Database.BeginTransactionAsync())
+                {
+                    try
+                    {
+                        foreach (SalesDetails details in sales.SalesDetails)
+                        {
+                            decimal salesPrice = _context.PurchaseDetails.OrderBy(o => o.Id).First(s => s.ItemId == details.ItemId && s.Quantity > s.SoldQty).SalesPrice;
+                            details.TotalAmount = details.SalesQty * salesPrice;
+                        }
+
+                        sales.SubTotal = sales.SalesDetails.Sum(s => s.TotalAmount);
+
+                         _context.Sales.Update(sales);
+
+                        List<PurchaseDetails> pdList = new List<PurchaseDetails>();
+                        foreach (SalesDetails details in sales.SalesDetails)
+                        {
+                            PurchaseDetails pd = _context.PurchaseDetails.OrderBy(o => o.Id).First(s => s.ItemId == details.ItemId && s.Quantity > s.SoldQty);
+                            decimal diffSoldQty = details.SalesQty - pd.SoldQty;
+                            pd.SoldQty += diffSoldQty;
+                            pdList.Add(pd);
+                        }
+                        _context.PurchaseDetails.UpdateRange(pdList);
+
+                        List<StockCount> whList = new List<StockCount>();
+                        foreach (SalesDetails details in sales.SalesDetails)
+                        {
+
+                            if (_context.StockCounts.Any(item => item.ItemId == details.ItemId))
+                            {
+                                decimal diffSalesQty = details.SalesQty - _context.SalesDetails.Single(sd => sd.Id == details.Id).SalesQty;
+                                StockCount wh = _context.StockCounts.Single(item => item.ItemId == details.ItemId);
+                                wh.SalesQty += diffSalesQty;
+                                whList.Add(wh);
+
+                            }
+
+                        }
+                        _context.StockCounts.UpdateRange(whList);
+                        await _context.SaveChangesAsync();
+                        await transection.CommitAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        await transection.RollbackAsync();
+                        throw new Exception(ex.Message);
+                    }
+                }
+                return Ok();
+            }
+           
+        }
     }
 }
 

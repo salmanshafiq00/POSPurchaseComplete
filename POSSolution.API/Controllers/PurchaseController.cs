@@ -25,7 +25,25 @@ namespace POSSolution.API.Controllers
 
         public override async Task<ActionResult<Purchase>> GetAsync([FromRoute] int id)
         {
-            return await _context.Purchases.Include(p => p.PurchaseDetails).SingleAsync(p => p.Id == id);
+            try
+            {
+
+                var result = await _dbSet.Include(pd => pd.PurchaseDetails).Where(e => e.Id == id).FirstOrDefaultAsync();
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return NotFound($"{id} not found");
+                }
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
         }
 
         public override  async Task<ActionResult<Purchase>> CreateAsync([FromBody] Purchase purchase)
@@ -39,9 +57,12 @@ namespace POSSolution.API.Controllers
                     foreach (PurchaseDetails details in purchase.PurchaseDetails)
                     {
 
+                        int discountId = _context.Items.Single(i => i.Id == details.ItemId).DiscountId;
                         decimal discountAmount = 0;
                         decimal taxAmount = 0;
-                        SalesDiscountTax dt = await _context.SalesDiscountTaxes.SingleAsync(s => s.Id == details.ItemId);
+
+                        SalesDiscountTax dt = await _context.SalesDiscountTaxes.FirstOrDefaultAsync(d => d.Id == discountId);
+
                         if (dt.IsPercentage)
                         {
                             discountAmount = details.UnitCost * dt.DiscountRate;
@@ -112,9 +133,11 @@ namespace POSSolution.API.Controllers
                         foreach (PurchaseDetails details in purchase.PurchaseDetails)
                         {
 
+                            int discountId = _context.Items.Single(i => i.Id == details.ItemId).DiscountId;
                             decimal discountAmount = 0;
                             decimal taxAmount = 0;
-                            SalesDiscountTax dt = await _context.SalesDiscountTaxes.SingleAsync(s => s.Id == details.ItemId);
+
+                            SalesDiscountTax dt = await _context.SalesDiscountTaxes.FirstOrDefaultAsync(d => d.Id == discountId);
                             if (dt.IsPercentage)
                             {
                                 discountAmount = details.UnitCost * dt.DiscountRate;
@@ -172,6 +195,8 @@ namespace POSSolution.API.Controllers
             }
             return Ok();
         }
+
+
 
     }
 
