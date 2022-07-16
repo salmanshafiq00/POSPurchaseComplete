@@ -52,12 +52,9 @@ namespace POSSolution.API.Controllers
                     if (await _context.Sales
                         .Include(s => s.SalesDetails)
                         .AnyAsync(s => s.Id == salesReturn.SalesId && 
-                        s.CustomerId == salesReturn.CustomerId && s.SalesDetails.Contains(salesReturn.SalesReturnDetails.))
+                        s.CustomerId == salesReturn.CustomerId ))
                     {
-                        foreach (SalesReturnDetails details in salesReturn.SalesReturnDetails)
-                        {
-                            && s.SalesDetails.Contains(salesReturn.SalesReturnDetails.Contains(sd => sd.ReturnItemId)
-                        }
+
                         await _context.SalesReturns.AddAsync(salesReturn);
                         await _context.SaveChangesAsync();
                     }
