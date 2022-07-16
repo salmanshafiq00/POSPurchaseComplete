@@ -487,6 +487,7 @@ namespace POSSolution.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     SalesReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SalesId = table.Column<int>(type: "int", nullable: false),
@@ -500,6 +501,12 @@ namespace POSSolution.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SalesReturns", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SalesReturns_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SalesReturns_Sales_SalesId",
                         column: x => x.SalesId,
@@ -610,11 +617,18 @@ namespace POSSolution.Infrastructure.Migrations
                     SalesReturnQty = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "money", nullable: false),
                     SalesReturnId = table.Column<int>(type: "int", nullable: false),
-                    ReturnItemId = table.Column<int>(type: "int", nullable: false)
+                    ReturnItemId = table.Column<int>(type: "int", nullable: false),
+                    ItemId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SalesReturnDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SalesReturnDetails_Items_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SalesReturnDetails_SalesReturns_SalesReturnId",
                         column: x => x.SalesReturnId,
@@ -769,9 +783,19 @@ namespace POSSolution.Infrastructure.Migrations
                 column: "SalesReturnId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SalesReturnDetails_ItemId",
+                table: "SalesReturnDetails",
+                column: "ItemId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SalesReturnDetails_SalesReturnId",
                 table: "SalesReturnDetails",
                 column: "SalesReturnId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SalesReturns_CustomerId",
+                table: "SalesReturns",
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SalesReturns_SalesId",

@@ -10,7 +10,7 @@ using POSSolution.Infrastructure;
 namespace POSSolution.Infrastructure.Migrations
 {
     [DbContext(typeof(POSContext))]
-    [Migration("20220707040915_init")]
+    [Migration("20220713150021_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -659,6 +659,9 @@ namespace POSSolution.Infrastructure.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("GrandTotal")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("money")
@@ -690,6 +693,8 @@ namespace POSSolution.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
                     b.HasIndex("SalesId");
 
                     b.ToTable("SalesReturns");
@@ -701,6 +706,9 @@ namespace POSSolution.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ReturnItemId")
                         .HasColumnType("int");
@@ -715,6 +723,8 @@ namespace POSSolution.Infrastructure.Migrations
                         .HasColumnType("money");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
 
                     b.HasIndex("SalesReturnId");
 
@@ -1077,22 +1087,36 @@ namespace POSSolution.Infrastructure.Migrations
 
             modelBuilder.Entity("POSSolution.Core.Models.SalesReturn", b =>
                 {
+                    b.HasOne("POSSolution.Core.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
+
                     b.HasOne("POSSolution.Core.Models.Sales", "Sales")
                         .WithMany()
                         .HasForeignKey("SalesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Customer");
+
                     b.Navigation("Sales");
                 });
 
             modelBuilder.Entity("POSSolution.Core.Models.SalesReturnDetails", b =>
                 {
+                    b.HasOne("POSSolution.Core.Models.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("POSSolution.Core.Models.SalesReturn", "SalesReturn")
                         .WithMany("SalesReturnDetails")
                         .HasForeignKey("SalesReturnId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Item");
 
                     b.Navigation("SalesReturn");
                 });

@@ -55,8 +55,6 @@ Item
  
 
 purchase:
-
-
  {
   "id": 0,
   "invoiceNo": "10001",   
@@ -65,13 +63,13 @@ purchase:
   "otherCharges": 2000,
   "grandTotal":100000,
   "note": "note",
-  "supplierId": 2,
+  "supplierId": 1,
   "purchaseDate": "2022-06-24",
   "status": 1,
   "purchaseDetails": [
    {
      "id": 0,
-     "quantity": 20,
+     "quantity": 100,
      "unitCost": 2100,
      "totalAmount": 42000,
      "discountAmount":2000,
@@ -82,20 +80,9 @@ purchase:
      "salesPrice": 100,
      "expireDate": "2022-06-27",
      "soldQty": 0
-  }
-]
-}
-  
- "purchasePayment":{
-    "id": 0,
-    "paymentType": 1,
-    "paymentDate": "2022-06-24",
-    "amount": 10000,
-    "dueAmount": 11000,
-    "paymentNote": "Partial",
-    "purchaseId": 0
- }
-}
+   }
+  ]  
+} 
 
 
 purchaseReturn
@@ -110,7 +97,6 @@ purchaseReturn
   "purchaseReturnDate": "2022-06-30",
   "status": 1,
   "purchaseId": 1,
- 
   "purchaseReturnDetails": [
     {
       "id": 0,
@@ -120,7 +106,7 @@ purchaseReturn
       "unitCost": 0,
       "totalAmount": 100,
       "purchaseReturnId": 0
-}
+    }
   ]
 }
 
@@ -143,158 +129,40 @@ sales:{
       "salesId": 0,
       "itemId": 1
     }
-  ]
+  ],
+   "salesPayment":{
+    "id": 0,
+    "paymentType": 1,
+    "paymentDate": "2022-06-24",
+    "amount": 10000,
+    "dueAmount": 11000,
+    "paymentNote": "Partial",
+    "purchaseId": 0
+ }
 }
 
-sales Return|: 
+sales Return: 
 {
   "id": 0,
-  "invoiceNo": "string",
-  "totalQuantity": 1,
+  "invoiceNo": SR1001
+  "totalQuantity": 4,
   "subTotal": 100,
   "otherCharges": 500,
   "grandTotal": 522,
   "note": "string",
+  "customerId": 1,
   "status": 1,
   "salesReturnDate": "2022-06-30",
-  "salesId": 3,
+  "salesId": 1,
   "salesReturnDetails": [
     {
       "id": 0,
-      "salesReturnQty": 1,
+      "salesReturnQty": 4,
       "totalAmount": 500,
       "salesReturnId": 0,
       "returnItemId": 1
     }
   ]
-    }
+ }
 
 
-Go
-Insert into PurchaseInvoices Values ('IN1003', 1, 2, '2022-12-12', 1, 'Hello', 10, 500000, 0, 0, 500000, 'Tata')
-Insert into PurchaseInvoices Values ('IN1004', 1, 2, '2022-12-12', 1, 'Hello', 15, 100000, 0, 0, 100000, 'Tatatata')
-Insert into PurchaseInvoices Values ('IN1005', 1, 2, '2022-12-12', 1, 'Hello', 20, 300000, 0, 0, 300000, 'Tatass')
-
-Go
-insert into dbo.Items values
-('Walton','W-123',1,1,1,'M-W123',1,1000,'2022/02/02','A123456','Mobile','null',0,20000.00,10,1,30000.00,4500.00),
-('Samsung','Sg-123',2,2,1,'M-Sg123',2,2000,'2022/02/02','A123455','Mobile','null',0,20000.00,10,1,30000.00,4500.00),
-('Oppo','Op-123',3,3,2,'M-Op123',2,3000,'2022/02/02','A123457','Mobile','null',0,20000.00,10,1,30000.00,4500.00);
-
-GO
-PurchaseDetails {
-  "id": 0,
-  "itemName": "Fridge",
-  "quantity": 7,
-  "purchasePrice": 50000,
-  "discount": 0,
-  "tax": 0,
-  "taxAmount": 0,
-  "unitCost": 50000,
-  "totalAmount": 500000,
-  "purchaseInvoiceId": 1,
-  "itemId": 1 
-}
-
-Go
-Insert into SalesInvoices Values ('SL1001', 1, 1, 1, '2022-01-01', 50, 200000, 0, 0, 200000, 'nai');
-Insert into SalesInvoices Values ('SL1002', 2, 1, 1, '2022-01-01', 60, 200000, 0, 0, 200000, 'nai');
-Insert into SalesInvoices Values ('SL1003', 3, 1, 1, '2022-01-01', 30, 200000, 0, 0, 200000, 'nai');
-
-GO
-SalesDetails [{
-  "id": 0,
-  "itemName": "Mixer",
-  "unitPrice": 30000,
-  "quantity": 50,
-  "tax": 0,
-  "taxAmount":0,
-  "discount": 0,
-  "discountAmount": 0,
-  "unitCost": 30000,
-  "totalAmount": 1500000, 
-  "salesInvoiceId": 1,
-  "itemId": 6  
-},
-{
-  "id": 0,
-  "itemName": "Blender",
-  "unitPrice": 30000,
-  "quantity": 25,
-  "tax": 0,
-  "taxAmount":0,
-  "discount": 0,
-  "discountAmount": 0,
-  "unitCost": 30000,
-  "totalAmount": 1500000, 
-  "salesInvoiceId": 1,
-  "itemId": 7  
-}]
-Go
-Insert into PurchaseReturnInvoices Values ('PR1001', 1, 1, '2022-01-01', 1, 'Mizan', 10, 20000, 0, 0, 200000,'BadProduct',1)
-Insert into PurchaseReturnInvoices Values ('PR1002', 1, 2, '2022-01-01', 1, 'Mizan', 20, 20000, 0, 0, 200000,'BadProduct',2)
-Insert into PurchaseReturnInvoices Values ('PR1003', 1, 2, '2022-01-01', 1, 'Mizan', 15, 20000, 0, 0, 200000,'BadProduct',3)
-Go
-[{
-  "id": 0,
-  "itemName": "Fridge",
-  "quantity": 12,
-  "purchasePrice": 50000,
-  "discount": 0,
-  "discountAmount":0;
-  "tax": 0,
-  "taxAmount": 0,
-  "unitCost": 50000,
-  "totalAmount": 500000,
-  "purchaseReturnInvoiceId": 1,
-  "itemId": 6
-  
-},
-{
-  "id": 0,
-  "itemName": "Television",
-  "quantity": 10,
-  "purchasePrice": 50000,
-  "discount": 0,
-  "discountAmount":0;
-  "tax": 0,
-  "taxAmount": 0,
-  "unitCost": 50000,
-  "totalAmount": 500000,
-  "purchaseReturnInvoiceId": 1,
-  "itemId": 7
-  
-}]
-Go
-Insert into SalesReturnInvoices Values('Sr1001', 1, 1, 1, '2022-01-01', 20, 300000, 0, 0, 300000,'BadProduct', 1)
-Insert into SalesReturnInvoices Values('Sr1001', 2, 1, 1, '2022-01-01', 10, 300000, 0, 0, 300000,'BadProduct', 2)
-Insert into SalesReturnInvoices Values('Sr1001', 3, 1, 1, '2022-01-01', 15, 300000, 0, 0, 300000,'BadProduct', 3)
-Go
-[{
-  "id": 0,
-  "itemName": "Mixer",
-  "unitPrice": 30000,
-  "quantity": 20,
-  "tax": 0,
-  "taxAmount":0,
-  "discount": 0,
-  "discountAmount": 0,
-  "unitCost": 30000,
-  "totalAmount": 1500000, 
-  "salesReturnInvoiceId": 1,
-  "itemId": 6  
-},
-{
-  "id": 0,
-  "itemName": "Blender",
-  "unitPrice": 30000,
-  "quantity": 25,
-  "tax": 0,
-  "taxAmount":0,
-  "discount": 0,
-  "discountAmount": 0,
-  "unitCost": 30000,
-  "totalAmount": 1500000, 
-  "salesReturnInvoiceId": 1,
-  "itemId": 7  
-}]

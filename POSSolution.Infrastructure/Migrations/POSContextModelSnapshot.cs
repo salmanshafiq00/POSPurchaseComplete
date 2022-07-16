@@ -657,6 +657,9 @@ namespace POSSolution.Infrastructure.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("GrandTotal")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("money")
@@ -687,6 +690,8 @@ namespace POSSolution.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("SalesId");
 
@@ -1075,11 +1080,17 @@ namespace POSSolution.Infrastructure.Migrations
 
             modelBuilder.Entity("POSSolution.Core.Models.SalesReturn", b =>
                 {
+                    b.HasOne("POSSolution.Core.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
+
                     b.HasOne("POSSolution.Core.Models.Sales", "Sales")
                         .WithMany()
                         .HasForeignKey("SalesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Customer");
 
                     b.Navigation("Sales");
                 });

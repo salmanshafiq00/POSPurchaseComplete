@@ -151,7 +151,6 @@ namespace POSSolution.API.Controllers
                             details.SalesPrice = details.UnitCost - discountAmount + taxAmount + profitMargin;
                         }
                          _context.Purchases.Update(purchase);
-                         //await _context.SaveChangesAsync();
 
                         List<StockCount> whList = new List<StockCount>();
                         foreach (PurchaseDetails details in purchase.PurchaseDetails)
@@ -179,8 +178,6 @@ namespace POSSolution.API.Controllers
 
                         }
                     }
-
-                  
 
                     await _context.SaveChangesAsync();
                     await transection.CommitAsync();

@@ -61,6 +61,7 @@ namespace POSSolution.API.Controllers
                     await _context.Sales.AddAsync(sales);
                     await _context.SaveChangesAsync();
 
+                    // Update the sold quantity in PurchaseDetails
                     List<PurchaseDetails> pdList = new List<PurchaseDetails>();
                     foreach (SalesDetails details in sales.SalesDetails)
                     {
@@ -70,6 +71,7 @@ namespace POSSolution.API.Controllers
                     }
                     _context.PurchaseDetails.UpdateRange(pdList);
 
+                    // Update the SalesQty in StockCount
                     List<StockCount> whList = new List<StockCount>();
                     foreach (SalesDetails details in sales.SalesDetails)
                     {
@@ -93,7 +95,6 @@ namespace POSSolution.API.Controllers
                     throw new Exception(ex.Message);
                 }
             }
-            //return RedirectToAction(actionName: )
             return Created("api/Sales/" + sales.Id, sales);
         }
 
@@ -120,6 +121,7 @@ namespace POSSolution.API.Controllers
 
                          _context.Sales.Update(sales);
 
+                        // Update the sold quantity in PurchaseDetails
                         List<PurchaseDetails> pdList = new List<PurchaseDetails>();
                         foreach (SalesDetails details in sales.SalesDetails)
                         {
@@ -130,6 +132,7 @@ namespace POSSolution.API.Controllers
                         }
                         _context.PurchaseDetails.UpdateRange(pdList);
 
+                        // Update the SalesQty in StockCount
                         List<StockCount> whList = new List<StockCount>();
                         foreach (SalesDetails details in sales.SalesDetails)
                         {
