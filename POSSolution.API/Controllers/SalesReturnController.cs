@@ -19,7 +19,7 @@ namespace POSSolution.API.Controllers
         {
             _context = context;
         }
-
+        // Api for get single entity
         public override async Task<ActionResult<SalesReturn>> GetAsync([FromRoute] int id)
         {
             try
@@ -42,15 +42,22 @@ namespace POSSolution.API.Controllers
                     "Error retrieving data from the database");
             }
         }
-
+        // Api for Create entity
         public override async Task<ActionResult<SalesReturn>> CreateAsync([FromBody] SalesReturn salesReturn)
         {
             using (var transection = await _context.Database.BeginTransactionAsync())
             {
                 try
                 {
-                    if (await _context.Sales.Include(s => s.SalesDetails).AnyAsync(s => s.Id == salesReturn.SalesId && s.CustomerId == salesReturn.CustomerId))
+                    if (await _context.Sales
+                        .Include(s => s.SalesDetails)
+                        .AnyAsync(s => s.Id == salesReturn.SalesId && 
+                        s.CustomerId == salesReturn.CustomerId && s.SalesDetails.Contains(salesReturn.SalesReturnDetails.))
                     {
+                        foreach (SalesReturnDetails details in salesReturn.SalesReturnDetails)
+                        {
+                            && s.SalesDetails.Contains(salesReturn.SalesReturnDetails.Contains(sd => sd.ReturnItemId)
+                        }
                         await _context.SalesReturns.AddAsync(salesReturn);
                         await _context.SaveChangesAsync();
                     }
@@ -89,7 +96,7 @@ namespace POSSolution.API.Controllers
             }
             return Created("api/SalesReturn/" + salesReturn.Id, salesReturn);
         }
-
+        // Api for update entity
         public override async Task<ActionResult<SalesReturn>> UpdateAsync([FromRoute] int id, [FromBody] SalesReturn salesReturn)
         {
             using (var transection = await _context.Database.BeginTransactionAsync())

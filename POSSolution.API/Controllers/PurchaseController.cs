@@ -45,8 +45,8 @@ namespace POSSolution.API.Controllers
                     "Error retrieving data from the database");
             }
         }
-
-        public override  async Task<ActionResult<Purchase>> CreateAsync([FromBody] Purchase purchase)
+        // Api for create entity
+        public override async Task<ActionResult<Purchase>> CreateAsync([FromBody] Purchase purchase)
         {
 
             using (var transection = await _context.Database.BeginTransactionAsync())
@@ -76,23 +76,25 @@ namespace POSSolution.API.Controllers
                         decimal profitMargin = _context.Items.Single(item => item.Id == details.ItemId).ProfitMargin;
                         details.SalesPrice = details.UnitCost - discountAmount + taxAmount + profitMargin;
                     }
-                        await _context.Purchases.AddAsync(purchase);
-                        await _context.SaveChangesAsync();
+                    await _context.Purchases.AddAsync(purchase);
+                    await _context.SaveChangesAsync();
 
-                       List<StockCount> whList = new List<StockCount>();
+                    // Update Correspondent StockCount entity
+                    List<StockCount> whList = new List<StockCount>();
                     foreach (PurchaseDetails details in purchase.PurchaseDetails)
                     {
-                       
+
                         if (_context.StockCounts.Any(item => item.ItemId == details.ItemId))
                         {
                             StockCount wh = _context.StockCounts.Single(item => item.ItemId == details.ItemId);
                             wh.PurchaseQty += details.Quantity;
                             whList.Add(wh);
-                             _context.StockCounts.UpdateRange(whList);
+                            _context.StockCounts.UpdateRange(whList);
 
                         }
                         else
                         {
+                            // Create correspondent entity in StockCount if not exist
                             StockCount wh = new StockCount();
                             wh.ItemId = details.ItemId;
                             wh.PurchaseQty = details.Quantity;
@@ -101,9 +103,9 @@ namespace POSSolution.API.Controllers
                             await _context.StockCounts.AddRangeAsync(whList);
 
                         }
-                        
+
                     }
-                    
+
                     await _context.SaveChangesAsync();
                     await transection.CommitAsync();
                 }
@@ -116,7 +118,7 @@ namespace POSSolution.API.Controllers
             return Created("api/Purchase/" + purchase.Id, purchase);
         }
 
-
+        // Api for update entity
         public override async Task<ActionResult<Purchase>> UpdateAsync([FromRoute] int id, [FromBody] Purchase purchase)
         {
             using (var transection = await _context.Database.BeginTransactionAsync())
@@ -132,10 +134,14 @@ namespace POSSolution.API.Controllers
                         foreach (PurchaseDetails details in purchase.PurchaseDetails)
                         {
 
-                            int discountId = _context.Items.Single(i => i.Id == details.ItemId).DiscountId;
+                            //int discountId = _context.Items.Single(i => i.Id == details.ItemId).DiscountId;
+                            //decimal discountAmount = 0;
+                            //decimal taxAmount = 0;
+                            //SalesDiscountTax dt = await _context.SalesDiscountTaxes.FirstOrDefaultAsync(d => d.Id == discountId);
+                            Item purchaseItem = _context.Items.Include(i => i.SalesDiscountTax).SingleOrDefault(it => it.Id == details.ItemId);
+                            SalesDiscountTax dt = purchaseItem.SalesDiscountTax;
                             decimal discountAmount = 0;
                             decimal taxAmount = 0;
-                            SalesDiscountTax dt = await _context.SalesDiscountTaxes.FirstOrDefaultAsync(d => d.Id == discountId);
                             if (dt.IsPercentage)
                             {
                                 discountAmount = details.UnitCost * dt.DiscountRate;
@@ -150,7 +156,7 @@ namespace POSSolution.API.Controllers
                             decimal profitMargin = _context.Items.Single(item => item.Id == details.ItemId).ProfitMargin;
                             details.SalesPrice = details.UnitCost - discountAmount + taxAmount + profitMargin;
                         }
-                         _context.Purchases.Update(purchase);
+                        _context.Purchases.Update(purchase);
 
                         List<StockCount> whList = new List<StockCount>();
                         foreach (PurchaseDetails details in purchase.PurchaseDetails)
@@ -167,6 +173,7 @@ namespace POSSolution.API.Controllers
                             }
                             else
                             {
+                                // Create correspondent entity in StockCount if not exist
                                 StockCount wh = new StockCount();
                                 wh.ItemId = details.ItemId;
                                 wh.PurchaseQty = details.Quantity;

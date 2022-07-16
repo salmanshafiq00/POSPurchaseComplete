@@ -13,8 +13,6 @@ namespace POSSolution.Core.Models
         [ForeignKey ("ExpenseCategory")]
         public int ExpenseCategoryId { get; set; }
 
-        public ExpenseCategory ExpenseCategory { get; set; }
-
         public string ExpenseFor { get; set; }
 
         [DataType(DataType.Currency), Column(TypeName = "money")]
@@ -23,6 +21,8 @@ namespace POSSolution.Core.Models
         public string ReferenceNo { get; set; }
 
         public string Note { get; set; }
+
+        public virtual ExpenseCategory ExpenseCategory { get; set; }
     }
 
 }

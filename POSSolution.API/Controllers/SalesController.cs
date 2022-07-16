@@ -20,7 +20,7 @@ namespace POSSolution.API.Controllers
         {
             _context = context;
         }
-
+        // Api for single entity
         public override async Task<ActionResult<Sales>> GetAsync([FromRoute] int id)
         {
             try
@@ -43,7 +43,7 @@ namespace POSSolution.API.Controllers
                     "Error retrieving data from the database");
             }
         }
-
+        // Api for Create entity
         public override async Task<ActionResult<Sales>> CreateAsync([FromBody] Sales sales)
         {
             using (var transection = await _context.Database.BeginTransactionAsync())
@@ -98,7 +98,7 @@ namespace POSSolution.API.Controllers
             return Created("api/Sales/" + sales.Id, sales);
         }
 
-
+        // Api for Update entity
         public override async Task<ActionResult<Sales>> UpdateAsync([FromRoute] int id, [FromBody] Sales sales)
         {
             if (id != sales.Id)
@@ -111,6 +111,7 @@ namespace POSSolution.API.Controllers
                 {
                     try
                     {
+                        // Fetch sold item's price
                         foreach (SalesDetails details in sales.SalesDetails)
                         {
                             decimal salesPrice = _context.PurchaseDetails.OrderBy(o => o.Id).First(s => s.ItemId == details.ItemId && s.Quantity > s.SoldQty).SalesPrice;

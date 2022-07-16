@@ -20,7 +20,7 @@ namespace POSSolution.API.Controllers
         {
             _context = context;
         }
-
+        // Api for single entity
         public override async Task<ActionResult<PurchaseReturn>> GetAsync([FromRoute] int id)
         {
             try
@@ -43,14 +43,14 @@ namespace POSSolution.API.Controllers
                     "Error retrieving data from the database");
             }
         }
-
+        // Api for create entity
         public override async Task<ActionResult<PurchaseReturn>> CreateAsync([FromBody] PurchaseReturn purchaseReturn)
         {
             using (var transection = await _context.Database.BeginTransactionAsync())
             {
                 try
                 {
-
+                    // Fetch purchased UnitCost
                     foreach (PurchaseReturnDetails details in purchaseReturn.PurchaseReturnDetails)
                     {
                         if (_context.PurchaseDetails.Any(a => a.PurchaseId == purchaseReturn.PurchaseId))
@@ -64,7 +64,7 @@ namespace POSSolution.API.Controllers
                     await _context.SaveChangesAsync();
 
                     List<StockCount> whList = new List<StockCount>();
-                    
+                    // Update Correspondent StockCount entity
                     foreach (PurchaseReturnDetails details in purchaseReturn.PurchaseReturnDetails)
                     {
                 
@@ -90,7 +90,7 @@ namespace POSSolution.API.Controllers
             }
             return Created("api/PurchaseReturn/" + purchaseReturn.Id, purchaseReturn);
         }
-
+        // Api for update entity
         public override async Task<ActionResult<PurchaseReturn>> UpdateAsync([FromRoute] int id, [FromBody] PurchaseReturn purchaseReturn)
         {
             using (var transection = await _context.Database.BeginTransactionAsync())
@@ -112,7 +112,7 @@ namespace POSSolution.API.Controllers
                     
 
                     List<StockCount> whList = new List<StockCount>();
-
+                    // Update Correspondent StockCount entity
                     foreach (PurchaseReturnDetails details in purchaseReturn.PurchaseReturnDetails)
                     {
 
