@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.API\\POSSolution.API.csproj": {}
+    "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.API\\POSSolution.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.API\\POSSolution.API.csproj": {
+    "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.API\\POSSolution.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.API\\POSSolution.API.csproj",
+        "projectUniqueName": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.API\\POSSolution.API.csproj",
         "projectName": "POSSolution.API",
-        "projectPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.API\\POSSolution.API.csproj",
+        "projectPath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.API\\POSSolution.API.csproj",
         "packagesPath": "C:\\Users\\D3\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.API\\obj\\",
+        "outputPath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -32,14 +32,14 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Application\\POSSolution.Application.csproj": {
-                "projectPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Application\\POSSolution.Application.csproj"
+              "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Application\\POSSolution.Application.csproj": {
+                "projectPath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Application\\POSSolution.Application.csproj"
               },
-              "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Core\\POSSolution.Core.csproj": {
-                "projectPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Core\\POSSolution.Core.csproj"
+              "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Core\\POSSolution.Core.csproj": {
+                "projectPath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Core\\POSSolution.Core.csproj"
               },
-              "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Infrastructure\\POSSolution.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Infrastructure\\POSSolution.Infrastructure.csproj"
+              "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Infrastructure\\POSSolution.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Infrastructure\\POSSolution.Infrastructure.csproj"
               }
             }
           }
@@ -87,14 +87,14 @@
         }
       }
     },
-    "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Application\\POSSolution.Application.csproj": {
+    "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Application\\POSSolution.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Application\\POSSolution.Application.csproj",
+        "projectUniqueName": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Application\\POSSolution.Application.csproj",
         "projectName": "POSSolution.Application",
-        "projectPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Application\\POSSolution.Application.csproj",
+        "projectPath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Application\\POSSolution.Application.csproj",
         "packagesPath": "C:\\Users\\D3\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Application\\obj\\",
+        "outputPath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -115,8 +115,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Core\\POSSolution.Core.csproj": {
-                "projectPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Core\\POSSolution.Core.csproj"
+              "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Core\\POSSolution.Core.csproj": {
+                "projectPath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Core\\POSSolution.Core.csproj"
               }
             }
           }
@@ -149,14 +149,14 @@
         }
       }
     },
-    "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Core\\POSSolution.Core.csproj": {
+    "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Core\\POSSolution.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Core\\POSSolution.Core.csproj",
+        "projectUniqueName": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Core\\POSSolution.Core.csproj",
         "projectName": "POSSolution.Core",
-        "projectPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Core\\POSSolution.Core.csproj",
+        "projectPath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Core\\POSSolution.Core.csproj",
         "packagesPath": "C:\\Users\\D3\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Core\\obj\\",
+        "outputPath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -215,14 +215,14 @@
         }
       }
     },
-    "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Infrastructure\\POSSolution.Infrastructure.csproj": {
+    "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Infrastructure\\POSSolution.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Infrastructure\\POSSolution.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Infrastructure\\POSSolution.Infrastructure.csproj",
         "projectName": "POSSolution.Infrastructure",
-        "projectPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Infrastructure\\POSSolution.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Infrastructure\\POSSolution.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\D3\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -243,11 +243,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Application\\POSSolution.Application.csproj": {
-                "projectPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Application\\POSSolution.Application.csproj"
+              "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Application\\POSSolution.Application.csproj": {
+                "projectPath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Application\\POSSolution.Application.csproj"
               },
-              "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Core\\POSSolution.Core.csproj": {
-                "projectPath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Core\\POSSolution.Core.csproj"
+              "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Core\\POSSolution.Core.csproj": {
+                "projectPath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Core\\POSSolution.Core.csproj"
               }
             }
           }

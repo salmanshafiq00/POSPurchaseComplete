@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "m2RIJ54Qg1ilF/hVqaDGn7HBLgCj+2ZT+fLTG4h0/e1KQETzB71Nt/7NPN/oJmAbWzv1Om4GTVcakvleABmIkA==",
+  "dgSpecHash": "WCQVaOSkICkZVxM7Qo3RpoukiGahxpemQFjUX3Ymj8Eu8jjtOb0N3+dX19XMDOjUN40/MIRpkjXYzYR4RGq4hg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.Core\\POSSolution.Core.csproj",
+  "projectFilePath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.Core\\POSSolution.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\D3\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\D3\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

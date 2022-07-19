@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1Jiapzl9PRsLONctFZm3yTiSZXEVsfKZFX4bPRmRLyGZoPr2cboGQ+7yE0Wmzv40u1tEt3LgTKzRA2rty5Wv/Q==",
+  "dgSpecHash": "FiIRlUg97nuA7yN/u97Oh7fix85tjaYKXI1cIyGXGMkfVh+pv1UvgbkDqGczCqIpAOluIiXfv2LqTl9zBRqLfg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\D3\\Desktop\\PosBackEnd-main\\POSSolution.API\\POSSolution.API.csproj",
+  "projectFilePath": "C:\\Users\\D3\\Desktop\\PosSoftware\\POSSoftware\\POSSolution.API\\POSSolution.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\D3\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\D3\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.0\\microsoft.aspnetcore.jsonpatch.5.0.0.nupkg.sha512",

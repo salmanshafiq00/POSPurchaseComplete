@@ -1,0 +1,227 @@
+<h2>Sales Form</h2>
+<div class="formbox">
+    <form #form="ngForm" (ngSubmit)="form">
+        <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formData.id">
+        <div class="formbox-header text-end">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label">Customer Name</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-select" name="customerId" #customerId="ngModel"
+                                [(ngModel)]="formData.customerId">
+                                <option value="-1" selected>-----Select Country-----</option>
+                                <option *ngFor="let customer of customerList" value="{{customer.id}}">{{customer.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label">Sales Date</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="date" class="form-control" name="salesDate" #salesDate="ngModel"
+                                [(ngModel)]="formData.salesDate" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="" class="form-label">Status</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-select" name="status" #status="ngModel" [(ngModel)]="formData.status">
+                                <option value="-1" selected>-----Select State-----</option>
+                                <option *ngFor="let sts of statusArray" value="{{sts}}">{{sts}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- item search box-->
+        <div class="formbox-body">
+
+            <div class="row mb-3">
+                <div class="col-md-8 offset-md-2">
+                    <input type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search"
+                        placeholder="Enter item name" (focus)="focus$.next($any($event).target.value)"
+                        (click)="click$.next($any($event).target.value)" #instance="ngbTypeahead" name="search" />
+                </div>
+            </div>
+
+
+            <div class="row">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr class="bg-primary text-center">
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Sales Price</th>
+                            <th>Discount</th>
+                            <th>Tax Amount</th>
+                            <th>Total Amount</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lee Shirt</td>
+                            <td>
+                                <div class="input-group">
+                                    <button (click)="decrement_qty()" type="button" class="btn btn-flat">
+                                        <i class="fas fa-minus text-danger"> - </i>
+                                    </button>
+                                    <input type="text" [value]="salesQty" class="form-control text-center" style="width: 50px;" />
+                                    <button (click)="increment_qty()" type="button" class="btn btn-flat">
+                                        <i class="fa fa-plus text-success"> +</i>
+                                    </button>
+                                </div>
+                            </td>
+                            <!-- Unit Cost Without Tax-->
+                            <td>
+                                <label class="form-control text-center">1000</label>
+                            </td>
+
+                            <!-- Discount -->
+                            <td>
+                                <label class="form-control text-center">160</label>
+                            </td>
+
+                            <!-- Tax Amount -->
+                            <td>
+                                <label class="form-control text-center">10</label>
+                            </td>
+                            <!-- Amount -->
+                            <td>
+                                <label class="form-control text-center" style="border-color: #f39c12; width: 50%; margin: auto;">990</label>
+                            </td>
+                            <td>
+                               <button class="btn btn-warning" type="button">Remove</button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- middle-area  -->
+        <div class="formbox-calculation">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label  text-end">Quantity</label>
+                        <div class="col-sm-4">
+                            <label class="control-label text-success">1</label>
+                        </div>
+                    </div>
+                    <div class="row  text-end">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+
+                                <label for="other_charges_input" class="col-sm-4 control-label">Other Charges</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="other_charges_input"
+                                        onkeyup="final_total();" value="">
+                                </div>
+                                <div class="col-sm-4">
+                                    <select class="form-select" onchange="final_total();">
+                                        <option>None</option>
+                                        <option value="4">Vat 5%</option>
+                                        <option value="5">Tax 10%</option>
+                                        <option value="6">Tax 18%</option>
+                                        <option value="13">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row  text-end">
+                        <label for="sales_note" class="col-sm-4 control-label">Note</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- calculation-area  -->
+                <div class="col-md-6 boldClass">
+                    <div class="row mb-3">
+                        <div class="col-md-6 text-end offset-md-1"><label for="">Subtotal</label></div>
+                        <div class="col-md-2 offset-md-1 text-end "> <label> 123</label></div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6 text-end offset-md-1"><label>Other Charges
+                            </label></div>
+                        <div class="col-md-2 offset-md-1 text-end "> <label> 123</label></div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6 text-end offset-md-1"><label for="">Grand Total
+                            </label></div>
+                        <div class="col-md-2 offset-md-1 text-end "> <label> 123</label></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- payment-area  -->
+        <div class="formbox-payment">
+            <div class="row jumbotron">
+                <div class="box-body">
+                    <div class="col-md-12">
+                        <h4 class="box-title text-info">Subtotal : </h4>
+                        <div class="box box-solid bg-gray">
+                            <div class="box-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="amount">Amount</label>
+                                        <input type="text" class="form-control text-right" name="amount">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="payment_type">Payment Type</label>
+                                        <select class="form-select">
+                                            <option value="">-Select-</option>
+                                            <option value="Cash">Cash</option>
+                                            <option value="Card">Card</option>
+                                            <option value="paypal">Paypal</option>
+                                            <option value="bkash">Bkash</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="payment_note">Payment Note</label>
+                                        <textarea type="text" class="form-control" name="payment_note"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="formbox-footer">
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-success">Save</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-secondary">Close</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
