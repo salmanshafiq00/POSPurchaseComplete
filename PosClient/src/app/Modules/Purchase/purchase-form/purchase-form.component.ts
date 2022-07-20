@@ -1,12 +1,19 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { OperatorFunction, Observable, debounceTime, distinctUntilChanged, filter, map } from 'rxjs';
+import {
+  OperatorFunction,
+  Observable,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+} from 'rxjs';
 import { PurchaseStatus } from 'src/app/Core/Enums/purchase-status.enum';
 import { Item } from 'src/app/Core/Models/item.model';
 import { PurchaseDetails } from 'src/app/Core/Models/purchase-details.model';
 import { Purchase } from 'src/app/Core/Models/purchase.model';
-import { PurchaseBody } from 'src/app/Core/Models/purchaseFormModel';
 import { Supplier } from 'src/app/Core/Models/supplier.model';
 import { DataListRepositoryService } from 'src/app/Core/Services/data-list-repository.service';
 import { RestDataService } from 'src/app/Core/Services/rest.service';
@@ -14,111 +21,199 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
 @Component({
   selector: 'app-purchase-form',
   templateUrl: './purchase-form.component.html',
-  styleUrls: ['./purchase-form.component.css']
+  styleUrls: ['./purchase-form.component.css'],
 })
 export class PurchaseFormComponent implements OnInit {
-
-  public supplierList : Supplier[];
-  public itemList : Item[] = [];
-  public itemListForBody : Item[] = [];
+  public supplierList: Supplier[];
+  public itemList: Item[] = [];
   public model: Item;
-  formData : Purchase = new Purchase();
+  formData: Purchase = new Purchase();
 
-  
-  puchaseDetails : PurchaseDetails = new PurchaseDetails();
-  formBodyArray : PurchaseDetails[] = new Array<PurchaseDetails>();
-  public purchaseStatusEnum : PurchaseStatus;
+  puchaseDetails: PurchaseDetails = new PurchaseDetails();
+  formBodyArray: PurchaseDetails[] = new Array<PurchaseDetails>();
+  public purchaseStatusEnum: PurchaseStatus;
   public statusArray = [];
   public routeData? = Number(location.pathname.split('/')[3]);
-  private url : string = "http://localhost:5000/api/";
+  private url: string = 'http://localhost:5000/api/';
 
-  constructor(private service : RestDataService, private repo: DataListRepositoryService, private route: Router) { 
-    this.statusArray = Object.keys(PurchaseStatus).filter(key => isNaN(+key));
-    this.formData.subTotal = 0;
-    //this.formBody.quatity=1;
+  constructor(
+    private service: RestDataService,
+    private repo: DataListRepositoryService,
+    private route: Router,
+    private datePipe: DatePipe
+  ) {
+    this.statusArray = Object.keys(PurchaseStatus).filter((key) => isNaN(+key));
   }
-  
-  getAllItem(){
-    this.service.GetAll<Item>(this.url+"item").subscribe(res => {
+
+  getAllItem() {
+    this.service.GetAll<Item>(this.url + 'item').subscribe((res) => {
       this.itemList = res;
-   })
+    });
   }
- 
-   
-  getAllSuppliers(){
-    this.service.GetAll<Supplier>(this.url + "supplier").subscribe(res => this.supplierList = res);
+
+  getAllSuppliers() {
+    this.service
+      .GetAll<Supplier>(this.url + 'supplier')
+      .subscribe((res) => (this.supplierList = res));
   }
 
   getEditData() {
     if (this.routeData > 0) {
-        console.log("for update");
-        
+      console.log('for update');
     }
   }
 
   // For search operation
   formatter = (item: Item) => item.name;
 
-  search: OperatorFunction<string, readonly Item[]> = (text$: Observable<string>) => text$.pipe(
-    debounceTime(200),
-    distinctUntilChanged(),
-    filter(term => term.length >= 2),
-    map(term => this.itemList.filter(state => new RegExp(term, 'mi').test(state.name)).slice(0, 10))
-  )
+  search: OperatorFunction<string, readonly Item[]> = (
+    text$: Observable<string>
+  ) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      filter((term) => term.length >= 2),
+      map((term) =>
+        this.itemList
+          .filter((state) => new RegExp(term, 'mi').test(state.name))
+          .slice(0, 10)
+      )
+    );
 
-  //formBody : PurchaseDetails = new PurchaseDetails();
-  formBody : PurchaseBody[] = [];
-  formBodySingle : PurchaseBody = new PurchaseBody;
-
-  SelectedItem(item : Item){
-    console.log(item);
-    this.formBodySingle.name = item.name;
-    this.formBody.push(Object.assign(this.formBodySingle));
-    console.log(this.formBody);
-
-    
-    // this.formBodyArray.push({id: item.id, quantity: 1, unitCost: 0, totalAmount: 0, purchaseId:0, itemId:1,   expireDate: this.formBody.expireDate});
-    // console.log(this.formBodyArray);
+    itemName : string; 
+  public sampleArray: PurchaseDetails[] = [];
+  SelectedItem(item: Item) {
+    if (item != undefined) {
+      // this.getItemName(item.id);
+       this.itemName= item.name;
+      this.formData.purchaseDetails.push({
+        id: 0,
+        quantity: 1,
+        unitCost: 0,
+        totalAmount: 0,
+        discountAmount: 0,
+        taxAmount: 0,
+        purchaseId: 0,
+        itemId: item.id,
+        profitAmount: 0,
+        salesPrice: 0,
+        expireDate: this.datePipe.transform(Date.now(), 'yyyy-MM-dd'),
+        soldQty: 0,
+      });
+      this.sampleArray = this.formData.purchaseDetails;
+      this.calTotalQty();
+    }
   }
 
-  submit(form : NgForm){
+  removeAttachedItem(index: number) {
+    this.formData.purchaseDetails.splice(index, 1);
+    this.calTotalQty();
+    this.calSubAmount();
+  }
 
-    // this.formData =  {id: 0, invoiceNo: this.formData.invoiceNo, totalQuantity: 10, subTotal: 10000, otherCharges: this.formData.otherCharges, grandTotal: 100000,  supplierId: this.formData.supplierId, purchaseDate: this.formData.purchaseDate, status: this.formData.status, note: this.formData.note, purchaseDetails: [{id: 0, quantity: this.formBody.quantity, unitCost: this.formBody.unitCost, totalAmount: 3000, discountAmount: 0, taxAmount: 0, purchaseId:0, itemId:1, profitAmount: 0, salesPrice: 0, expireDate: this.formBody.expireDate, soldQty:0}]};
+  changedExpiredDate(e: any, index: number) {
+    var newDate = this.datePipe.transform(
+      new Date((e as HTMLInputElement).value),
+      'yyyy-MM-dd'
+    );
+    this.formData.purchaseDetails[index].expireDate = newDate;
+  }
 
-    console.log(this.formData);
-     if (form.valid) {
+  changedQty(e: any, index: number) {
+    this.formData.purchaseDetails[index].quantity = Number(
+      (e as HTMLInputElement).value
+    );
+    this.formData.purchaseDetails[index].totalAmount =
+      this.formData.purchaseDetails[index].quantity *
+      this.formData.purchaseDetails[index].unitCost;
+    this.calTotalQty();
+    this.calSubAmount();
+  }
+
+  changedUnitCost(e: any, index: number) {
+    this.formData.purchaseDetails[index].unitCost = Number(
+      (e as HTMLInputElement).value
+    );
+    this.formData.purchaseDetails[index].totalAmount =
+      this.formData.purchaseDetails[index].quantity *
+      this.formData.purchaseDetails[index].unitCost;
+      this.calSubAmount();
+  }
+
+  changedValuesTrack(index: number, purchaseDetails: any) {
+    return purchaseDetails;
+  }
+  submit(form: NgForm) {
+    if (form.valid) {
       if (this.routeData > 0) {
-
-        this.service.Update<Purchase>(this.formData, this.url+"purchase/" + this.routeData).subscribe(res => {
-          alert("Data updated");
-         var index = this.repo.purchaseData.indexOf(this.formData);
-         this.repo.purchaseData.splice(index, 1, res);
-          this.route.navigateByUrl("purchase");
-        })
-      }else{
-        this.service.Insert<Purchase>(this.formData, this.url+"purchase").subscribe(res => {
-          alert("Data Inserted");
-        this.repo.purchaseData.push(res);
-        })
+        this.service
+          .Update<Purchase>(
+            this.formData,
+            this.url + 'purchase/' + this.routeData
+          )
+          .subscribe((res) => {
+            alert('Data updated');
+            var index = this.repo.purchaseData.indexOf(this.formData);
+            this.repo.purchaseData.splice(index, 1, res);
+            this.route.navigateByUrl('purchase');
+          });
+      } else {
+        this.service
+          .Insert<Purchase>(this.formData, this.url + 'purchase')
+          .subscribe((res) => {
+            alert('Data Inserted');
+            this.repo.purchaseData.push(res);
+          });
       }
-     }
+    }
   }
-
 
   // For Quantity increment and decrement
-  decrement_qty(i: number){
-    // if(this.formBody.quantity> 1){
-    //   this.formBody[i].quantity -= 1;
-    // }
-    
-  }
-  increment_qty(i: number){
-    // this.formBody[i].quantity +=1;
+  decrement_qty(i: number) {
+    if (this.formData.purchaseDetails[i].quantity > 1) {
+      this.formData.purchaseDetails[i].quantity -= 1;
+      this.calTotalQty();
+      this.calSubAmount();
+    }
+
   }
 
+  increment_qty(i: number) {
+    this.formData.purchaseDetails[i].quantity += 1;
+    this.calTotalQty();
+    this.calSubAmount();
+  }
+
+  calTotalQty() {
+    this.formData.totalQuantity = 0;
+    for (let index = 0; index < this.formData.purchaseDetails.length; index++) {
+      let oneQty = this.formData.purchaseDetails[index].quantity;
+      this.formData.totalQuantity += Number(oneQty);
+    }
+  }
+
+  calSubAmount() {
+    this.formData.subTotal = 0;
+    for (let index = 0; index < this.formData.purchaseDetails.length; index++) {
+      let oneTotal = this.formData.purchaseDetails[index].quantity *  this.formData.purchaseDetails[index].unitCost;
+      this.formData.subTotal += Number(oneTotal);
+    }
+  }
   ngOnInit(): void {
     this.getAllSuppliers();
     this.getAllItem();
     this.getEditData();
+    this.formData.subTotal = 0;
+    this.formData.otherCharges = 0;
+    this.formData.grandTotal = 0;
+  }
+
+  getItemName(id : number) : string{
+    if(this.formData.purchaseDetails != null){
+
+      return this.itemList.find(e => e.id == id).name;
+    }else{
+     return "item"
+    }
   }
 }

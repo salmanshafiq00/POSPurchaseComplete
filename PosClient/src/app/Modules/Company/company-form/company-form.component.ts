@@ -69,16 +69,18 @@ export class CompanyFormComponent implements OnInit {
   submit(form : NgForm){
     if (form.valid) {
       if (this.routeData > 0) {
-        this.service.Update<CompanyInfo>(this.formData, this.url+"company/" + this.routeData).subscribe(res => {
-          var index = this.repo.companyData.indexOf(this.formData);
-          this.repo.companyData.splice(index, 1, res);
+        this.service.Update<CompanyInfo>(this.formData, this.url+"companyinfo/" + this.routeData).subscribe(res => {
           alert("Data updated");
+          var index = this.repo.companyData.indexOf(this.formData);
+          this.repo.companyData.splice(index, 1, this.formData);
           this.route.navigateByUrl("company");
         })
       }else{
-        this.service.Insert<CompanyInfo>(this.formData, this.url+"company").subscribe(res => {
-          this.repo.companyData.push(res);
+        this.service.Insert<CompanyInfo>(this.formData, this.url+"companyinfo").subscribe(res => {
           alert("Data Inserted");
+          this.repo.companyData.push(res);
+          console.log(res);
+          
         });
       }
     }

@@ -12,5 +12,5 @@ export class Purchase {
     public otherCharges: number;
     public grandTotal: number;
     public note: string;
-    public purchaseDetails: PurchaseDetails[];
+    public purchaseDetails: PurchaseDetails[] = [];
 }

@@ -9,6 +9,6 @@ export class PurchaseDetails {
     public salesPrice?:number;
     public totalAmount: number;
     public soldQty?: number;
-    public expireDate:Date;
+    public expireDate:string;
     public purchaseId:number;
 }

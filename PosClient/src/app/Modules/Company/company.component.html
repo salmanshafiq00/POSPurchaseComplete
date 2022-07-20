@@ -1,1 +1,50 @@
-<p>company works!</p>
+<div class="box">
+    <div class="box-header">
+        <h4>CompanyInfo List</h4>
+        <button routerLink="/company/form" class="btn btn-info" style="float:right">New CompanyInfo</button>
+    </div>
+    <div class="box-body">
+        <table class="table table-border table-hover">
+            <thead class="bg-primary">
+                <tr>
+                    <th>Sarial No</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>AQddress</th>
+                    <th>Logo</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of repo.companyData; index as ID">
+                    <td>{{data.id}}</td>
+                    <td>{{data.name}}</td>
+                    <td>{{data.phone}}</td>
+                    <td>{{data.mobile}}</td>
+                    <td>{{data.email}}</td>
+                    <td>{{data.stateId}}</td>
+                    <td>{{data.id}}</td>
+                    <td>{{data.address}}</td>
+                    <td>
+                        <img src="{{data.companyLogo}}" height="50px" width="50px">
+                    </td>
+                    <td>
+
+                        <div ngbDropdown class="d-inline-block">
+                            <button type="button" class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Action</button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                              <button ngbDropdownItem routerLink="/company/form/{{data.id}}">Edit</button>
+                              <button ngbDropdownItem (click)="deleteRow(data.id)">Delete</button>
+                            </div>
+                          </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

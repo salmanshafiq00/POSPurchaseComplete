@@ -90,9 +90,15 @@ export class DataListRepositoryService {
         this.service.GetAll<Sales>(this.baseUrl + entity).subscribe(res => this.salesData = res);
         return this.salesData;
       case
-        'company':
-        this.service.GetAll<CompanyInfo>(this.baseUrl + entity).subscribe(res => this.companyData = res);
+        'companyinfo':
+        this.service.GetAll<CompanyInfo>(this.baseUrl + entity).subscribe(res => {this.companyData = res, console.log(res);
+        });
         return this.companyData;
+      case
+        'item':
+        this.service.GetAll<Item>(this.baseUrl + entity).subscribe(res => {this.itemData = res, console.log(res);
+        });
+        return this.itemData;
       default:
         return this.emptyData;
     }

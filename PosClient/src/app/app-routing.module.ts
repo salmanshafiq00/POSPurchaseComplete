@@ -36,7 +36,7 @@ import { SalesFormComponent } from './Modules/Sales/sales-form/sales-form.compon
 import { SalesComponent } from './Modules/Sales/sales.component';
 import { SalesReturnFormComponent } from './Modules/Sales/SalesReturn/sales-return-form/sales-return-form.component';
 import { SalesReturnComponent } from './Modules/Sales/SalesReturn/sales-return.component';
-import { SearchComponent } from './search/search.component';
+
 import { ErrorComponent } from './Shared/layout/error/error.component';
 import { LayoutComponent } from './Shared/layout/layout.component';
 
@@ -46,7 +46,6 @@ const routes: Routes = [
   {path: '', component: LayoutComponent, children: [
     {path: "", component: DashboardComponent},
     {path: "dashboard", component: DashboardComponent},
-    {path: "dd", component: SearchComponent},
     {path: "purchase", component: PurchaseComponent}, 
     {path: "purchase/form", component:PurchaseFormComponent},
     {path: "purchase/form/:id", component:PurchaseFormComponent},

@@ -20,12 +20,12 @@
                 type="text"
                 class="form-control"
                 required
-                name="companyName"
-                #companyName="ngModel"
-                [(ngModel)]="formData.companyName"
+                name="name"
+                #name="ngModel"
+                [(ngModel)]="formData.name"
               />
               <span
-                *ngIf="companyName.dirty && companyName.errors?.['required']"
+                *ngIf="name.dirty && name.errors?.['required']"
                 >Company Name can not be empty</span
               >
             </div>

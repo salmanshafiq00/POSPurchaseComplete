@@ -39,6 +39,7 @@ export class ItemFormComponent implements OnInit {
           this.route.navigateByUrl("item");
         })
       } else {
+        this.formData.profitMargin = this.formData.profitMargin/100;
         this.service.Insert<Item>(this.formData, this.url + "item").subscribe(res => {
           alert("Data Inserted");
           this.repo.itemData.push(res);

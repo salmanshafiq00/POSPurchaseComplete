@@ -8,10 +8,6 @@ import { PurchaseModule } from './Purchase/purchase.module';
 import { SalesModule } from './Sales/sales.module';
 import { DataListRepositoryService } from '../Core/Services/data-list-repository.service';
 
-
-
-
-
 @NgModule({
   declarations: [
   ],

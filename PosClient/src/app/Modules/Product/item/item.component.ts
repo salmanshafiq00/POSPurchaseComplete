@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from 'src/app/Core/Models/category.model';
 import { Item } from 'src/app/Core/Models/item.model';
 import { DataListRepositoryService } from 'src/app/Core/Services/data-list-repository.service';
 import { RestDataService } from 'src/app/Core/Services/rest.service';
@@ -19,6 +18,8 @@ export class ItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.repo.itemData);
+    
   }
 
   getDataAll(): Item[] {

@@ -75,6 +75,7 @@ namespace POSSolution.API.Controllers
                         details.TaxAmount = taxAmount;
                         decimal profitMarginRate = _context.Items.Single(item => item.Id == details.ItemId).ProfitMargin;
                         decimal profitAmount = (details.UnitCost - discountAmount + taxAmount) * profitMarginRate;
+                        details.ProfitAmount = profitAmount;
                         details.SalesPrice = details.UnitCost - discountAmount + taxAmount + profitAmount;
                     }
                     await _context.Purchases.AddAsync(purchase);
@@ -155,7 +156,9 @@ namespace POSSolution.API.Controllers
                             taxAmount = (details.UnitCost - (details.UnitCost * dt.DiscountRate)) * dt.TaxRate;
                             details.TaxAmount = taxAmount;
                             decimal profitMargin = _context.Items.Single(item => item.Id == details.ItemId).ProfitMargin;
-                            details.SalesPrice = details.UnitCost - discountAmount + taxAmount + profitMargin;
+                            decimal profitAmount = (details.UnitCost - discountAmount + taxAmount) * profitMargin;
+                            details.ProfitAmount = profitAmount;
+                            details.SalesPrice = details.UnitCost - discountAmount + taxAmount + profitAmount;
                         }
                         _context.Purchases.Update(purchase);
 

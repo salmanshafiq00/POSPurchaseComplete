@@ -93,20 +93,28 @@
       <div class="row mb-3">
         <div class="col-md-8 offset-md-2">
           <div class="input-group">
-            <input id="typeahead-prevent-manual-entry" type="text" style="border: 1px solid #33b5e5; " class="form-control"
+            <input
+              id="typeahead-prevent-manual-entry"
+              type="text"
+              style="border: 1px solid #33b5e5"
+              class="form-control"
               [(ngModel)]="model"
               [ngbTypeahead]="search"
               [inputFormatter]="formatter"
               [resultFormatter]="formatter"
-              [editable]='false'
-              [ngModelOptions]="{standalone: true}"/>
-              <a class="btn btn-info input-group-append" (click)="SelectedItem(model)">add</a>
+              [editable]="false"
+              [ngModelOptions]="{ standalone: true }"
+            />
+            <a
+              class="btn btn-info input-group-append"
+              (click)="SelectedItem(model)"
+              >add</a
+            >
           </div>
         </div>
-
       </div>
 
-        <!-- PurchaseBody Section -->
+      <!-- PurchaseBody Section -->
       <div class="row">
         <table class="table table-hover table-bordered">
           <thead>
@@ -120,19 +128,30 @@
             </tr>
           </thead>
           <tbody>
-           
-            <tr *ngFor="let item of formBody; let i = index" class="row">
+            <tr
+              *ngFor="
+                let purchaseDetails of formData.purchaseDetails;
+                let i = index;
+                trackBy: changedValuesTrack
+              "
+              class="row"
+            >
               <td class="col-md-2">
-               {{item.name}}
-                <input type="number" style="display: none;"  name="{{i}}.itemId"  [(ngModel)]="item.itemId" /> 
+                <label>{{getItemName(purchaseDetails.itemId)}} </label>
+                <input
+                  type="number"
+                  style="display: none"
+                  name="purchaseDetails.itemId"
+                  [(ngModel)]="purchaseDetails.itemId"
+                />
               </td>
               <td class="col-md-2">
                 <input
                   type="date"
                   class="form-control"
-                      name="{{item}}.expireDate"
-                  #expireDate="ngModel"
-                  [(ngModel)]="item.expireDate"
+                  name="expireDate"
+                  [value]="purchaseDetails.expireDate"
+                  (change)="changedExpiredDate($event.target, i)"
                 />
               </td>
               <td class="col-md-2">
@@ -145,12 +164,12 @@
                     <i class="fas fa-minus text-danger"> - </i>
                   </button>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control text-center"
                     style="width: 50px; border-radius: 4px"
-                    name="{{item}}.quantity"
-                    #quantity="ngModel"
-                    [(ngModel)]="item.quantity"
+                    name="quantity"
+                    [value]="purchaseDetails.quantity"
+                    (change)="changedQty($event.target, i)"
                   />
                   <button
                     (click)="increment_qty(i)"
@@ -166,17 +185,28 @@
                 <input
                   type="number"
                   class="form-control text-center"
-                  name="{{item}}.unitCost"
-                  #unitCost="ngModel"
-                  [(ngModel)]="item.unitCost"
+                  name="unitCost"
+                  [value]="purchaseDetails.unitCost"
+                  (change)="changedUnitCost($event.target, i)"
                 />
               </td>
 
               <td class="col-md-2">
-                 <input type="number" Readonly style="border-color: #f39c12; width: 50%; margin: auto" name="totalAmount" #totalAmount="ngModel" [(ngModel)]="item.totalAmount" value="{{item.quantity * item.unitCost}}">
+                <input
+                  type="number"
+                  Readonly
+                  style="
+                    width: 90%;
+                  "
+                  name="totalAmount"
+                  class="form-control text-center"
+                  [value]="purchaseDetails.quantity * purchaseDetails.unitCost"
+                />
               </td>
               <td class="col-md-2">
-                <a class="btn btn-warning" type="button">Remove</a>
+                <a class="btn btn-warning" (click)="removeAttachedItem(i)"
+                  >Remove</a
+                >
               </td>
             </tr>
           </tbody>
@@ -191,8 +221,7 @@
           <div class="form-group row">
             <label class="col-sm-4 control-label text-end">Quantity</label>
             <div class="col-sm-4">
-              <label class="control-label text-success">1</label>
-              <!-- <input type="hidden" value="10" name="totalQuantity" #totalQuantity="ngModel" [(ngModel)]="formData.totalQuantity" /> -->
+              <input type="number"  name="totalQuantity" #totalQuantity="ngModel" [(ngModel)]="formData.totalQuantity"  readonly class="lblInput"/>
             </div>
           </div>
           <div class="row text-end">
@@ -272,7 +301,7 @@
             </div>
             <div class="col-md-2 offset-md-1 text-end">
               <input
-                value="{{ formData.subTotal + formData.otherCharges}}"
+                value="{{ formData.subTotal + formData.otherCharges }}"
                 readonly
                 type="number"
                 class="lblInput"

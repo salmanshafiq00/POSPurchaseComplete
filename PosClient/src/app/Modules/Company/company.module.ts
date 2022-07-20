@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { CompanyComponent } from './company.component';
 import { CompanyFormComponent } from './company-form/company-form.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 const CompanyConponentsArray = [
   CompanyComponent, CompanyFormComponent
@@ -15,7 +17,7 @@ const CompanyConponentsArray = [
     CompanyConponentsArray
   ],
   imports: [
-    CommonModule, FormsModule
+    CommonModule, FormsModule, RouterModule, NgbDropdownModule
   ], exports:[
     CompanyConponentsArray
   ]

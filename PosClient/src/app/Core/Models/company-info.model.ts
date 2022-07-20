@@ -1,6 +1,6 @@
 export class CompanyInfo {
     public id : number;
-    public companyName : string;
+    public name : string;
     public countryId : number;
     public stateId : number;
     public cityId : number;
