@@ -12,19 +12,15 @@ export class ItemComponent implements OnInit {
   private url: string = "http://localhost:5000/api/";
   constructor(private service: RestDataService, public repo : DataListRepositoryService,) {
 
-    if (this.repo.itemData ==undefined) {
+    if (this.repo.itemData.length == 0) {
         this.repo.itemData =  this.getDataAll();
     }
   }
 
-  ngOnInit(): void {
-    console.log(this.repo.itemData);
-    
-  }
+  // updateLastAction(index: number, item: Item) : number{
+  //   return item.id;
+  // }
 
-  getDataAll(): Item[] {
-     return  this.repo.getRecords("item");
-  }
 
   deleteRow(id: number) {
     var record = this.repo.itemData.find(w => w.id == id);
@@ -33,4 +29,12 @@ export class ItemComponent implements OnInit {
       this.repo.itemData.splice(this.repo.itemData.indexOf(record));
     });
   }
+
+  ngOnInit(): void {
+    
+  }
+
+  private getDataAll(): Item[] {
+    return  this.repo.getRecords("item");
+ }
 }

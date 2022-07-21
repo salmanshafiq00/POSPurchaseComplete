@@ -18,17 +18,19 @@ export class ItemFormComponent implements OnInit {
 
 
   constructor(private service: RestDataService, private repo: DataListRepositoryService, private route: Router) { }
-  private url: string = "http://localhost:5000/api/";
   public routeData?= Number(location.pathname.split('/')[3]);
   formData: Item = new Item();
-
+  sampleImage : string = "\\assets\\product.jpg";
+  imagePlaceHolder : string;
+  private url: string = "http://localhost:5000/api/";
+  
   getEdit() {
     if (this.routeData > 0) {
       this.formData = this.repo.itemData.find(f => f.id == this.routeData);
     }
   }
 
-
+  newItem = new Item();
   submit(form: NgForm) {
     if (form.valid) {
       if (this.routeData > 0) {
@@ -39,14 +41,20 @@ export class ItemFormComponent implements OnInit {
           this.route.navigateByUrl("item");
         })
       } else {
+        console.log(this.formData);
+        
         this.formData.profitMargin = this.formData.profitMargin/100;
+        this.formData.id = 0;
         this.service.Insert<Item>(this.formData, this.url + "item").subscribe(res => {
           alert("Data Inserted");
           this.repo.itemData.push(res);
+          this.newItem = res as Item;          
+          this.imagePlaceHolder = this.sampleImage;
+          form.reset();
         });
+        
       }
     }
-
   }
 
   onChange(event : any){
@@ -54,13 +62,12 @@ export class ItemFormComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = (e : any) => {
         this.formData.imagePath = e.target.result;
-        this.userImage = e.target.result;
+        this.imagePlaceHolder = e.target.result;
       };
       reader.readAsDataURL(event.target.files[0]);
     }
   }
 
-  userImage : string = "\\assets\\product.jpg";
 
   categoryList: Category[];
   brandList: Brand[];
@@ -109,6 +116,7 @@ export class ItemFormComponent implements OnInit {
     this.getAllBrand();
     this.getAllDiscount();
     this.getAllUnit();
+    this.imagePlaceHolder = this.sampleImage;
   }
 
 }

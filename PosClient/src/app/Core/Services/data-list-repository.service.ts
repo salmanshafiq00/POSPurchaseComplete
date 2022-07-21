@@ -41,7 +41,7 @@ export class DataListRepositoryService {
   public cityData: City[];
   public salesData: Sales[];
   public companyData: CompanyInfo[];
-  public itemData: Item[];
+  public itemData: Item[] = [];
   public discountData: SalesDiscountTax[];
 
 
@@ -91,13 +91,11 @@ export class DataListRepositoryService {
         return this.salesData;
       case
         'companyinfo':
-        this.service.GetAll<CompanyInfo>(this.baseUrl + entity).subscribe(res => {this.companyData = res, console.log(res);
-        });
+        this.service.GetAll<CompanyInfo>(this.baseUrl + entity).subscribe(res => {this.companyData = res});
         return this.companyData;
       case
         'item':
-        this.service.GetAll<Item>(this.baseUrl + entity).subscribe(res => {this.itemData = res, console.log(res);
-        });
+        this.service.GetAll<Item>(this.baseUrl + entity).subscribe(res => {this.itemData = res});
         return this.itemData;
       default:
         return this.emptyData;

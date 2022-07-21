@@ -6,6 +6,7 @@ import { PurchaseReturnFormComponent } from './PurchaseReturn/purchase-return-fo
 import { PurchasereturnComponent } from './PurchaseReturn/purchasereturn.component';
 import { FormsModule } from '@angular/forms';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToItemNamePipe } from 'src/app/Shared/Pipe/to-item-name.pipe';
 
 
 const purchaseComponentsArray =[

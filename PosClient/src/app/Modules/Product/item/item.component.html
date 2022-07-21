@@ -1,7 +1,7 @@
 <div class="box">
     <div class="box-header">
         <h4>Item List</h4>
-        <button routerLink="/item/form" class="btn btn-info" style="float:right">New Item</button>
+        <button routerLink="/item/form" class="btn btn-info" style="float:right" ngbTooltip="Add new item">New Item</button>
     </div>
     <div class="box-body">
         <table class="table table-border table-hover col-md-10">
@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let data of repo.itemData;">
+                <tr *ngFor="let data of repo.itemData; let i = index;">
                     <td>{{data.itemCode}}</td>
                     <td>{{data.name}}</td>
                     <td>{{data.sku}}</td>

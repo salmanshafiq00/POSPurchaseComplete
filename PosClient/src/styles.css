@@ -115,13 +115,6 @@ a, a:hover, a:focus {
     color: white;
 }
 
-.accordion-header{
-    background-color: red;
-}
-
-ngb{
-    background: #6bc502;
-}
 
 .lblInput{
     border: none;

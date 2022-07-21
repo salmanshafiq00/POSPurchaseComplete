@@ -4,13 +4,14 @@ import { PurchaseDetails } from "./purchase-details.model";
 export class Purchase {
     public id: number;
     public supplierId: number;
-    public purchaseDate: Date;
+    public purchaseDate: string;
     public status: PurchaseStatus;
     public invoiceNo: string;
-    public totalQuantity: number;
-    public subTotal: number;
-    public otherCharges: number;
-    public grandTotal: number;
+    public totalQuantity: number=0;
+    public subTotal: number = 0;
+    public otherCharges: number = 0;
+    public grandTotal: number = 0;
     public note: string;
     public purchaseDetails: PurchaseDetails[] = [];
+
 }

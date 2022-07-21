@@ -98,7 +98,7 @@
               type="text"
               style="border: 1px solid #33b5e5"
               class="form-control"
-              [(ngModel)]="model"
+              [(ngModel)]="singleItemEntity"
               [ngbTypeahead]="search"
               [inputFormatter]="formatter"
               [resultFormatter]="formatter"
@@ -107,8 +107,8 @@
             />
             <a
               class="btn btn-info input-group-append"
-              (click)="SelectedItem(model)"
-              >add</a
+              (click)="SelectedItem(singleItemEntity)"
+              >Add</a
             >
           </div>
         </div>
@@ -132,7 +132,6 @@
               *ngFor="
                 let purchaseDetails of formData.purchaseDetails;
                 let i = index;
-                trackBy: changedValuesTrack
               "
               class="row"
             >
@@ -169,7 +168,7 @@
                     style="width: 50px; border-radius: 4px"
                     name="quantity"
                     [value]="purchaseDetails.quantity"
-                    (change)="changedQty($event.target, i)"
+                    (keyup)="changedQty($event.target, i)"
                   />
                   <button
                     (click)="increment_qty(i)"
@@ -187,7 +186,7 @@
                   class="form-control text-center"
                   name="unitCost"
                   [value]="purchaseDetails.unitCost"
-                  (change)="changedUnitCost($event.target, i)"
+                  (keyup)="changedUnitCost($event.target, i)"
                 />
               </td>
 

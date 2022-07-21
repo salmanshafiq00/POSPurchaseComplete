@@ -3,9 +3,9 @@
     <nav id="sidebar">
         <ul class="list-unstyled components">
             <li><button class="btn btn-large btn-warning" routerLink="dashboard" style="width: 100%;">Dashboard</button></li>
-                <ngb-accordion #acc="ngbAccordion">
+                <ngb-accordion #acc="ngbAccordion" class="customScrollBar">
 
-                    <ngb-panel title="Purcahge">
+                    <ngb-panel title="Purchase">
                       <ng-template ngbPanelContent>
                         <li>
                             <a routerLink="purchase">Purchase List</a>

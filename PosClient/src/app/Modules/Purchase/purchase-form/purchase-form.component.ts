@@ -26,11 +26,9 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
 export class PurchaseFormComponent implements OnInit {
   public supplierList: Supplier[];
   public itemList: Item[] = [];
-  public model: Item;
+  public singleItemEntity: Item;
   formData: Purchase = new Purchase();
 
-  puchaseDetails: PurchaseDetails = new PurchaseDetails();
-  formBodyArray: PurchaseDetails[] = new Array<PurchaseDetails>();
   public purchaseStatusEnum: PurchaseStatus;
   public statusArray = [];
   public routeData? = Number(location.pathname.split('/')[3]);
@@ -45,26 +43,9 @@ export class PurchaseFormComponent implements OnInit {
     this.statusArray = Object.keys(PurchaseStatus).filter((key) => isNaN(+key));
   }
 
-  getAllItem() {
-    this.service.GetAll<Item>(this.url + 'item').subscribe((res) => {
-      this.itemList = res;
-    });
-  }
-
-  getAllSuppliers() {
-    this.service
-      .GetAll<Supplier>(this.url + 'supplier')
-      .subscribe((res) => (this.supplierList = res));
-  }
-
-  getEditData() {
-    if (this.routeData > 0) {
-      console.log('for update');
-    }
-  }
 
   // For search operation
-  formatter = (item: Item) => item.name;
+  formatter = (item: Item) => item.itemCode + " | " + item.name;
 
   search: OperatorFunction<string, readonly Item[]> = (
     text$: Observable<string>
@@ -75,17 +56,13 @@ export class PurchaseFormComponent implements OnInit {
       filter((term) => term.length >= 2),
       map((term) =>
         this.itemList
-          .filter((state) => new RegExp(term, 'mi').test(state.name))
+          .filter((item) => new RegExp(term, 'mi').test(item.itemCode))
           .slice(0, 10)
       )
     );
 
-    itemName : string; 
-  public sampleArray: PurchaseDetails[] = [];
   SelectedItem(item: Item) {
     if (item != undefined) {
-      // this.getItemName(item.id);
-       this.itemName= item.name;
       this.formData.purchaseDetails.push({
         id: 0,
         quantity: 1,
@@ -100,7 +77,6 @@ export class PurchaseFormComponent implements OnInit {
         expireDate: this.datePipe.transform(Date.now(), 'yyyy-MM-dd'),
         soldQty: 0,
       });
-      this.sampleArray = this.formData.purchaseDetails;
       this.calTotalQty();
     }
   }
@@ -137,12 +113,15 @@ export class PurchaseFormComponent implements OnInit {
     this.formData.purchaseDetails[index].totalAmount =
       this.formData.purchaseDetails[index].quantity *
       this.formData.purchaseDetails[index].unitCost;
-      this.calSubAmount();
+    this.calSubAmount();
   }
 
-  changedValuesTrack(index: number, purchaseDetails: any) {
-    return purchaseDetails;
+  getEditData() {
+    if (this.routeData > 0) {
+      console.log('for update');
+    }
   }
+  // Crud Operation methods
   submit(form: NgForm) {
     if (form.valid) {
       if (this.routeData > 0) {
@@ -175,7 +154,6 @@ export class PurchaseFormComponent implements OnInit {
       this.calTotalQty();
       this.calSubAmount();
     }
-
   }
 
   increment_qty(i: number) {
@@ -195,25 +173,37 @@ export class PurchaseFormComponent implements OnInit {
   calSubAmount() {
     this.formData.subTotal = 0;
     for (let index = 0; index < this.formData.purchaseDetails.length; index++) {
-      let oneTotal = this.formData.purchaseDetails[index].quantity *  this.formData.purchaseDetails[index].unitCost;
+      let oneTotal =
+        this.formData.purchaseDetails[index].quantity *
+        this.formData.purchaseDetails[index].unitCost;
       this.formData.subTotal += Number(oneTotal);
     }
   }
-  ngOnInit(): void {
-    this.getAllSuppliers();
-    this.getAllItem();
-    this.getEditData();
-    this.formData.subTotal = 0;
-    this.formData.otherCharges = 0;
-    this.formData.grandTotal = 0;
+
+  getItemName(id: number): string {
+    if (this.formData.purchaseDetails != null) {
+      return this.itemList.find((e) => e.id == id).name;
+    } else {
+      return 'item';
+    }
   }
 
-  getItemName(id : number) : string{
-    if(this.formData.purchaseDetails != null){
+  ngOnInit(): void {
+    this.getAllItem();
+    this.getAllSuppliers();
+    this.getEditData();
+    this.formData.purchaseDate = this.datePipe.transform(Date.now(), 'yyyy-MM-dd');
+  }
 
-      return this.itemList.find(e => e.id == id).name;
-    }else{
-     return "item"
-    }
+  private getAllItem() {
+    this.service.GetAll<Item>(this.url + 'item').subscribe((res) => {
+      this.itemList = res;
+    });
+  }
+
+  private getAllSuppliers() {
+    this.service
+      .GetAll<Supplier>(this.url + 'supplier')
+      .subscribe((res) => (this.supplierList = res));
   }
 }
