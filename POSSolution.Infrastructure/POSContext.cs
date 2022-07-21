@@ -61,7 +61,13 @@ namespace POSSolution.Infrastructure
             modelBuilder.Entity<SalesReturn>().Property(p => p.GrandTotal).HasComputedColumnSql("[SubTotal]+[OtherCharges]");
 
 
-
+            modelBuilder.Entity<Brand>().HasData(new Brand { Id = 1, Name = "Samsung", Description = "GlobalBrand" }, new Brand { Id = 2, Name = "Apple", Description = "GlobalBrand" }, new Brand { Id = 3, Name = "Walton", Description = "GlobalBrand" });
+            modelBuilder.Entity<Category>().HasData(new Category { Id = 1, Name = "Electronics", Description = "AllKindElectronics" }, new Category { Id = 2, Name = "Appliance", Description = "Home Appliance" }, new Category { Id = 3, Name = "Mobile", Description = "All mobile phones" });
+            modelBuilder.Entity<Country>().HasData(new Country { Id = 1, Name = "Bangladesh" }, new Country { Id = 2, Name = "India"}, new Country { Id = 3, Name = "Pakistan" });
+            modelBuilder.Entity<State>().HasData(new State { Id = 1, Name = "Dhaka", CountryId=1 }, new State { Id = 2, Name = "Chittagong", CountryId = 1 }, new State { Id = 3, Name = "Sylhet", CountryId = 1 }, new State { Id = 4, Name = "UttarProdesh", CountryId = 2 }, new State { Id = 5, Name = "Karachi", CountryId = 3 });
+            modelBuilder.Entity<City>().HasData(new City { Id = 1, Name = "Dhaka", StateId=1 }, new City { Id = 2, Name = "Chittagong", StateId=2}, new City { Id = 3, Name = "Sylhet",StateId=3 }, new City { Id = 4, Name = "Agra", StateId = 4 }, new City { Id = 5, Name = "Karachi City", StateId = 5 });
+            modelBuilder.Entity<Unit>().HasData(new Unit { Id = 1, Name = "pcs", Description = "Pieces" }, new Unit { Id = 2, Name = "Kg", Description = "Killogram" }, new Unit { Id = 3, Name = "ltr", Description = "Litre" });
+            modelBuilder.Entity<ExpenseCategory>().HasData(new ExpenseCategory { Id = 1, CategoryName = "Office supplies", Description = "pens, folders, disinfectant wipes, trash bags, and other cleaning supplies" }, new ExpenseCategory { Id = 2, CategoryName = "Utilities", Description = "costs of electricity, gas, water, air conditioning, and trash" }, new ExpenseCategory { Id = 3, CategoryName = "OfficeOperationCost", Description = "Salaries and other compensation, Rent, Maintenance and repairs, Employee benefit programs" });
 
             base.OnModelCreating(modelBuilder);
         }
