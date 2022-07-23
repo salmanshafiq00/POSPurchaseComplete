@@ -12,7 +12,6 @@ import {
 } from 'rxjs';
 import { PurchaseStatus } from 'src/app/Core/Enums/purchase-status.enum';
 import { Item } from 'src/app/Core/Models/item.model';
-import { PurchaseDetails } from 'src/app/Core/Models/purchase-details.model';
 import { Purchase } from 'src/app/Core/Models/purchase.model';
 import { Supplier } from 'src/app/Core/Models/supplier.model';
 import { DataListRepositoryService } from 'src/app/Core/Services/data-list-repository.service';
@@ -24,8 +23,6 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
   styleUrls: ['./purchase-form.component.css'],
 })
 export class PurchaseFormComponent implements OnInit {
-  public supplierList: Supplier[];
-  public itemList: Item[] = [];
   public singleItemEntity: Item;
   formData: Purchase = new Purchase();
 
@@ -36,7 +33,7 @@ export class PurchaseFormComponent implements OnInit {
 
   constructor(
     private service: RestDataService,
-    private repo: DataListRepositoryService,
+    public repo: DataListRepositoryService,
     private route: Router,
     private datePipe: DatePipe
   ) {
@@ -55,10 +52,14 @@ export class PurchaseFormComponent implements OnInit {
       distinctUntilChanged(),
       filter((term) => term.length >= 2),
       map((term) =>
-        this.itemList
+        this.repo.itemData
           .filter((item) => new RegExp(term, 'mi').test(item.itemCode))
           .slice(0, 10)
-      )
+      ) || map((term) =>
+      this.repo.itemData
+        .filter((item) => new RegExp(term, 'mi').test(item.name))
+        .slice(0, 10)
+    )
     );
 
   SelectedItem(item: Item) {
@@ -182,7 +183,7 @@ export class PurchaseFormComponent implements OnInit {
 
   getItemName(id: number): string {
     if (this.formData.purchaseDetails != null) {
-      return this.itemList.find((e) => e.id == id).name;
+      return this.repo.itemData.find((e) => e.id == id).name;
     } else {
       return 'item';
     }
@@ -196,14 +197,19 @@ export class PurchaseFormComponent implements OnInit {
   }
 
   private getAllItem() {
+
+    if(this.repo.itemData.length == 0)
     this.service.GetAll<Item>(this.url + 'item').subscribe((res) => {
-      this.itemList = res;
-    });
+      this.repo.itemData = res;      
+    })
   }
 
   private getAllSuppliers() {
-    this.service
+    if (this.repo.supplierData.length == 0) {
+      this.service
       .GetAll<Supplier>(this.url + 'supplier')
-      .subscribe((res) => (this.supplierList = res));
+      .subscribe(res => this.repo.supplierData = res);      
+    }
+    
   }
 }

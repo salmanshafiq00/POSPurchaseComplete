@@ -29,7 +29,7 @@
       </div>
       <div class="box-footer">
         <div class="col-md-10 text-center">
-          <button class="btn btn-success" type="submit">Save</button>
+          <button class="btn btn-success" type="submit" [disabled]="form.invalid">{{buttonMode}}</button>
           <button class="btn btn-warning" routerLink="/">Close</button>
         </div>
       </div>

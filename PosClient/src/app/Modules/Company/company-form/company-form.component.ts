@@ -16,59 +16,60 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
 })
 export class CompanyFormComponent implements OnInit {
 
-  public countryList : Country[];
-  public stateData : State[];
-  public cityData : City[];
+  public stateData: State[];
+  public cityData: City[];
   public routeData? = Number(location.pathname.split('/')[3]);
-  formData : CompanyInfo = new CompanyInfo();
-  public logo : string = "/assets/Logo.PNG";
+  public formData : CompanyInfo = new CompanyInfo();
+  public sampleImage : string = "/assets/Logo.PNG";
+  public imagePlaceHolder : string;
+  public buttonMode : string = "Save";
   private url : string = "http://localhost:5000/api/";
 
-  constructor(private service : RestDataService, private repo: DataListRepositoryService, private route: Router) { }
+  constructor(private service : RestDataService, public repo: DataListRepositoryService, private route: Router) { }
   
 
   getDataAll() {   
-    if (this.routeData > 0) {
-      this.formData = this.repo.companyData.find(f => f.id == this.routeData);
+    if (this.routeData > 0) {      
+      if((this.repo.companyData.find(f => f.id == this.routeData)) == undefined){
+        this.formData = new CompanyInfo();        
+      }
+      else{
+        this.formData = this.repo.companyData.find(f => f.id == this.routeData);
+        this.imagePlaceHolder = this.formData.companyLogo;
+      }
+      this.buttonMode = "Update";
     }
     
   }
-  getAllCountry(){
-    if (this.repo.countryData == undefined) {
-      this.service.GetAll<Country>(this.url + "country").subscribe(res => {this.countryList = res, this.repo.countryData = res});
-    }else{
-      this.countryList = this.repo.countryData;
-    }
 
+  getStateById(countryId: number) {
+    if (this.repo.stateData.length == 0) {
+      this.service.GetAll<State>(this.url + 'state').subscribe((res) => {
+        this.stateData = res.filter((e) => e.countryId == countryId);        
+      });
+    } else {
+      this.stateData = this.repo.stateData.filter(
+        (e) => e.countryId == countryId
+      );
+    }
   }
 
-  getAllState(countryId : number){
-    if(this.repo.stateData ==undefined){
-      this.service.GetAll<State>(this.url+"state").subscribe(res => {
-      this.stateData = res.filter(e => e.countryId == countryId);
+  getCityById(stateId: number) {
+    if (this.repo.cityData.length == 0) {
+      this.service.GetAll<City>(this.url + 'city').subscribe((res) => {
+        this.cityData = res.filter((e) => e.stateId == stateId);
       });
-    }else{
-      this.stateData = this.repo.stateData.filter(e => e.countryId == countryId);
+    } else {
+      this.cityData = this.repo.cityData.filter((e) => e.stateId == stateId);
     }
-    
-
-  }
-
-  getAllCity(stateId : number){
-    if(this.repo.cityData == undefined){
-      this.service.GetAll<City>(this.url+"city").subscribe(res => {
-        this.cityData = res.filter(e => e.stateId == stateId);
-      });
-    }else{
-      this.cityData = this.repo.cityData.filter(e => e.stateId == stateId);
-    }
-   
   }
 
  
   submit(form : NgForm){
     if (form.valid) {
       if (this.routeData > 0) {
+        this.formData.companyLogo = this.imagePlaceHolder;
+        this.formData.id = this.routeData;
         this.service.Update<CompanyInfo>(this.formData, this.url+"companyinfo/" + this.routeData).subscribe(res => {
           alert("Data updated");
           var index = this.repo.companyData.indexOf(this.formData);
@@ -79,8 +80,8 @@ export class CompanyFormComponent implements OnInit {
         this.service.Insert<CompanyInfo>(this.formData, this.url+"companyinfo").subscribe(res => {
           alert("Data Inserted");
           this.repo.companyData.push(res);
-          console.log(res);
-          
+          form.reset();
+          this.imagePlaceHolder = this.sampleImage;
         });
       }
     }
@@ -93,7 +94,7 @@ export class CompanyFormComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = (e : any) => {
         this.formData.companyLogo = e.target.result;
-        this.logo = e.target.result;
+        this.imagePlaceHolder = e.target.result;
       };
 
       reader.readAsDataURL(event.target.files[0]);
@@ -101,8 +102,16 @@ export class CompanyFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.imagePlaceHolder = this.sampleImage;
     this.getDataAll();
     this.getAllCountry();
+   
+  }
+
+  private getAllCountry() {
+    if (this.repo.countryData.length == 0) {
+      this.service.GetAll<Country>(this.url + 'country').subscribe(res =>  this.repo.countryData = res);
+    } 
   }
 
 }

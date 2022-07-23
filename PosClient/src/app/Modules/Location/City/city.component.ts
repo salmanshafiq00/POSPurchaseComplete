@@ -13,16 +13,14 @@ export class CityComponent implements OnInit {
     private url: string = "http://localhost:5000/api/";
 
     constructor(private service: RestDataService, public repo : DataListRepositoryService,) {
-      if (this.repo.cityData == undefined) {
-          this.repo.cityData =  this.getDataAll();
-      }
+
     }
 
 
-
-    getDataAll(): City[] {
-       return  this.repo.getRecords("city");
-    }
+    updateLastAction(index: number, city: City) : number{
+      return city.id;
+   }
+   
 
     deleteRow(id: number) {
       var record = this.repo.cityData.find(w => w.id == id);
@@ -33,5 +31,11 @@ export class CityComponent implements OnInit {
     }
 
     ngOnInit(): void {
+      this.getDataAll();
     }
+
+    private  getDataAll(){
+      if(this.repo.cityData.length == 0)
+      this.repo.cityData =  this.repo.getRecords("city");
+   }
   }

@@ -7,14 +7,14 @@
       <table class="table table-border table-hover">
           <thead class="bg-primary">
               <tr>
-                  <th>State ID</th>
+                  <th>Serial No</th>
                   <th>State Name</th>
                   <th>Action</th>
               </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let state of repo.stateData; index as ID">
-                  <td>{{state.id}}</td>
+              <tr *ngFor="let state of repo.stateData; let i = index; trackBy:updateLastAction;">
+                  <td>{{i + 1}}</td>
                   <td>{{state.name}}</td>
                   <td>
                       <div ngbDropdown class="d-inline-block">

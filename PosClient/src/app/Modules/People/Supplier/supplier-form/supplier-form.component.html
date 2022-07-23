@@ -84,7 +84,7 @@
               <!-- <input type="text" class="form-control"> -->
               <select class="form-control" name="countryId" #countryId="ngModel" [(ngModel)]="formData.countryId" (change)="getAllState(formData.countryId)">
                 <option value="-1" selected>-----Select Country-----</option>
-                <option *ngFor="let data of countryList" value="{{data.id}}">{{data.name}}</option>
+                <option *ngFor="let data of repo.countryData" value="{{data.id}}">{{data.name}}</option>
               </select>
             </div>
           </div>

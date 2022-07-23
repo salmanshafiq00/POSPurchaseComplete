@@ -16,13 +16,14 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
 })
 export class ItemFormComponent implements OnInit {
 
+  public routeData?= Number(location.pathname.split('/')[3]);
+  public formData: Item = new Item();
+  public sampleImage : string = "\\assets\\product.jpg";
+  public imagePlaceHolder : string;
+  private url: string = "http://localhost:5000/api/";
 
   constructor(private service: RestDataService, private repo: DataListRepositoryService, private route: Router) { }
-  public routeData?= Number(location.pathname.split('/')[3]);
-  formData: Item = new Item();
-  sampleImage : string = "\\assets\\product.jpg";
-  imagePlaceHolder : string;
-  private url: string = "http://localhost:5000/api/";
+ 
   
   getEdit() {
     if (this.routeData > 0) {
@@ -33,6 +34,8 @@ export class ItemFormComponent implements OnInit {
   newItem = new Item();
   submit(form: NgForm) {
     if (form.valid) {
+      console.log("valid");
+      
       if (this.routeData > 0) {
         this.service.Update<Item>(this.formData, this.url + "item/" + this.routeData).subscribe(res => {
           alert("Data updated");
@@ -48,13 +51,13 @@ export class ItemFormComponent implements OnInit {
         this.service.Insert<Item>(this.formData, this.url + "item").subscribe(res => {
           alert("Data Inserted");
           this.repo.itemData.push(res);
-          this.newItem = res as Item;          
           this.imagePlaceHolder = this.sampleImage;
           form.reset();
         });
         
       }
     }
+    
   }
 
   onChange(event : any){

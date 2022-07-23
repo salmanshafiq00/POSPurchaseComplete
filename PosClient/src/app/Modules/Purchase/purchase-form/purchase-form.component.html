@@ -21,7 +21,7 @@
               >
                 <option value="-1" selected>-----Select Country-----</option>
                 <option
-                  *ngFor="let supplier of supplierList"
+                  *ngFor="let supplier of repo.supplierData"
                   value="{{ supplier.id }}"
                 >
                   {{ supplier.name }}
@@ -61,7 +61,7 @@
                 #status="ngModel"
                 [(ngModel)]="formData.status"
               >
-                <option value="-1" selected>-----Select State-----</option>
+                <option value="-1" selected>-----Select Status-----</option>
                 <option *ngFor="let sts of statusArray" value="{{ sts }}">
                   {{ sts }}
                 </option>
@@ -136,7 +136,7 @@
               class="row"
             >
               <td class="col-md-2">
-                <label>{{getItemName(purchaseDetails.itemId)}} </label>
+                <label>{{ getItemName(purchaseDetails.itemId) }} </label>
                 <input
                   type="number"
                   style="display: none"

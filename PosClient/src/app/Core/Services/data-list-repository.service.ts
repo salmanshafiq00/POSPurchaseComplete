@@ -25,24 +25,24 @@ export class DataListRepositoryService {
 
   }
 
-  public baseUrl = 'http://localhost:5000/api/';
   public emptyData = [];
-  public supplierData: Supplier[];
-  public customerData: Customer[];
-  public roleData: Role[];
-  public userData: User[];
-  public employeeData: Employee[];
-  public brandData: Brand[];
-  public categoryData: Category[];
-  public unitData: Unit[];
-  public purchaseData: Purchase[];
-  public countryData: Country[];
-  public stateData: State[];
-  public cityData: City[];
-  public salesData: Sales[];
-  public companyData: CompanyInfo[];
+  public baseUrl = 'http://localhost:5000/api/';
+  public brandData: Brand[] = [];
+  public cityData: City[] = [];
+  public categoryData: Category[] =[];
+  public companyData: CompanyInfo[] = [];
+  public customerData: Customer[] = [];
+  public countryData: Country[] = [];
+  public discountData: SalesDiscountTax[] =[];
+  public employeeData: Employee[] = [];
   public itemData: Item[] = [];
-  public discountData: SalesDiscountTax[];
+  public purchaseData: Purchase[] = [];
+  public roleData: Role[] = [];
+  public supplierData: Supplier[] = [];
+  public stateData: State[] = [];
+  public salesData: Sales[] = [];
+  public unitData: Unit[] = [];
+  public userData: User[] = [];
 
 
   public getRecords(entity: string): any[] {

@@ -14,6 +14,8 @@ export class ItemComponent implements OnInit {
 
     if (this.repo.itemData.length == 0) {
         this.repo.itemData =  this.getDataAll();
+        console.log("if data not found");
+        
     }
   }
 

@@ -114,16 +114,15 @@
           <div class="form-group row">
             <label class="form-label col-md-4 text-end">Country</label>
             <div class="col-md-8">
-              <!-- <input type="text" class="form-control"> -->
               <select
-                class="form-control"
+              class="form-select"
                 name="countryId"
                 #countryId="ngModel"
                 [(ngModel)]="formData.countryId"
-                (change)="getAllState(formData.countryId)"
+                (change)="getStateById(formData.countryId)"
               >
                 <option value="-1" selected>-----Select Country-----</option>
-                <option *ngFor="let data of countryList" value="{{ data.id }}">
+                <option *ngFor="let data of repo.countryData" value="{{ data.id }}">
                   {{ data.name }}
                 </option>
               </select>
@@ -136,11 +135,11 @@
             <label class="form-label col-md-4 text-end">State</label>
             <div class="col-md-8">
               <select
-                class="form-control"
+                class="form-select"
                 name="stateId"
                 #stateId="ngModel"
                 [(ngModel)]="formData.stateId"
-                (change)="getAllCity(formData.stateId)"
+                (change)="getCityById(formData.stateId)"
               >
                 <option value="-1" selected>-----Select State-----</option>
                 <option *ngFor="let data of stateData" value="{{ data.id }}">
@@ -153,7 +152,7 @@
             <label class="form-label col-md-4 text-end">City</label>
             <div class="col-md-8">
               <select
-                class="form-control"
+              class="form-select"
                 name="cityId"
                 #cityId="ngModel"
                 [(ngModel)]="formData.cityId"
@@ -219,7 +218,7 @@
             <div class="col-md-8">
               <img
                 id="proPic"
-                src="{{ logo }}"
+                src="{{ imagePlaceHolder }}"
                 alt=""
                 height="100px"
                 width="100px"
@@ -231,7 +230,7 @@
     </div>
     <div class="box-footer">
       <div class="col-md-10 text-center">
-        <button class="btn btn-success" type="submit">Save</button>
+        <button class="btn btn-success" type="submit" [disabled]="form.invalid">{{buttonMode}}</button>
         <button class="btn btn-warning" routerLink="/">Close</button>
       </div>
     </div>

@@ -12,20 +12,11 @@ export class StateComponent implements OnInit {
 
   private url: string = "http://localhost:5000/api/";
 
-  constructor(private service: RestDataService, public repo : DataListRepositoryService,) {
+  constructor(private service: RestDataService, public repo : DataListRepositoryService,) { } 
 
-    if (this.repo.stateData ==undefined) {
-        this.repo.stateData =  this.getDataAll();
-    }
-  }
-
-  ngOnInit(): void {
-  }
-
-  getDataAll(): State[] {
-     return  this.repo.getRecords("state");
-  }
-
+  updateLastAction(index: number, state: State) : number{
+    return state.id;
+ }
   deleteRow(id: number) {
     var record = this.repo.stateData.find(w => w.id == id);
     this.service.Delete<State>(this.url + "state/" + record.id).subscribe(res => {
@@ -33,4 +24,17 @@ export class StateComponent implements OnInit {
       alert("Data deleted");
     });
   }
+  
+  ngOnInit(): void {
+    this.getDataAll();
+  }
+
+  private getDataAll(){
+    if (this.repo.stateData.length == 0) {
+      this.repo.stateData =  this.repo.getRecords("state");
+  }
+     
+  }
+
+
 }

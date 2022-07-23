@@ -12,14 +12,25 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
 })
 export class CountryFormComponent implements OnInit {
 
-  constructor(private service : RestDataService, private repo: DataListRepositoryService, private route: Router) { }
-  private url : string = "http://localhost:5000/api/";
   public routeData? = Number(location.pathname.split('/')[3]);
-  formData : Country = new Country();
+  public formData : Country = new Country();
+  public buttonMode : string = "Save";
+
+  private url : string = "http://localhost:5000/api/";
+
+  constructor(private service : RestDataService, private repo: DataListRepositoryService, private route: Router) { }
+  
 
   getDataAll() {
     if (this.routeData > 0) {
-      this.formData = this.repo.countryData.find(f => f.id == this.routeData);
+      if (this.repo.countryData.find(f => f.id == this.routeData) == undefined) {
+        this.formData = new Country();
+      }
+      else{
+        this.formData = this.repo.countryData.find(f => f.id == this.routeData);
+        
+      }
+      this.buttonMode = "Update";
     }
   }
 
@@ -27,6 +38,7 @@ export class CountryFormComponent implements OnInit {
   submit(form : NgForm){
     if (form.valid) {
       if (this.routeData > 0) {
+        this.formData.id = this.routeData;
         this.service.Update<Country>(this.formData, this.url+"country/" + this.routeData).subscribe(res => {
           alert("Data updated");
           var index = this.repo.countryData.indexOf(this.formData);
@@ -37,6 +49,7 @@ export class CountryFormComponent implements OnInit {
         this.service.Insert<Country>(this.formData, this.url+"country").subscribe(res => {
           this.repo.countryData.push(res);
           alert("Data Inserted");
+          form.reset();
         })
       }
     }

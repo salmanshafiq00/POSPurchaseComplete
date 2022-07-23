@@ -14,19 +14,25 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
 })
 export class CityFormComponent implements OnInit {
 
-  private url: string = "http://localhost:5000/api/";
   public routeData?= Number(location.pathname.split('/')[3]);
-  formData: City = new City();
-  constructor(private service: RestDataService, private repo: DataListRepositoryService, private route: Router) {
+  public formData: City = new City();
+  public buttonMode : string = "Save";
+  public stateData: State[];
+
+  private url: string = "http://localhost:5000/api/";
+
+  constructor(private service: RestDataService, public repo: DataListRepositoryService, private route: Router) {
   }
 
-  getDataAll(): Country[] {
-    return this.repo.getRecords("country");
-  }
-
-  getEdit() {
+  getDataAll() {
     if (this.routeData > 0) {
-      this.formData = this.repo.cityData.find(f => f.id == this.routeData);
+      if (this.repo.cityData.find(f => f.id == this.routeData) == undefined) {
+        this.formData = new City();
+      }
+      else{
+        this.formData = this.repo.cityData.find(f => f.id == this.routeData);
+      }
+      this.buttonMode = "Update";
     }
   }
 
@@ -34,6 +40,7 @@ export class CityFormComponent implements OnInit {
   submit(form: NgForm) {
     if (form.valid) {
       if (this.routeData > 0) {
+        this.formData.id = this.routeData;
         this.service.Update<City>(this.formData, this.url + "city/" + this.routeData).subscribe(res => {
           alert("Data updated");
           var index = this.repo.cityData.indexOf(this.formData);
@@ -44,30 +51,37 @@ export class CityFormComponent implements OnInit {
         this.service.Insert<City>(this.formData, this.url + "city").subscribe(res => {
           alert("Data Inserted");
           this.repo.cityData.push(res);
+          form.reset();
         })
       }
     }
 
   }
 
-  countryList: Country[];
-  stateList: State[];
 
-  getAllCountry() {
-    if (this.repo.countryData == undefined) {
-      this.service.GetAll<Country>(this.url + "country").subscribe(res => {this.countryList = res, this.repo.countryData = res});
+
+  getStateById(countryId: any) {   
+    if (this.repo.stateData.length == 0) {
+      this.service.GetAll<State>(this.url + 'state').subscribe((res) => {
+        this.stateData = res.filter((e) => e.countryId == countryId);        
+      });
+    } else {
+      this.stateData = this.repo.stateData.filter(
+        (e) => e.countryId == countryId
+      );
     }
-    else{
-      this.countryList = this.repo.countryData;
-    }
-    
   }
-  getAllState(id: any) {
-    this.service.GetAll<State>(this.url + "state").subscribe(res => this.stateList = res.filter(a => a.countryId == id.value));
-  }
+
 
   ngOnInit(): void {
-    this.getEdit();
+    this.getDataAll();
     this.getAllCountry();
+  }
+
+  private getAllCountry() {    
+    if (this.repo.countryData.length == 0) {
+      this.service.GetAll<Country>(this.url + "country").subscribe(res => {this.repo.countryData = res});
+    }
+
   }
 }

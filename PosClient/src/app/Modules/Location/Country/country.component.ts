@@ -6,31 +6,37 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
 @Component({
   selector: 'app-country',
   templateUrl: './country.component.html',
-  styleUrls: ['./country.component.css']
+  styleUrls: ['./country.component.css'],
 })
 export class CountryComponent implements OnInit {
+  private url: string = 'http://localhost:5000/api/';
 
-  private url: string = "http://localhost:5000/api/";
+  constructor(
+    private service: RestDataService,
+    public repo: DataListRepositoryService
+  ) {}
 
-  constructor(private service: RestDataService, public repo : DataListRepositoryService,) {
+updateLastAction(index: number, country: Country) : string{
+   return country.name;
+}
 
-    if (this.repo.countryData ==undefined) {
-        this.repo.countryData =  this.getDataAll();
-    }
+  deleteRow(id: number) {
+    var record = this.repo.countryData.find((w) => w.id == id);
+    this.service
+      .Delete<Country>(this.url + 'country/' + record.id)
+      .subscribe((res) => {
+        this.repo.countryData.splice(this.repo.countryData.indexOf(record));
+        alert('Data deleted');
+      });
   }
 
   ngOnInit(): void {
+    this.getDataAll();
   }
 
-  getDataAll(): Country[] {
-     return  this.repo.getRecords("country");
-  }
-
-  deleteRow(id: number) {
-    var record = this.repo.countryData.find(w => w.id == id);
-    this.service.Delete<Country>(this.url + "country/" + record.id).subscribe(res => {
-      this.repo.countryData.splice(this.repo.countryData.indexOf(record));
-      alert("Data deleted");
-    });
+  private getDataAll() {
+    if (this.repo.countryData.length == 0) {
+      this.repo.countryData = this.repo.getRecords('country');
+    }
   }
 }

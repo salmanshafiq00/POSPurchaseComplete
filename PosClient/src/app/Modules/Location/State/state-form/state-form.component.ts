@@ -13,16 +13,24 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
 })
 export class StateFormComponent implements OnInit {
 
-  constructor(private service : RestDataService, private repo: DataListRepositoryService, private route: Router) { }
-  private url : string = "http://localhost:5000/api/";
   public routeData? = Number(location.pathname.split('/')[3]);
-  formData : State = new State();
-
+  public formData : State = new State();
+  public buttonMode : string = "Save";
+  private url : string = "http://localhost:5000/api/";
+  
+  constructor(private service : RestDataService, private repo: DataListRepositoryService, private route: Router) { }
+  
   getDataAll() {
 
     if (this.routeData > 0) {
-
-      this.formData = this.repo.stateData.find(f => f.id == this.routeData);
+      if (this.repo.stateData.find(f => f.id == this.routeData) == undefined) {
+        this.formData = new State();
+      }
+      else{
+        this.formData = this.repo.stateData.find(f => f.id == this.routeData);
+      
+      }
+      this.buttonMode = "Update";
     }
 
   }
@@ -31,6 +39,7 @@ export class StateFormComponent implements OnInit {
   submit(form : NgForm){
     if (form.valid) {
       if (this.routeData > 0) {
+        this.formData.id = this.routeData;
         this.service.Update<State>(this.formData, this.url+"state/" + this.routeData).subscribe(res => {
           alert("Data updated");
           var index = this.repo.stateData.indexOf(this.formData);
