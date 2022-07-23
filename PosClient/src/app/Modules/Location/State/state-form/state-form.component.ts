@@ -47,9 +47,11 @@ export class StateFormComponent implements OnInit {
           this.route.navigateByUrl("state");
         })
       }else{
+        this.formData.id = 0;
         this.service.Insert<State>(this.formData, this.url+"state").subscribe(res => {
           alert("Data Inserted");
           this.repo.stateData.push(res);
+          form.reset();
         })
       }
     }

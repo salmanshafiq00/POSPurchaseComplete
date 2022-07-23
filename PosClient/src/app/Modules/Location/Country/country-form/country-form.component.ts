@@ -46,6 +46,7 @@ export class CountryFormComponent implements OnInit {
           this.route.navigateByUrl("country");
         })
       }else{
+        this.formData.id = 0;
         this.service.Insert<Country>(this.formData, this.url+"country").subscribe(res => {
           this.repo.countryData.push(res);
           alert("Data Inserted");

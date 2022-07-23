@@ -48,6 +48,7 @@ export class CityFormComponent implements OnInit {
           this.route.navigateByUrl("city");
         })
       } else {
+        this.formData.id = 0;
         this.service.Insert<City>(this.formData, this.url + "city").subscribe(res => {
           alert("Data Inserted");
           this.repo.cityData.push(res);

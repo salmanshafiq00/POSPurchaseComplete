@@ -31,8 +31,8 @@
                         <div class="col-md-8">
                             <select class="form-select" name="category" #categoryId="ngModel"
                                 [(ngModel)]="formData.categoryId">
-                                <option value="-1" selected>-----Select Catagory-----</option>
-                                <option *ngFor="let data of categoryList" value="{{data.id}}">{{data.name}}</option>
+                                <option value="-1" selected>-----Select Category-----</option>
+                                <option *ngFor="let data of repo.categoryData" value="{{data.id}}">{{data.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                             <select class="form-select" name="brandId" #brandId="ngModel"
                                 [(ngModel)]="formData.brandId">
                                 <option value="-1" selected>-----Select Brand-----</option>
-                                <option *ngFor="let data of brandList" value="{{data.id}}">{{data.name}}</option>
+                                <option *ngFor="let data of repo.brandData" value="{{data.id}}">{{data.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         <div class="col-md-8">
                             <select class="form-select" name="unitId" #unitId="ngModel" [(ngModel)]="formData.unitId">
                                 <option value="-1" selected>-----Select Unit-----</option>
-                                <option *ngFor="let data of unitList" value="{{data.id}}">{{data.name}}</option>
+                                <option *ngFor="let data of repo.unitData" value="{{data.id}}">{{data.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
         </div>
         <div class="box-footer">
             <div class="col-md-10 text-center">
-                <button class="btn btn-success"  type="submit" [disabled]="form.invalid"> Save</button>
+                <button class="btn btn-success"  type="submit" [disabled]="form.invalid"> {{buttonMode}}</button>
                 <button class="btn btn-warning" routerLink="/">Close</button>
             </div>
         </div>

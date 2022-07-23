@@ -20,39 +20,48 @@ export class ItemFormComponent implements OnInit {
   public formData: Item = new Item();
   public sampleImage : string = "\\assets\\product.jpg";
   public imagePlaceHolder : string;
+  public buttonMode : string = "Save";
+
   private url: string = "http://localhost:5000/api/";
 
-  constructor(private service: RestDataService, private repo: DataListRepositoryService, private route: Router) { }
+  constructor(private service: RestDataService, public repo: DataListRepositoryService, private route: Router) { }
  
   
   getEdit() {
     if (this.routeData > 0) {
-      this.formData = this.repo.itemData.find(f => f.id == this.routeData);
+      if (this.repo.itemData.find(f => f.id == this.routeData) == undefined) {   
+        this.formData = new Item();
+        this.imagePlaceHolder = this.sampleImage;
+      }
+      else{
+        this.formData = this.repo.itemData.find(f => f.id == this.routeData);
+        this.formData.profitMargin = this.repo.itemData.find(f => f.id == this.routeData).profitMargin * 100;
+        this.imagePlaceHolder = this.formData.imagePath;
+      }
+      this.buttonMode = "Update";
     }
   }
 
-  newItem = new Item();
   submit(form: NgForm) {
     if (form.valid) {
-      console.log("valid");
       
       if (this.routeData > 0) {
+        this.formData.imagePath = this.imagePlaceHolder;
+        this.formData.id = this.routeData;
         this.service.Update<Item>(this.formData, this.url + "item/" + this.routeData).subscribe(res => {
           alert("Data updated");
           var index = this.repo.itemData.indexOf(this.formData);
           this.repo.itemData.splice(index, 1, this.formData);
           this.route.navigateByUrl("item");
         })
-      } else {
-        console.log(this.formData);
-        
-        this.formData.profitMargin = this.formData.profitMargin/100;
+      } else {        
         this.formData.id = 0;
+        this.formData.profitMargin = this.formData.profitMargin/100;
         this.service.Insert<Item>(this.formData, this.url + "item").subscribe(res => {
           alert("Data Inserted");
           this.repo.itemData.push(res);
-          this.imagePlaceHolder = this.sampleImage;
           form.reset();
+          this.imagePlaceHolder = this.sampleImage;
         });
         
       }
@@ -72,54 +81,43 @@ export class ItemFormComponent implements OnInit {
   }
 
 
-  categoryList: Category[];
-  brandList: Brand[];
-  unitList: Unit[];
   discountList: SalesDiscountTax[];
 
-  getAllCategory() {
-    if (this.repo.categoryData == undefined) {
-      this.service.GetAll<Category>(this.url + "category").subscribe(res => {this.categoryList = res, this.repo.countryData = res});
-    }else{
+ 
 
-      this.categoryList = this.repo.categoryData;
-    }
-  }
-  getAllBrand() {
-    if (this.repo.brandData == undefined) {
-      this.service.GetAll<Brand>(this.url + "brand").subscribe(res => {this.brandList = res, this.repo.brandData = res});
-    }else{
-
-      this.brandList = this.repo.brandData;
-    }
+  ngOnInit(): void {
+    this.imagePlaceHolder = this.sampleImage;
+    this.getEdit();
+    this.getAllCategory();
+    this.getAllBrand();
+    this.getAllDiscount();
+    this.getAllUnit();
   }
 
-  getAllUnit() {
-    if (this.repo.unitData == undefined) {
-      this.service.GetAll<Unit>(this.url + "unit").subscribe(res => {this.unitList = res, this.repo.unitData = res});
-    }else{
-
-      this.unitList = this.repo.unitData;
+  private getAllCategory() {
+    if (this.repo.categoryData.length == 0) {
+      this.service.GetAll<Category>(this.url + "category").subscribe(res => this.repo.categoryData = res);
     }
   }
-  getAllDiscount() {
+  private getAllBrand() {
+    if (this.repo.brandData.length == 0) {
+      this.service.GetAll<Brand>(this.url + "brand").subscribe(res => this.repo.brandData = res);
+    }
+  }
+
+ private getAllUnit() {
+    if (this.repo.unitData.length == 0) {
+      this.service.GetAll<Unit>(this.url + "unit").subscribe(res => this.repo.unitData = res);
+    }
+  }
+
+  private getAllDiscount() {
     if (this.repo.discountData == undefined) {
 
       // Todo todo doto
       // Todo todo doto
       // Todo todo doto
       this.service.GetAll<SalesDiscountTax>(this.url + "brand").subscribe(res => {this.discountList = res, this.repo.discountData = res});
-    }else{
-      this.brandList = this.repo.brandData;
     }
   }
-  ngOnInit(): void {
-    this.getEdit();
-    this.getAllCategory();
-    this.getAllBrand();
-    this.getAllDiscount();
-    this.getAllUnit();
-    this.imagePlaceHolder = this.sampleImage;
-  }
-
 }

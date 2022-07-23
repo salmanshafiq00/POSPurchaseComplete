@@ -6,37 +6,39 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
-  styleUrls: ['./item.component.css']
+  styleUrls: ['./item.component.css'],
 })
 export class ItemComponent implements OnInit {
-  private url: string = "http://localhost:5000/api/";
-  constructor(private service: RestDataService, public repo : DataListRepositoryService,) {
+  private url: string = 'http://localhost:5000/api/';
+  
+  constructor(
+    private service: RestDataService,
+    public repo: DataListRepositoryService
+  ) {}
 
-    if (this.repo.itemData.length == 0) {
-        this.repo.itemData =  this.getDataAll();
-        console.log("if data not found");
-        
-    }
+  updateLastAction(index: number, item: Item): number {
+    return item.id;
   }
 
-  // updateLastAction(index: number, item: Item) : number{
-  //   return item.id;
-  // }
-
-
   deleteRow(id: number) {
-    var record = this.repo.itemData.find(w => w.id == id);
-    this.service.Delete<Item>(this.url + "item/" + record.id).subscribe(res => {
-      alert("Data deleted");
-      this.repo.itemData.splice(this.repo.itemData.indexOf(record));
-    });
+    var record = this.repo.itemData.find((w) => w.id == id);
+    this.service
+      .Delete<Item>(this.url + 'item/' + record.id)
+      .subscribe((res) => {
+        alert('Data deleted');
+        this.repo.itemData.splice(this.repo.itemData.indexOf(record));
+      });
   }
 
   ngOnInit(): void {
-    
+    this.getDataAll();
   }
 
-  private getDataAll(): Item[] {
-    return  this.repo.getRecords("item");
- }
+  private getDataAll() {
+    if (this.repo.itemData.length == 0) {
+      this.service
+        .GetAll<Item>(this.url + 'item')
+        .subscribe((res) => (this.repo.itemData = res));
+    }
+  }
 }

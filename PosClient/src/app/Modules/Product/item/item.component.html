@@ -17,11 +17,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let data of repo.itemData; let i = index;">
+                <tr *ngFor="let data of repo.itemData; let i = index; trackBy:updateLastAction">
                     <td>{{data.itemCode}}</td>
                     <td>{{data.name}}</td>
                     <td>{{data.sku}}</td>
-                    <td>{{data.profitMargin}}</td>
+                    <td>{{data.profitMargin | percent}}</td>
                     <td>{{data.description}}</td>
                     <td>
                         <img src="{{data.imagePath}}" alt="product image" width="50px" height="50px"> 

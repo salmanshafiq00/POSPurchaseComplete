@@ -77,6 +77,7 @@ export class CompanyFormComponent implements OnInit {
           this.route.navigateByUrl("company");
         })
       }else{
+        this.formData.id = 0;
         this.service.Insert<CompanyInfo>(this.formData, this.url+"companyinfo").subscribe(res => {
           alert("Data Inserted");
           this.repo.companyData.push(res);
