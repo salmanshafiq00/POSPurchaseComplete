@@ -12,20 +12,31 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
   styleUrls: ['./unit-form.component.css']
 })
 export class UnitFormComponent implements OnInit {
-    constructor(private service: RestDataService, private repo: DataListRepositoryService, private route: Router) { }
-    private url: string = "http://localhost:5000/api/";
-    public routeData?= Number(location.pathname.split('/')[3]);
-    formData: Unit = new Unit();
+  public buttonMode : string = "Save";
+  public routeData?= Number(location.pathname.split('/')[3]);
+  public formData: Unit = new Unit();
+
+  private url: string = "http://localhost:5000/api/";
+
+  constructor(private service: RestDataService, private repo: DataListRepositoryService, private route: Router) { }
+   
   
     getEdit() {
       if (this.routeData > 0) {
-        this.formData = this.repo.unitData.find(f => f.id == this.routeData);
+        if (this.repo.unitData.find(f => f.id == this.routeData) == undefined) {
+          this.formData = new Unit();
+        }
+        else{
+          this.formData = this.repo.unitData.find(f => f.id == this.routeData);
+        }
+        this.buttonMode = "Update";
       }
     }
   
     submit(form: NgForm) {
       if (form.valid) {
         if (this.routeData > 0) {
+          this.formData.id = this.routeData;
           this.service.Update<Unit>(this.formData, this.url + "unit/" + this.routeData).subscribe(res => {
             alert("Data updated");
             var index = this.repo.unitData.indexOf(this.formData);
@@ -33,9 +44,11 @@ export class UnitFormComponent implements OnInit {
             this.route.navigateByUrl("unit");
           })
         } else {
+          this.formData.id = 0;
           this.service.Insert<Unit>(this.formData, this.url + "unit").subscribe(res => {
             alert("Data Inserted");
             this.repo.unitData.push(res);
+            form.reset();
           });
         }
       }

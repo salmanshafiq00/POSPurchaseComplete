@@ -14,16 +14,6 @@ export class CategoryComponent implements OnInit {
 
   constructor(private service: RestDataService, public repo : DataListRepositoryService,) {
 
-    if (this.repo.categoryData ==undefined) {
-        this.repo.categoryData =  this.getDataAll();
-    }
-  }
-
-  ngOnInit(): void {
-  }
-
-  getDataAll(): Category[] {
-     return  this.repo.getRecords("category");
   }
 
   deleteRow(id: number) {
@@ -32,5 +22,20 @@ export class CategoryComponent implements OnInit {
       alert("Data deleted");
       this.repo.categoryData.splice(this.repo.categoryData.indexOf(record));
     });
+  }
+
+  updateLastAction(index: number, category: Category): number {
+    return category.id;
+  }
+  
+  ngOnInit(): void {
+    this.getDataAll();
+  }
+
+
+  private getDataAll(){
+    if (this.repo.categoryData.length == 0) {
+      this.repo.categoryData =  this.repo.getRecords("category");
+  }
   }
 }

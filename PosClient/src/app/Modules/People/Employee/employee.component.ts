@@ -10,26 +10,29 @@ import {Employee} from 'src/app/Core/Models/employee.model'
 })
 export class EmployeeComponent implements OnInit {
 
+  private url : string = "http://localhost:5000/api/";
+
   constructor(private service: RestDataService, public repo : DataListRepositoryService) { }
 
-  private url : string = "http://localhost:5000/api/";
-  ngOnInit(): void {
-    if(this.repo.employeeData == undefined){
-      this.repo.employeeData = this.getAllData();
-    }
-  }
-
-  getAllData() : Employee[]{
-    return this.repo.getRecords("employee");
+  updateLastAction(index: number, employee: Employee): number {
+    return employee.id;
   }
 
   deleteRow(id : number){
     var record = this.repo.employeeData.find(e => e.id == id);
     this.service.Delete<Employee>(this.url + "employee/" + record.id).subscribe(res => {
-      alert("Data Deleted Successfull");
+      this.repo.employeeData.splice(this.repo.employeeData.indexOf(record));
+      alert("Data Deleted Successfully");
     });
-    this.repo.employeeData.splice(this.repo.employeeData.indexOf(record));
   }
 
-  
+  ngOnInit(): void {
+    this.getAllData();    
+  }
+
+  private getAllData() {
+    if(this.repo.employeeData.length == 0){
+      this.repo.employeeData = this.repo.getRecords("employee");
+    }
+  }
 }

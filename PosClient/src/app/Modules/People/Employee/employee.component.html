@@ -7,38 +7,34 @@
       <table class="table table-border table-hover">
           <thead class="bg-primary">
               <tr>
-                  <th>Employee ID</th>
-                  <th>Employee Name</th>
+                  <th>Serial No</th>
+                  <th> Name</th>
                   <th>Phone</th>
                   <th>Mobile</th>
                   <th>Email</th>
-                  <th>Password</th>
-                  <th>Role</th>
-                  <th>Profile Pic</th>
-                  <th>Status</th>
+                  <th>Designation</th>
+                  <th>Image</th>
                   <th>Action</th>
               </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let user of repo.employeeData;">
-                  <td>{{user.id}}</td>
-                  <td>{{user.name}}</td>
-                  <td>{{user.phone}}</td>
-                  <td>{{user.mobile}}</td>
-                  <td>{{user.email}}</td>
-                  <td>{{user.password}}</td>
-                  <td>{{user.roleId}}</td>
+              <tr *ngFor="let employee of repo.employeeData; let i = index; trackBy:updateLastAction">
+                  <td>{{i + 1}}</td>
+                  <td>{{employee.name}}</td>
+                  <td>{{employee.phone}}</td>
+                  <td>{{employee.mobile}}</td>
+                  <td>{{employee.email}}</td>
+                  <td>{{employee.designation | toEnumName}}</td>
                   <td>
-                      <img src="{{user.profilePicture}}" height="50px" width="50px">
+                      <img src="{{employee.profilePicture}}" height="50px" width="50px">
                   </td>
-                  <td><button class="btn btn-sm btn-success">Active</button></td>
                   <td>
 
                       <div ngbDropdown class="d-inline-block">
                           <button type="button" class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Action</button>
                           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                            <button ngbDropdownItem routerLink="/employee/form/{{user.id}}">Edit</button>
-                            <button ngbDropdownItem (click)="deleteRow(user.id)">Delete</button>
+                            <button ngbDropdownItem routerLink="/employee/form/{{employee.id}}">Edit</button>
+                            <button ngbDropdownItem (click)="deleteRow(employee.id)">Delete</button>
                           </div>
                         </div>
                   </td>

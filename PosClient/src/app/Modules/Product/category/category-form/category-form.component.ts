@@ -11,15 +11,24 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
   styleUrls: ['./category-form.component.css']
 })
 export class CategoryFormComponent implements OnInit {
+  public routeData?= Number(location.pathname.split('/')[3]);
+  public formData: Category = new Category();
+  public buttonMode : string = "Save";
+
+  private url: string = "http://localhost:5000/api/";
 
   constructor(private service: RestDataService, private repo: DataListRepositoryService, private route: Router) { }
-  private url: string = "http://localhost:5000/api/";
-  public routeData?= Number(location.pathname.split('/')[3]);
-  formData: Category = new Category();
+  
 
   getEdit() {
     if (this.routeData > 0) {
-      this.formData = this.repo.categoryData.find(f => f.id == this.routeData);
+      if(this.repo.categoryData.find(f => f.id == this.routeData) == undefined){
+        this.formData = new Category();
+      }
+      else{
+        this.formData = this.repo.categoryData.find(f => f.id == this.routeData);
+        this.buttonMode = "Update";
+      }
     }
   }
 
@@ -27,6 +36,7 @@ export class CategoryFormComponent implements OnInit {
   submit(form: NgForm) {
     if (form.valid) {
       if (this.routeData > 0) {
+        this.formData.id = this.routeData;
         this.service.Update<Category>(this.formData, this.url + "category/" + this.routeData).subscribe(res => {
           alert("Data updated");
           var index = this.repo.categoryData.indexOf(this.formData);
@@ -34,9 +44,11 @@ export class CategoryFormComponent implements OnInit {
           this.route.navigateByUrl("category");
         })
       } else {
+        this.formData.id = 0;
         this.service.Insert<Category>(this.formData, this.url + "category").subscribe(res => {
           alert("Data Inserted");
           this.repo.categoryData.push(res);
+          form.reset();
         });
       }
     }

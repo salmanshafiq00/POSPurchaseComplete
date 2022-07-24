@@ -82,16 +82,16 @@
               <label class="form-label col-md-4 text-end">Country</label>
               <div class="col-md-8">
                 <!-- <input type="text" class="form-control"> -->
-                <select class="form-control" name="countryId" #countryId="ngModel" [(ngModel)]="formData.countryId" (change)="getAllState(formData.countryId)">
+                <select class="form-select" name="countryId" #countryId="ngModel" [(ngModel)]="formData.countryId" (change)="getAllState(formData.countryId)">
                   <option value="-1" selected>-----Select Country-----</option>
-                  <option *ngFor="let data of countryList" value="{{data.id}}">{{data.name}}</option>
+                  <option *ngFor="let data of repo.countryData" value="{{data.id}}">{{data.name}}</option>
                 </select>
               </div>
             </div>
             <div class="form-group row">
               <label class="form-label col-md-4 text-end">State</label>
               <div class="col-md-8">
-                <select class="form-control" name="stateId" #stateId="ngModel" [(ngModel)]="formData.stateId" (change)="getAllCity(formData.stateId)" >
+                <select class="form-select" name="stateId" #stateId="ngModel" [(ngModel)]="formData.stateId" (change)="getAllCity(formData.stateId)" >
                   <option value="-1" selected>-----Select State-----</option>
                   <option *ngFor="let data of stateData" value="{{data.id}}">{{data.name}}</option>
                 </select>
@@ -100,7 +100,7 @@
             <div class="form-group row">
               <label class="form-label col-md-4 text-end">City</label>
               <div class="col-md-8">
-                <select class="form-control" name="cityId" #cityId="ngModel" [(ngModel)]="formData.cityId" >
+                <select class="form-select" name="cityId" #cityId="ngModel" [(ngModel)]="formData.cityId" >
                   <option value="-1" selected>-----Select City-----</option>
                   <option *ngFor="let data of cityData" value="{{data.id}}">{{data.name}}</option>
                 </select>
@@ -136,7 +136,7 @@
       </div>
       <div class="box-footer">
         <div class="col-md-10 text-center">
-          <button class="btn btn-success" type="submit">Save</button>
+          <button class="btn btn-success" type="submit" [disabled]="form.invalid" >{{buttonMode}}</button>
           <button class="btn btn-warning" routerLink="/">Close</button>
       </div>
   </div>

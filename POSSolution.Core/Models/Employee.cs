@@ -11,7 +11,6 @@ namespace POSSolution.Core.Models
     public class Employee : Identity
     {
         public Designation Designation { get; set; }
-        public string Salery { get; set; }
-        public DateTime PaymentDate { get; set; }
+        public string profilePicture { get; set; }
     }
 }

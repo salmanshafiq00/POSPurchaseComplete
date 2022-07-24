@@ -8,6 +8,6 @@ namespace POSSolution.Core.Enum
 {
     public enum Designation
     {
-        Salesman, Deliveryman, Foreman, 
+        Salesman, Deliveryman, Foreman 
     }
 }

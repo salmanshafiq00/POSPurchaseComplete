@@ -7,7 +7,7 @@
         <table class="table table-border table-hover">
             <thead class="bg-primary">
                 <tr>
-                    <th>Supplier ID</th>
+                    <th>Serial No</th>
                     <th>Supplier Name</th>
                     <th>Phone</th>
                     <th>Mobile</th>
@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let supplier of repo.supplierData; index as ID">
+                <tr *ngFor="let supplier of repo.supplierData; let i = index; trackBy:updateLastAction">
                     <td>{{supplier.id}}</td>
                     <td>{{supplier.name}}</td>
                     <td>{{supplier.phone}}</td>

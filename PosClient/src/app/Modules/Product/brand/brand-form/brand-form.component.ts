@@ -11,17 +11,24 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
   styleUrls: ['./brand-form.component.css']
 })
 export class BrandFormComponent implements OnInit {
+  public buttonMode : string = "Save";
+  public routeData? = Number(location.pathname.split('/')[3]);
+  public formData : Brand = new Brand();
+  private url : string = "http://localhost:5000/api/";
 
   constructor(private service : RestDataService, private repo: DataListRepositoryService, private route: Router) { }
-  private url : string = "http://localhost:5000/api/";
-  public routeData? = Number(location.pathname.split('/')[3]);
-  formData : Brand = new Brand();
 
   getEdit() {
 
     if (this.routeData > 0) {
-
-      this.formData = this.repo.brandData.find(f => f.id == this.routeData);
+      if (this.repo.brandData.find(f => f.id == this.routeData) == undefined) {
+        this.formData = new Brand();
+      }
+      else{
+        this.formData = this.repo.brandData.find(f => f.id == this.routeData);
+      
+      }
+      this.buttonMode = "Update";
     }
 
   }
@@ -30,7 +37,7 @@ export class BrandFormComponent implements OnInit {
   submit(form : NgForm){
     if (form.valid) {
       if (this.routeData > 0) {
-
+        this.formData.id = this.routeData;
         this.service.Update<Brand>(this.formData, this.url+"brand/" + this.routeData).subscribe(res => {
           alert("Data updated");
           var index = this.repo.brandData.indexOf(this.formData);
@@ -38,9 +45,11 @@ export class BrandFormComponent implements OnInit {
           this.route.navigateByUrl("brand");
         })
       }else{
+        this.formData.id = 0;
         this.service.Insert<Brand>(this.formData, this.url+"brand").subscribe(res => {
           alert("Data Inserted");
           this.repo.brandData.push(res);
+          form.reset();
         })
       }
     }

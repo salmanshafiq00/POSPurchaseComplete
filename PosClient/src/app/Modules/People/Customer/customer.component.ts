@@ -14,15 +14,10 @@ export class CustomerComponent implements OnInit {
 
   constructor(private service: RestDataService, public repo : DataListRepositoryService,) {
     
-    if (this.repo.customerData ==undefined) {
-        this.repo.customerData =  this.getDataAll();
-    }
+   
   }
-
-  ngOnInit(): void {}
-
-  getDataAll(): Customer[] {
-     return  this.repo.getRecords("customer");
+  updateLastAction(index: number, customer: Customer): number {
+    return customer.id;
   }
 
   deleteRow(id: number) {
@@ -32,4 +27,18 @@ export class CustomerComponent implements OnInit {
       this.repo.customerData.splice(this.repo.customerData.indexOf(record));
     });
   }
+
+
+  ngOnInit(): void {
+    this.getDataAll();
+  }
+
+  private getDataAll(){
+    if (this.repo.customerData.length == 0) {
+      this.repo.customerData =  this.repo.getRecords("customer");
+  }
+
+  }
+
+
 }

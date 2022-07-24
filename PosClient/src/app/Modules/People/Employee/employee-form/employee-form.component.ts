@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Designation } from 'src/app/Core/Enums/designation.enum';
+import { Employee } from 'src/app/Core/Models/employee.model';
 import { Role } from 'src/app/Core/Models/role.model';
 import { User } from 'src/app/Core/Models/user.model';
 import { DataListRepositoryService } from 'src/app/Core/Services/data-list-repository.service';
@@ -13,36 +15,56 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
 })
 export class EmployeeFormComponent implements OnInit {
 
-    constructor(private repo : DataListRepositoryService, private route : Router, private service : RestDataService) {}
   
-    private url : string = "http://localhost:5000/api/";
-    public routeParam? = Number(location.pathname.split('/')[3]);
-    public formData : User = new User();
-    public roleData : Role[];
+  public routeParam? = Number(location.pathname.split('/')[3]);
+  public formData : Employee = new Employee();
+  public sampleImage : string = "\\assets\\avatar5.png";
+  public imagePlaceHolder : string;
+  public designEnum = [];
 
+
+  public buttonMode : string = "Save";
   
-    getDataToUpdate(){
-      if(this.routeParam > 0){
-        this.formData = this.repo.userData.find(e => e.id == this.routeParam);
+  private url : string = "http://localhost:5000/api/";
+
+  constructor(private repo : DataListRepositoryService, private route : Router, private service : RestDataService) {
+    this.designEnum = Object.keys(Designation).filter((key) => isNaN(+key));
+
+  }
+  
+  getEdit() {
+    if (this.routeParam > 0) {
+      if (this.repo.employeeData.find(f => f.id == this.routeParam) == undefined) {   
+        this.formData = new Employee();
+        this.imagePlaceHolder = this.sampleImage;
       }
+      else{
+        this.formData = this.repo.employeeData.find(f => f.id == this.routeParam);
+        this.imagePlaceHolder = this.formData.profilePicture;
+      }
+      this.buttonMode = "Update";
     }
+  }
   
     submit(form : NgForm){
       if(form.valid){
         if(this.routeParam > 0){
-          this.service.Update<User>(this.formData, this.url + "supplier/" + this.routeParam).subscribe(res=>{
+          this.formData.id = this.routeParam;
+          this.formData.profilePicture = this.imagePlaceHolder;
+          this.service.Update<Employee>(this.formData, this.url + "employee/" + this.routeParam).subscribe(res=>{
             alert("Data Updated");
-            var index = this.repo.userData.indexOf(this.formData);
-            this.repo.userData.splice(index, 1, this.formData);
-            this.route.navigateByUrl("user");
+            var index = this.repo.employeeData.indexOf(this.formData);
+            this.repo.employeeData.splice(index, 1, this.formData);
+            this.route.navigateByUrl("employee");
           })
         }
-        else{
-          this.formData.profilePicture = (this.formData.profilePicture);
-          this.service.Insert<User>(this.formData, this.url + "user").subscribe(res => {
-            console.log(this.formData);
+        else{          
+          this.formData.id = 0;          
+          this.service.Insert<Employee>(this.formData, this.url + "employee").subscribe(res => {
             alert("Data Inserted");
-            this.repo.userData.push(res);
+            this.repo.employeeData.push(res);            
+            form.reset();
+            this.imagePlaceHolder = this.sampleImage;
           });
         }
       }
@@ -54,22 +76,16 @@ export class EmployeeFormComponent implements OnInit {
         const reader = new FileReader();
         reader.onload = (e : any) => {
           this.formData.profilePicture = e.target.result;
-          this.userImage = e.target.result;
+          this.imagePlaceHolder = e.target.result;
         };
   
         reader.readAsDataURL(event.target.files[0]);
       }
     }
   
-    getAllRole(){
-      this.service.GetAll<Role>(this.url + "role").subscribe(res => this.roleData = res);
-    }
-
-    userImage : string = "\\assets\\avatar5.png";
-
     ngOnInit(): void {
-      this.getAllRole();
-      this.getDataToUpdate();
+      this.imagePlaceHolder = this.sampleImage;
+      this.getEdit();
     }
   
   }

@@ -17,7 +17,9 @@ export class SupplierFormComponent implements OnInit {
   public stateData: State[];
   public cityData: City[];
   public routeData? = Number(location.pathname.split('/')[3]);
-  formData: Supplier = new Supplier();
+  public buttonMode : string = "Save";
+  public formData: Supplier = new Supplier();
+
   private url: string = 'http://localhost:5000/api/';
 
   constructor(
@@ -28,9 +30,13 @@ export class SupplierFormComponent implements OnInit {
 
   getDataAll() {
     if (this.routeData > 0) {
-      this.formData = this.repo.supplierData.find(
-        (f) => f.id == this.routeData
-      );
+      if (this.repo.supplierData.find((f) => f.id == this.routeData) == undefined) {
+        this.formData = new Supplier();
+      }
+      else{
+        this.formData = this.repo.supplierData.find((f) => f.id == this.routeData);
+        this.buttonMode = "Update";
+      }
     }
   }
   getAllState(countryId: number) {
@@ -58,6 +64,7 @@ export class SupplierFormComponent implements OnInit {
   submit(form: NgForm) {
     if (form.valid) {
       if (this.routeData > 0) {
+        this.formData.id = this.routeData;
         this.service
           .Update<Supplier>(
             this.formData,
@@ -70,11 +77,13 @@ export class SupplierFormComponent implements OnInit {
             this.route.navigateByUrl('supplier');
           });
       } else {
+        this.formData.id = 0;
         this.service
           .Insert<Supplier>(this.formData, this.url + 'supplier')
           .subscribe((res) => {
             this.repo.supplierData.push(res);
             alert('Data Inserted');
+            form.reset();
           });
       }
     }

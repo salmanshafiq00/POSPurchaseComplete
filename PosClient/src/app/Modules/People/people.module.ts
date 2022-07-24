@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToEnumNamePipe } from 'src/app/Shared/Pipe/to-enum-name.pipe';
 
 const PeopleComponentsArray = [
   CustomerComponent,  CustomerFormComponent, EmployeeComponent, EmployeeFormComponent,  RoleComponent, RoleFormComponent,  SupplierComponent, SupplierFormComponent , UserComponent,  UserFormComponent 
@@ -21,7 +22,7 @@ const PeopleComponentsArray = [
 
 @NgModule({
   declarations: [
-    PeopleComponentsArray 
+    PeopleComponentsArray, ToEnumNamePipe
    ],
   imports: [
     CommonModule, RouterModule, BrowserModule, FormsModule , NgbDropdownModule

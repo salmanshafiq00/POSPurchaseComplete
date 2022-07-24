@@ -14,16 +14,10 @@ export class UnitComponent implements OnInit {
 
   constructor(private service: RestDataService, public repo : DataListRepositoryService,) {
 
-    if (this.repo.unitData ==undefined) {
-        this.repo.unitData =  this.getDataAll();
-    }
   }
 
-  ngOnInit(): void {
-  }
-
-  getDataAll(): Unit[] {
-     return  this.repo.getRecords("unit");
+  updateLastAction(index: number, unit: Unit): number {
+    return unit.id;
   }
 
   deleteRow(id: number) {
@@ -33,4 +27,15 @@ export class UnitComponent implements OnInit {
       this.repo.unitData.splice(this.repo.unitData.indexOf(record));
     });
   }
+
+  ngOnInit(): void {
+     this.getDataAll();
+  }
+
+ private getDataAll() {
+    if (this.repo.unitData.length == 0) {
+      this.repo.unitData =  this.repo.getRecords("unit");
+    } 
+  }
+
 }

@@ -6,31 +6,39 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
 @Component({
   selector: 'app-brand',
   templateUrl: './brand.component.html',
-  styleUrls: ['./brand.component.css']
+  styleUrls: ['./brand.component.css'],
 })
 export class BrandComponent implements OnInit {
+  private url: string = 'http://localhost:5000/api/';
 
-  private url: string = "http://localhost:5000/api/";
+  constructor(
+    private service: RestDataService,
+    public repo: DataListRepositoryService
+  ) {}
 
-  constructor(private service: RestDataService, public repo : DataListRepositoryService,) {
-    
-    if (this.repo.brandData ==undefined) {
-        this.repo.brandData =  this.getDataAll();
-    }
+  updateLastAction(index: number, brand: Brand): number {
+    return brand.id;
+  }
+  
+  deleteRow(id: number) {
+    var record = this.repo.brandData.find((w) => w.id == id);
+    this.service
+      .Delete<Brand>(this.url + 'brand/' + record.id)
+      .subscribe((res) => {
+        alert('Data deleted');
+        this.repo.brandData.splice(this.repo.brandData.indexOf(record));
+      });
   }
 
   ngOnInit(): void {
+    this.getDataAll();
   }
 
-  getDataAll(): Brand[] {
-     return  this.repo.getRecords("brand");
+  private getDataAll() {
+    if (this.repo.brandData.length == 0) {
+      this.repo.brandData = this.repo.getRecords('brand');
+    }
   }
 
-  deleteRow(id: number) {
-    var record = this.repo.brandData.find(w => w.id == id);
-    this.service.Delete<Brand>(this.url + "brand/" + record.id).subscribe(res => {
-      alert("Data deleted");
-      this.repo.brandData.splice(this.repo.brandData.indexOf(record));
-    });
-  }
+  
 }

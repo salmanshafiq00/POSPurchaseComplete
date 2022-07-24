@@ -29,6 +29,7 @@ export class PurchaseFormComponent implements OnInit {
   public purchaseStatusEnum: PurchaseStatus;
   public statusArray = [];
   public routeData? = Number(location.pathname.split('/')[3]);
+  
   private url: string = 'http://localhost:5000/api/';
 
   constructor(

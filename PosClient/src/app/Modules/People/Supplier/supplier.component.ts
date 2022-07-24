@@ -9,6 +9,7 @@ import { DataListRepositoryService } from 'src/app/Core/Services/data-list-repos
   styleUrls: ['./supplier.component.css'],
 })
 export class SupplierComponent implements OnInit {
+  
   private url: string = 'http://localhost:5000/api/';
 
   constructor(
@@ -16,6 +17,9 @@ export class SupplierComponent implements OnInit {
     public repo: DataListRepositoryService
   ) {
  
+  }
+  updateLastAction(index: number, supplier: Supplier): number {
+    return supplier.id;
   }
 
   deleteRow(id: number) {
