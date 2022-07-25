@@ -8,6 +8,7 @@ import {Employee} from 'src/app/Core/Models/employee.model'
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css']
 })
+
 export class EmployeeComponent implements OnInit {
 
   private url : string = "http://localhost:5000/api/";

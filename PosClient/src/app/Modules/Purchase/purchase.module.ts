@@ -5,8 +5,10 @@ import { PurchaseFormComponent } from './purchase-form/purchase-form.component';
 import { PurchaseReturnFormComponent } from './PurchaseReturn/purchase-return-form/purchase-return-form.component';
 import { PurchasereturnComponent } from './PurchaseReturn/purchasereturn.component';
 import { FormsModule } from '@angular/forms';
-import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-import { ToItemNamePipe } from 'src/app/Shared/Pipe/to-item-name.pipe';
+import {NgbDropdownModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
+import { ToEnumNamePipe } from 'src/app/Shared/Pipe/to-enum-name.pipe';
+import { PurchaseStatusNamePipe } from 'src/app/Shared/Pipe/purchase-status-name.pipe';
 
 
 const purchaseComponentsArray =[
@@ -15,10 +17,10 @@ const purchaseComponentsArray =[
 
 @NgModule({
   declarations: [
-    purchaseComponentsArray
+    purchaseComponentsArray, PurchaseStatusNamePipe
   ],
   imports: [
-    CommonModule, FormsModule, NgbTypeaheadModule
+    CommonModule, FormsModule, NgbTypeaheadModule, RouterModule, NgbDropdownModule
   ], 
   providers:[
     DatePipe

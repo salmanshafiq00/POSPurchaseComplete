@@ -10,12 +10,12 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { FeaturesModule } from './Modules/features.module';
 import { LayoutModule } from './Shared/layout/layout.module';
 import { ToEnumNamePipe } from './Shared/Pipe/to-enum-name.pipe';
+import { PurchaseStatusNamePipe } from './Shared/Pipe/purchase-status-name.pipe';
 
 
 @NgModule({
   declarations: [
-    AppComponent
-    
+    AppComponent,    
   ],
   imports: [
     BrowserModule,
