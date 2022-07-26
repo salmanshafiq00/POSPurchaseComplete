@@ -7,6 +7,7 @@ import { Country } from '../Models/country.model';
 import { Customer } from '../Models/customer.model';
 import { Employee } from '../Models/employee.model';
 import { Item } from '../Models/item.model';
+import { PurchaseReturn } from '../Models/purchase-return.model';
 import { Purchase } from '../Models/purchase.model';
 import { Role } from '../Models/role.model';
 import { Sales } from '../Models/sales.model';
@@ -37,6 +38,7 @@ export class DataListRepositoryService {
   public employeeData: Employee[] = [];
   public itemData: Item[] = [];
   public purchaseData: Purchase[] = [];
+  public purchaseReturnData: PurchaseReturn[] = [];
   public roleData: Role[] = [];
   public supplierData: Supplier[] = [];
   public stateData: State[] = [];
@@ -63,7 +65,7 @@ export class DataListRepositoryService {
         this.service.GetAll<Role>(this.baseUrl + entity).subscribe(res => this.roleData = res);
         return this.roleData;
       case 'brand':
-        this.service.GetAll<Brand>(this.baseUrl + entity).subscribe(res => { this.brandData = res, console.log(res) });
+        this.service.GetAll<Brand>(this.baseUrl + entity).subscribe(res => this.brandData = res);
         return this.brandData;
       case 'category':
         this.service.GetAll<Category>(this.baseUrl + entity).subscribe(res => this.categoryData = res);
@@ -74,6 +76,9 @@ export class DataListRepositoryService {
       case 'purchase':
         this.service.GetAll<Purchase>(this.baseUrl + entity).subscribe(res => this.purchaseData = res);
         return this.purchaseData;
+      case 'purchaseReturnData':
+        this.service.GetAll<PurchaseReturn>(this.baseUrl + entity).subscribe(res => this.purchaseReturnData = res);
+        return this.purchaseReturnData;
       case 'country':
         this.service.GetAll<Country>(this.baseUrl + entity).subscribe(res => this.countryData = res);
         return this.countryData;

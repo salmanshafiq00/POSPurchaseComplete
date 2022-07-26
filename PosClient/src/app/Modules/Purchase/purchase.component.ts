@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/app/Core/Models/item.model';
 import { Purchase } from 'src/app/Core/Models/purchase.model';
-import { Supplier } from 'src/app/Core/Models/supplier.model';
 import { DataListRepositoryService } from 'src/app/Core/Services/data-list-repository.service';
 import { RestDataService } from 'src/app/Core/Services/rest.service';
 
@@ -11,16 +10,20 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
   styleUrls: ['./purchase.component.css'],
 })
 export class PurchaseComponent implements OnInit {
+
   private url: string = 'http://localhost:5000/api/';
 
   constructor(
     private service: RestDataService,
     public repo: DataListRepositoryService
-  ) {}
+  ) {
+    this.getSupplierAll();
 
-  updateLastAction(index: number, purchase: Purchase): number {
-    return purchase.id;
   }
+
+  // updateLastAction(index: number, purchase: Purchase): number {
+  //   return purchase.id;
+  // }
 
   deleteRow(id: number) {
     var record = this.repo.purchaseData.find((w) => w.id == id);
@@ -31,8 +34,9 @@ export class PurchaseComponent implements OnInit {
         this.repo.purchaseData.splice(this.repo.purchaseData.indexOf(record));
       });
   }
+
   getSupplierName(id: number): string {
-    if (id != undefined) {
+    if (id != undefined) {      
       return this.repo.supplierData.find((s) => s.id == id).name;
     } else {
       return 'Supplier not found';
@@ -54,9 +58,7 @@ export class PurchaseComponent implements OnInit {
 
   private getSupplierAll() {
     if (this.repo.supplierData.length == 0) {
-      this.service
-        .GetAll<Supplier>(this.url + 'supplier')
-        .subscribe((res) => (this.repo.supplierData = res));
-    }
+      this.repo.supplierData = this.repo.getRecords('supplier');
+     }
   }
 }

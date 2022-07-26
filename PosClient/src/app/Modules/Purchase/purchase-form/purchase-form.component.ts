@@ -24,12 +24,12 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
 })
 export class PurchaseFormComponent implements OnInit {
   public singleItemEntity: Item;
-  formData: Purchase = new Purchase();
-
+  public formData: Purchase = new Purchase();
   public purchaseStatusEnum: PurchaseStatus;
   public statusArray = [];
   public routeData? = Number(location.pathname.split('/')[3]);
-  
+  public buttonMode : string = "Save";
+
   private url: string = 'http://localhost:5000/api/';
 
   constructor(
@@ -39,8 +39,33 @@ export class PurchaseFormComponent implements OnInit {
     private datePipe: DatePipe
   ) {
     this.statusArray = Object.keys(PurchaseStatus).filter((key) => isNaN(+key));
+    this.getEditData();
+    this.getAllItem();
   }
 
+  getEditData() {
+
+    if (this.routeData > 0) {
+      if (this.repo.purchaseData.find(f => f.id == this.routeData) == undefined) {
+        this.formData = new Purchase();
+      }
+      else{
+        this.service.GetOne<Purchase>(this.url + "purchase/"+ this.routeData)
+        .subscribe(res => 
+          {
+            this.formData = res;
+            this.formData.purchaseDate = this.datePipe.transform(res.purchaseDate, 'yyyy-MM-dd');
+            for (let index = 0; index < this.formData.purchaseDetails.length; index++) {
+               for (let index = 0; index < res.purchaseDetails.length; index++) {
+                this.formData.purchaseDetails[index].expireDate = this.datePipe.transform(res.purchaseDetails[index].expireDate, 'yyyy-MM-dd');                
+               }              
+            }
+          });
+      }
+      this.buttonMode = "Update";
+    }
+
+  }
 
   // For search operation
   formatter = (item: Item) => item.itemCode + " | " + item.name;
@@ -89,44 +114,10 @@ export class PurchaseFormComponent implements OnInit {
     this.calSubAmount();
   }
 
-  changedExpiredDate(e: any, index: number) {
-    var newDate = this.datePipe.transform(
-      new Date((e as HTMLInputElement).value),
-      'yyyy-MM-dd'
-    );
-    this.formData.purchaseDetails[index].expireDate = newDate;
-  }
-
-  changedQty(e: any, index: number) {
-    this.formData.purchaseDetails[index].quantity = Number(
-      (e as HTMLInputElement).value
-    );
-    this.formData.purchaseDetails[index].totalAmount =
-      this.formData.purchaseDetails[index].quantity *
-      this.formData.purchaseDetails[index].unitCost;
-    this.calTotalQty();
-    this.calSubAmount();
-  }
-
-  changedUnitCost(e: any, index: number) {
-    this.formData.purchaseDetails[index].unitCost = Number(
-      (e as HTMLInputElement).value
-    );
-    this.formData.purchaseDetails[index].totalAmount =
-      this.formData.purchaseDetails[index].quantity *
-      this.formData.purchaseDetails[index].unitCost;
-    this.calSubAmount();
-  }
-
-  getEditData() {
-    if (this.routeData > 0) {
-      console.log('for update');
-    }
-  }
   // Crud Operation methods
   submit(form: NgForm) {
     if (form.valid) {
-      if (this.routeData > 0) {
+      if (this.routeData > 0) {        
         this.service
           .Update<Purchase>(
             this.formData,
@@ -145,6 +136,7 @@ export class PurchaseFormComponent implements OnInit {
             alert('Data Inserted');
             this.repo.purchaseData.push(res);
           });
+          form.reset();
       }
     }
   }
@@ -161,6 +153,37 @@ export class PurchaseFormComponent implements OnInit {
   increment_qty(i: number) {
     this.formData.purchaseDetails[i].quantity += 1;
     this.calTotalQty();
+    this.calSubAmount();
+  }
+
+  changedQty(e: any, index: number) {
+    this.formData.purchaseDetails[index].quantity = Number(
+      (e as HTMLInputElement).value
+    );
+    this.formData.purchaseDetails[index].totalAmount =
+      this.formData.purchaseDetails[index].quantity *
+      this.formData.purchaseDetails[index].unitCost;
+    this.calTotalQty();
+    this.calSubAmount();
+  }
+
+  changedExpiredDate(e: any, index: number) {
+    var newDate = this.datePipe.transform(
+      new Date((e as HTMLInputElement).value),
+      'yyyy-MM-dd'
+    );
+    this.formData.purchaseDetails[index].expireDate = newDate;
+  }
+
+  
+
+  changedUnitCost(e: any, index: number) {
+    this.formData.purchaseDetails[index].unitCost = Number(
+      (e as HTMLInputElement).value
+    );
+    this.formData.purchaseDetails[index].totalAmount =
+      this.formData.purchaseDetails[index].quantity *
+      this.formData.purchaseDetails[index].unitCost;
     this.calSubAmount();
   }
 
@@ -191,9 +214,8 @@ export class PurchaseFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllItem();
+
     this.getAllSuppliers();
-    this.getEditData();
     this.formData.purchaseDate = this.datePipe.transform(Date.now(), 'yyyy-MM-dd');
   }
 

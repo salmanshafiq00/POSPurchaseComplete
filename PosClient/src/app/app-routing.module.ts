@@ -28,10 +28,11 @@ import { ItemFormComponent } from './Modules/Product/item/item-form/item-form.co
 import { ItemComponent } from './Modules/Product/item/item.component';
 import { UnitFormComponent } from './Modules/Product/unit/unit-form/unit-form.component';
 import { UnitComponent } from './Modules/Product/unit/unit.component';
+import { PurchaseDetailsComponent } from './Modules/Purchase/purchase-details.component';
 import { PurchaseFormComponent } from './Modules/Purchase/purchase-form/purchase-form.component';
 import { PurchaseComponent } from './Modules/Purchase/purchase.component';
 import { PurchaseReturnFormComponent } from './Modules/Purchase/PurchaseReturn/purchase-return-form/purchase-return-form.component';
-import { PurchasereturnComponent } from './Modules/Purchase/PurchaseReturn/purchasereturn.component';
+import { PurchaseReturnComponent } from './Modules/Purchase/PurchaseReturn/purchasereturn.component';
 import { SalesFormComponent } from './Modules/Sales/sales-form/sales-form.component';
 import { SalesComponent } from './Modules/Sales/sales.component';
 import { SalesReturnFormComponent } from './Modules/Sales/SalesReturn/sales-return-form/sales-return-form.component';
@@ -49,9 +50,10 @@ const routes: Routes = [
     {path: "purchase", component: PurchaseComponent}, 
     {path: "purchase/form", component:PurchaseFormComponent},
     {path: "purchase/form/:id", component:PurchaseFormComponent},
-    {path: "purchase/return", component: PurchasereturnComponent},
-    {path: "purchase/return/form", component: PurchaseReturnFormComponent},
-    {path: "purchase/return/form/:id", component: PurchaseReturnFormComponent},
+    {path: "purchase/details/:id", component:PurchaseDetailsComponent},
+    {path: "purchase_return", component: PurchaseReturnComponent},
+    {path: "purchase_return/form", component: PurchaseReturnFormComponent},
+    {path: "purchase_return/form/:id", component: PurchaseReturnFormComponent},
   
     {path: "item", component: ItemComponent},
     {path: "item/form", component: ItemFormComponent },

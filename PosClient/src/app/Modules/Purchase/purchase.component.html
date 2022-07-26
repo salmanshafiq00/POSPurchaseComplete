@@ -17,10 +17,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let data of repo.purchaseData; let i = index; trackBy:updateLastAction">
+                <tr *ngFor="let data of repo.purchaseData; let i = index;">
                     <td>{{i + 1 }}</td>
                     <td>{{data.invoiceNo}}</td>
-                    <td>{{data.purchaseDate}}</td>
+                    <td>{{data.purchaseDate | date}}</td>
                     <td>{{getSupplierName(data.supplierId)}}</td>
                     <td>{{data.status | purchaseStatusName}}</td>
                     <td>{{data.grandTotal}}</td>
@@ -29,8 +29,9 @@
                         <div ngbDropdown class="d-inline-block">
                             <button type="button" class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Action</button>
                             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                              <button ngbDropdownItem routerLink="/item/form/{{data.id}}">Edit</button>
-                              <button ngbDropdownItem (click)="deleteRow(data.id)">Delete</button>
+                              <button ngbDropdownItem routerLink="/purchase/details/{{data.id}}">Details</button>
+                              <button ngbDropdownItem routerLink="/purchase/form/{{data.id}}">Edit</button>
+                              <button ngbDropdownItem (click)="deleteRow(data.id)" [disabled]="true">Delete</button>
                             </div>
                           </div>
                     </td>
