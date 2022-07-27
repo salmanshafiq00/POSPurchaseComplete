@@ -46,6 +46,7 @@ export class PurchaseComponent implements OnInit {
   ngOnInit(): void {
     this.getDataAll();
     this.getSupplierAll();
+    this.getAllItem();
   }
 
   private getDataAll() {
@@ -60,5 +61,12 @@ export class PurchaseComponent implements OnInit {
     if (this.repo.supplierData.length == 0) {
       this.repo.supplierData = this.repo.getRecords('supplier');
      }
+  }
+
+  private getAllItem() {
+    if (this.repo.itemData.length == 0)
+      this.service.GetAll<Item>(this.url + 'item').subscribe((res) => {
+        this.repo.itemData = res;
+      });
   }
 }

@@ -19,12 +19,12 @@
             </thead>
             <tbody>
                 <tr *ngFor="let supplier of repo.supplierData; let i = index; trackBy:updateLastAction">
-                    <td>{{supplier.id}}</td>
-                    <td>{{supplier.name}}</td>
-                    <td>{{supplier.phone}}</td>
-                    <td>{{supplier.mobile}}</td>
-                    <td>{{supplier.email}}</td>
-                    <td>{{supplier.balance}}</td>
+                    <td>{{supplier?.id}}</td>
+                    <td>{{supplier?.name}}</td>
+                    <td>{{supplier?.phone}}</td>
+                    <td>{{supplier?.mobile}}</td>
+                    <td>{{supplier?.email}}</td>
+                    <td>{{supplier?.balance}}</td>
                     <td><button class="btn btn-sm btn-success">Active</button></td>
                     <td>
 

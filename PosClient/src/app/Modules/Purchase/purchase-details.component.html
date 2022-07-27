@@ -15,13 +15,14 @@
             </div>
   
             <div class="col-md-4">
-              <label class="row">{{supplier.name}}</label>
-              <label class="row">{{supplier.address}}</label>
-              <label class="row">Phone: {{supplier.phone}}</label>
-              <label class="row">Mobile: {{supplier.mobile}}</label>
-              <label class="row">Email: {{supplier.email}}</label>
-              <label class="row">VAT No: {{supplier.vatNumber}}</label>
+              <label class="row">{{supplierInfo?.name}}</label>
+              <label class="row">{{supplierInfo?.address}}</label>
+              <label class="row">Phone: {{supplierInfo?.phone}}</label>
+              <label class="row">Mobile: {{supplierInfo?.mobile}}</label>
+              <label class="row">Email: {{supplierInfo?.email}}</label>
+              <label class="row">VAT No: {{supplierInfo?.vatNumber}}</label>
           </div>
+
   
           <div class="col-md-4">
               <label class="row">Invoice: {{purchaseInvoice.invoiceNo}}</label>
@@ -45,11 +46,11 @@
               </thead>
               <tbody>
                   <tr class="row text-center" *ngFor="let pd of purchaseInvoice.purchaseDetails">
-                      <td class="col-md-3">{{getItemName(pd.itemId)}}</td>
-                      <td class="col-md-2">{{pd.expireDate | date}}</td>
-                      <td class="col-md-2">{{pd.quantity}}</td>
-                      <td class="col-md-2">{{pd.unitCost}}</td>
-                      <td class="col-md-3">{{pd.totalAmount}}</td>
+                      <td class="col-md-3">{{getItemName(pd?.itemId)}}</td>
+                      <td class="col-md-2">{{pd?.expireDate | date}}</td>
+                      <td class="col-md-2">{{pd?.quantity}}</td>
+                      <td class="col-md-2">{{pd?.unitCost}}</td>
+                      <td class="col-md-3">{{pd?.totalAmount}}</td>
                   </tr>
               </tbody>
             </table>
