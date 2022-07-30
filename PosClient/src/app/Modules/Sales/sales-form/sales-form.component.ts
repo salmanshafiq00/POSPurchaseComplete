@@ -12,6 +12,8 @@ import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
 import { Purchase } from 'src/app/Core/Models/purchase.model';
 import { ItemWithPriceVM } from 'src/app/Core/ViewModel/ItemWithPriceVM.model';
+import { SalesPayment } from 'src/app/Core/Models/sales-payment.model';
+import { PaymentType } from 'src/app/Core/Enums/payment-type.enum';
 
 @Component({
   selector: 'app-sales-form',
@@ -23,20 +25,22 @@ export class SalesFormComponent implements OnInit {
   public customerList : Customer[];
   public itemList : string[] = [];
   public formData : Sales = new Sales();
-  public salesStatusEnum : SalesStatus;
   public statusArray = [];
+  public paymentTypeArray = [];
   public singleItemEntity: ItemWithPriceVM;
   public routeData? = Number(location.pathname.split('/')[3]);
-  public itemWithPrice : ItemWithPriceVM;
-
+  public itemWithPrice : ItemWithPriceVM = new ItemWithPriceVM();
+  public salesPayment : SalesPayment = new SalesPayment();
   public salesPrice : number;
   public discountAmount : number;
   public taxAmount : number;
 
   private url : string = "http://localhost:5000/api/";
 
-  constructor(private service : RestDataService, private repo: DataListRepositoryService, private route: Router, private datePipe : DatePipe) { 
+  constructor(private service : RestDataService, private repo: DataListRepositoryService, private route: Router, private datePipe : DatePipe) 
+  { 
     this.statusArray = Object.keys(SalesStatus).filter(key => isNaN(+key));
+    this.paymentTypeArray = Object.keys(PaymentType).filter(key => isNaN(+key));
     this.getAllPurchase();
     this.getAllItemWithPrice();
   }
@@ -49,7 +53,7 @@ export class SalesFormComponent implements OnInit {
   }
 
   // Search Operation
-  formatter = (item: ItemWithPriceVM) =>  item.itemCode + " -- " + "["+"Qty: "+ item.stockQty + "]"+ " -- " +  item.itemName;
+  formatter = (item: ItemWithPriceVM) =>  item.itemCode + " - " + "["+"Qty: "+ item.stockQty + "]"+ " - " +  item.itemName;
   @ViewChild('instance', { static: true }) instance: NgbTypeahead;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
@@ -79,15 +83,18 @@ export class SalesFormComponent implements OnInit {
 
 
   SelectedItem(item: ItemWithPriceVM) {
+    
     if (item != undefined) {
-      this.itemWithPrice =this.repo.itemDataWithPrice.sort(d => d.expireDate).find(i => i.id == item.id);
+      this.itemWithPrice =this.repo.itemDataWithPrice.sort(d => d.expireDate).find(i => i.itemId == item.itemId);
+            
       this.formData.salesDetails.push({
         id: 0,
         salesQty: 1,
-        totalAmount: 0,
-        itemId: item.id,
-        salesId: 0
+        totalAmount: this.itemWithPrice.salesPrice,
+        salesId: 0,
+        itemId: item.itemId
       });
+      
       this.salesPrice = this.itemWithPrice.salesPrice;
       this.discountAmount = this.itemWithPrice.discountAmount;
       this.taxAmount = this.itemWithPrice.taxAmount;
@@ -96,8 +103,9 @@ export class SalesFormComponent implements OnInit {
   }
 
   getItemName(id: number): string {
-    if (this.repo.itemDataWithPrice != undefined && id != undefined) {
-      return this.repo.itemDataWithPrice.find((e) => e.id == id).itemName;
+    
+    if ( id != undefined) {      
+      return this.repo.itemDataWithPrice.find((e) => e.itemId == id).itemName;
     } else {
       return 'item not found';
     }
@@ -111,6 +119,11 @@ export class SalesFormComponent implements OnInit {
 
 
   submit(form : NgForm){
+    console.log(form.value);
+    console.log(this.formData);
+    console.log(this.salesPayment);
+    
+    
     if (form.valid) {
       if (this.routeData > 0) {
 
@@ -121,9 +134,13 @@ export class SalesFormComponent implements OnInit {
           this.route.navigateByUrl("sales");
         })
       }else{
+        
+        
         this.service.Insert<Sales>(this.formData, this.url+"sales").subscribe(res => {
           this.repo.salesData.push(res);
           alert("Data Inserted");
+          form.reset();
+          this.formData = new Sales();
         })
       }
     }

@@ -258,8 +258,9 @@ export class PurchaseReturnFormComponent implements OnInit {
         res.purchaseDetails.forEach((f) =>
           this.purchaseItemList.push({
             id: f.itemId,
-            name: f.itemName,
-            unitCost: f.unitCost,
+            name: this.getItemName(f.itemId),
+            unitCost: f.unitCost
+            
           })
         );
         this.supplierId = res.supplierId;

@@ -1,5 +1,5 @@
 export class ItemWithPriceVM {
-    public id : number;
+    public itemId : number;
     public itemName : string 
     public itemCode : string;
     public expireDate : string;

@@ -46,7 +46,7 @@
               </thead>
               <tbody>
                   <tr class="row text-center" *ngFor="let pd of purchaseInvoice.purchaseDetails">
-                      <td class="col-md-3">{{pd?.itemName}}</td>
+                      <td class="col-md-3">{{getItemName(pd?.itemId)}}</td>
                       <td class="col-md-2">{{pd?.expireDate | date}}</td>
                       <td class="col-md-2">{{pd?.quantity}}</td>
                       <td class="col-md-2">{{pd?.unitCost}}</td>

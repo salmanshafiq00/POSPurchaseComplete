@@ -73,26 +73,6 @@ export class PurchaseFormComponent implements OnInit {
   }
 
   // For search operation
-  // formatter = (item: Item) => item.itemCode + " | " + item.name;
-
-  // search: OperatorFunction<string, readonly Item[]> = (
-  //   text$: Observable<string>
-  // ) =>
-  //   text$.pipe(
-  //     debounceTime(200),
-  //     distinctUntilChanged(),
-  //     filter((term) => term.length >= 2),
-  //     map((term) =>
-  //       this.repo.itemData
-  //         .filter((item) => new RegExp(term, 'mi').test(item.itemCode))
-  //         .slice(0, 10)
-  //     ) || map((term) =>
-  //     this.repo.itemData
-  //       .filter((item) => new RegExp(term, 'mi').test(item.name))
-  //       .slice(0, 10)
-  //   )
-  //   );
-
   formatter = (item: ItemVM) => item.itemCode + " | " +  item.name;
 
   @ViewChild('instance', { static: true }) instance: NgbTypeahead;
@@ -134,7 +114,6 @@ export class PurchaseFormComponent implements OnInit {
         taxAmount: 0,
         purchaseId: 0,
         itemId: item.id,
-        itemName: item.name,
         profitAmount: 0,
         salesPrice: 0,
         expireDate: this.datePipe.transform(Date.now(), 'yyyy-MM-dd'),
@@ -167,7 +146,8 @@ export class PurchaseFormComponent implements OnInit {
             this.route.navigateByUrl('purchase');
           });
       } else {        
-        this.formData.id = 0;
+        console.log(this.formData);
+        
         this.service
           .Insert<Purchase>(this.formData, this.url + 'purchase')
           .subscribe((res) => {

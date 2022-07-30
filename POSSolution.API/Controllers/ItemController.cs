@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using POSSolution.API.DTO;
 using POSSolution.Core.Models;
 using POSSolution.Infrastructure;
 using System;

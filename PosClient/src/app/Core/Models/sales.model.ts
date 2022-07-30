@@ -1,5 +1,6 @@
 import { SalesStatus } from "../Enums/sales-status.enum";
 import { SalesDetails } from "./sales-details.model";
+import { SalesPayment } from "./sales-payment.model";
 
 export class Sales {
     public id:number;
@@ -13,4 +14,5 @@ export class Sales {
     public grandTotal: number = 0;
     public note: string;
     public salesDetails: SalesDetails[] = [];
+    public salesPayments : SalesPayment[] = [];
 }

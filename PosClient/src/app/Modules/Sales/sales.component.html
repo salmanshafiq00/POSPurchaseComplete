@@ -29,7 +29,7 @@
                       <div ngbDropdown class="d-inline-block">
                           <button type="button" class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Action</button>
                           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                            <button ngbDropdownItem routerLink="/sales/details/{{data.id}}">Details</button>
+                            <button ngbDropdownItem routerLink="/sales_details/{{data.id}}">Details</button>
                             <button ngbDropdownItem routerLink="/sales/form/{{data.id}}">Edit</button>
                             <button ngbDropdownItem routerLink="/sales/{{data.id}}/return/form">Return</button>
                             <button ngbDropdownItem (click)="deleteRow(data.id)" [disabled]="true">Delete</button>

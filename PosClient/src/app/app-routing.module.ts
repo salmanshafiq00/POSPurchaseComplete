@@ -36,11 +36,12 @@ import { PurchaseReturnFormComponent } from './Modules//purchase-return/purchase
 import { PurchaseReturnComponent } from './Modules/purchase-return/purchasereturn.component';
 import { SalesFormComponent } from './Modules/Sales/sales-form/sales-form.component';
 import { SalesComponent } from './Modules/Sales/sales.component';
-import { SalesReturnFormComponent } from './Modules/Sales/SalesReturn/sales-return-form/sales-return-form.component';
-import { SalesReturnComponent } from './Modules/Sales/SalesReturn/sales-return.component';
 
 import { ErrorComponent } from './Shared/layout/error/error.component';
 import { LayoutComponent } from './Shared/layout/layout.component';
+import { SalesReturnComponent } from './Modules/sales-return/sales-return.component';
+import { SalesReturnFormComponent } from './Modules/sales-return/sales-return-form/sales-return-form.component';
+import { SalesDetailsComponent } from './Modules/Sales/sales-details.component';
 
 
 
@@ -70,12 +71,12 @@ const routes: Routes = [
     {path: "unit/form", component: UnitFormComponent }, 
     {path: "unit/form/:id", component: UnitFormComponent }, 
     {path: "sales", component: SalesComponent }, 
+    {path: "sales_details/:id", component: SalesDetailsComponent }, 
     {path: "sales/form", component: SalesFormComponent }, 
     {path: "sales/form/:id", component: SalesFormComponent }, 
-    {path: "sales/return", component: SalesReturnComponent }, 
-    {path: "sales/return/form", component: SalesReturnFormComponent }, 
+    {path: "sales_return", component: SalesReturnComponent }, 
+    {path: "sales_return/form", component: SalesReturnFormComponent }, 
     {path: "sales/return/form/:id", component: SalesReturnFormComponent }, 
-  
     {path: "country", component: CountryComponent }, 
     {path: "country/form", component: CountryFormComponent }, 
     {path: "country/form/:id", component: CountryFormComponent }, 

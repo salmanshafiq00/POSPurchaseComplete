@@ -23,7 +23,9 @@ export class PurchaseReturnDetailsComponent implements OnInit {
     public repo: DataListRepositoryService
   ) {
     this.getAllSuppliers();
+    this.getCompanyInfo();
     this.getAllPurchase();
+    this.getItemAll();
   }
 
   getItemName(id: number): string {
@@ -35,9 +37,6 @@ export class PurchaseReturnDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.getItemAll();
-    this.getCompanyInfo();
     this.getReturnPurchaseInvoice();
   }
 

@@ -4,6 +4,7 @@ import { Purchase } from 'src/app/Core/Models/purchase.model';
 import { Supplier } from 'src/app/Core/Models/supplier.model';
 import { DataListRepositoryService } from 'src/app/Core/Services/data-list-repository.service';
 import { RestDataService } from 'src/app/Core/Services/rest.service';
+import { ItemVM } from 'src/app/Core/ViewModel/itemVM.model';
 
 @Component({
   selector: 'app-purchase-details',
@@ -22,14 +23,21 @@ export class PurchaseDetailsComponent implements OnInit {
     private service: RestDataService,
     public repo: DataListRepositoryService
   ) {
-    
+    this.getAllItem();
   }
 
+  getItemName(id: number): string {
+    if (this.repo.itemDataNoImages != null && id != undefined) {
+      return this.repo.itemDataNoImages.find((e) => e.id == id).name;
+    } else {
+      return 'item not found';
+    }
+  }
 
   ngOnInit(): void {
+    this.getCompanyInfo();
     this.getPurchaseInvoice();
 
-    this.getCompanyInfo();
   }
 
   private getPurchaseInvoice() {
@@ -57,5 +65,12 @@ export class PurchaseDetailsComponent implements OnInit {
     } else {
       this.supplierInfo = this.repo.supplierData.find((f) => f.id == id);
     }
+  }
+  private getAllItem() {
+    if (this.repo.itemDataNoImages.length == 0) {
+      this.service
+        .GetAll<ItemVM>(this.url + 'item/NoImages')
+        .subscribe(res => this.repo.itemDataNoImages = res);
+    } 
   }
 }
