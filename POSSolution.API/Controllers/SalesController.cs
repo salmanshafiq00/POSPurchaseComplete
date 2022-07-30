@@ -21,6 +21,7 @@ namespace POSSolution.API.Controllers
             _context = context;
         }
         // Api for single entity
+        [HttpGet("{id}")]
         public override async Task<ActionResult<Sales>> GetAsync([FromRoute] int id)
         {
             try
@@ -44,6 +45,7 @@ namespace POSSolution.API.Controllers
             }
         }
         // Api for Create entity
+        [HttpPost]
         public override async Task<ActionResult<Sales>> CreateAsync([FromBody] Sales sales)
         {
             using (var transection = await _context.Database.BeginTransactionAsync())
@@ -99,6 +101,7 @@ namespace POSSolution.API.Controllers
         }
 
         // Api for Update entity
+        [HttpPut("{id}")]
         public override async Task<ActionResult<Sales>> UpdateAsync([FromRoute] int id, [FromBody] Sales sales)
         {
             if (id != sales.Id)

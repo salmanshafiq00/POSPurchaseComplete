@@ -1,7 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap/typeahead/typeahead.module';
 import {
   OperatorFunction,
   Observable,
@@ -9,6 +10,8 @@ import {
   distinctUntilChanged,
   filter,
   map,
+  merge,
+  Subject,
 } from 'rxjs';
 import { PurchaseStatus } from 'src/app/Core/Enums/purchase-status.enum';
 import { Item } from 'src/app/Core/Models/item.model';
@@ -16,6 +19,7 @@ import { Purchase } from 'src/app/Core/Models/purchase.model';
 import { Supplier } from 'src/app/Core/Models/supplier.model';
 import { DataListRepositoryService } from 'src/app/Core/Services/data-list-repository.service';
 import { RestDataService } from 'src/app/Core/Services/rest.service';
+import { ItemVM } from 'src/app/Core/ViewModel/itemVM.model';
 
 @Component({
   selector: 'app-purchase-form',
@@ -23,12 +27,13 @@ import { RestDataService } from 'src/app/Core/Services/rest.service';
   styleUrls: ['./purchase-form.component.css'],
 })
 export class PurchaseFormComponent implements OnInit {
-  public singleItemEntity: Item;
+  public singleItemEntity: ItemVM;
   public formData: Purchase = new Purchase();
   public purchaseStatusEnum: PurchaseStatus;
   public statusArray = [];
   public routeData? = Number(location.pathname.split('/')[3]);
   public buttonMode : string = "Save";
+  // public itemModel: any;
 
   private url: string = 'http://localhost:5000/api/';
 
@@ -68,27 +73,57 @@ export class PurchaseFormComponent implements OnInit {
   }
 
   // For search operation
-  formatter = (item: Item) => item.itemCode + " | " + item.name;
+  // formatter = (item: Item) => item.itemCode + " | " + item.name;
 
-  search: OperatorFunction<string, readonly Item[]> = (
+  // search: OperatorFunction<string, readonly Item[]> = (
+  //   text$: Observable<string>
+  // ) =>
+  //   text$.pipe(
+  //     debounceTime(200),
+  //     distinctUntilChanged(),
+  //     filter((term) => term.length >= 2),
+  //     map((term) =>
+  //       this.repo.itemData
+  //         .filter((item) => new RegExp(term, 'mi').test(item.itemCode))
+  //         .slice(0, 10)
+  //     ) || map((term) =>
+  //     this.repo.itemData
+  //       .filter((item) => new RegExp(term, 'mi').test(item.name))
+  //       .slice(0, 10)
+  //   )
+  //   );
+
+  formatter = (item: ItemVM) => item.itemCode + " | " +  item.name;
+
+  @ViewChild('instance', { static: true }) instance: NgbTypeahead;
+  focus$ = new Subject<string>();
+  click$ = new Subject<string>();
+
+  search: OperatorFunction<string, readonly ItemVM[]> = (
     text$: Observable<string>
-  ) =>
-    text$.pipe(
+  ) => {
+    const debouncedText$ = text$.pipe(
       debounceTime(200),
-      distinctUntilChanged(),
-      filter((term) => term.length >= 2),
-      map((term) =>
-        this.repo.itemData
-          .filter((item) => new RegExp(term, 'mi').test(item.itemCode))
-          .slice(0, 10)
-      ) || map((term) =>
-      this.repo.itemData
-        .filter((item) => new RegExp(term, 'mi').test(item.name))
-        .slice(0, 10)
-    )
+      distinctUntilChanged()
     );
+    const clicksWithClosedPopup$ = this.click$.pipe(
+      filter(() => !this.instance.isPopupOpen())
+    );
+    const inputFocus$ = this.focus$;
 
-  SelectedItem(item: Item) {
+    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+      map((term) =>
+        (term === ''
+          ? this.repo.itemDataNoImages
+          : this.repo.itemDataNoImages.filter(
+              (v) => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1
+            )
+        ).slice(0, 10)
+      )
+    );
+  };
+
+  SelectedItem(item: ItemVM) {
     if (item != undefined) {
       this.formData.purchaseDetails.push({
         id: 0,
@@ -99,6 +134,7 @@ export class PurchaseFormComponent implements OnInit {
         taxAmount: 0,
         purchaseId: 0,
         itemId: item.id,
+        itemName: item.name,
         profitAmount: 0,
         salesPrice: 0,
         expireDate: this.datePipe.transform(Date.now(), 'yyyy-MM-dd'),
@@ -117,7 +153,8 @@ export class PurchaseFormComponent implements OnInit {
   // Crud Operation methods
   submit(form: NgForm) {
     if (form.valid) {
-      if (this.routeData > 0) {        
+      if (this.routeData > 0) { 
+        this.formData.id = this.routeData;
         this.service
           .Update<Purchase>(
             this.formData,
@@ -126,17 +163,21 @@ export class PurchaseFormComponent implements OnInit {
           .subscribe((res) => {
             alert('Data updated');
             var index = this.repo.purchaseData.indexOf(this.formData);
-            this.repo.purchaseData.splice(index, 1, res);
+            this.repo.purchaseData.splice(index, 1, this.formData);
             this.route.navigateByUrl('purchase');
           });
-      } else {
+      } else {        
+        this.formData.id = 0;
         this.service
           .Insert<Purchase>(this.formData, this.url + 'purchase')
           .subscribe((res) => {
             alert('Data Inserted');
             this.repo.purchaseData.push(res);
+            form.reset();
+            this.formData = new Purchase();
+            
           });
-          form.reset();
+
       }
     }
   }
@@ -206,8 +247,8 @@ export class PurchaseFormComponent implements OnInit {
   }
 
   getItemName(id: number): string {
-    if (this.formData.purchaseDetails != null) {
-      return this.repo.itemData.find((e) => e.id == id).name;
+    if (this.formData.purchaseDetails != null && id != undefined) {
+      return this.repo.itemDataNoImages.find((e) => e.id == id).name;
     } else {
       return 'item';
     }
@@ -220,11 +261,11 @@ export class PurchaseFormComponent implements OnInit {
   }
 
   private getAllItem() {
-
-    if(this.repo.itemData.length == 0)
-    this.service.GetAll<Item>(this.url + 'item').subscribe((res) => {
-      this.repo.itemData = res;      
-    })
+    if (this.repo.itemDataNoImages.length == 0) {
+      this.service
+        .GetAll<ItemVM>(this.url + 'item/NoImages')
+        .subscribe(res => this.repo.itemDataNoImages = res);
+    } 
   }
 
   private getAllSuppliers() {

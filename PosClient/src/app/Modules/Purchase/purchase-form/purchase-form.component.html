@@ -19,7 +19,7 @@
                 #supplierId="ngModel"
                 [(ngModel)]="formData.supplierId"
               >
-                <option value="-1" selected>-----Select Country-----</option>
+                <option value="-1" selected>-----Select Supplier-----</option>
                 <option
                   *ngFor="let supplier of repo.supplierData"
                   value="{{ supplier.id }}"
@@ -93,7 +93,7 @@
       <div class="row mb-3">
         <div class="col-md-8 offset-md-2">
           <div class="input-group">
-            <input
+            <!-- <input
               id="typeahead-prevent-manual-entry"
               type="text"
               style="border: 1px solid #33b5e5"
@@ -104,7 +104,20 @@
               [resultFormatter]="formatter"
               [editable]="false"
               [ngModelOptions]="{ standalone: true }"
-            />
+            /> -->
+            <input
+            id="typeahead-focus"
+            type="text"
+            class="form-control"
+            [(ngModel)]="singleItemEntity"
+            [ngbTypeahead]="search"
+            (focus)="focus$.next($any($event).target.value)"
+            (click)="click$.next($any($event).target.value)"
+            [inputFormatter]="formatter"
+            [resultFormatter]="formatter"
+            #instance="ngbTypeahead"
+            [ngModelOptions]="{ standalone: true }"
+          />
             <a
               class="btn btn-info input-group-append"
               (click)="SelectedItem(singleItemEntity)"
@@ -136,12 +149,17 @@
               class="row"
             >
               <td class="col-md-2">
-                <label>{{ getItemName(purchaseDetails.itemId) }} </label>
                 <input
                   type="number"
                   style="display: none"
-                  name="purchaseDetails.itemId"
+                  name="itemId"
                   [(ngModel)]="purchaseDetails.itemId"
+                />
+                <input
+                  type="text"
+                  class="lblInput"
+                  name="itemName"
+                  [(ngModel)]="purchaseDetails.itemName"
                 />
               </td>
               <td class="col-md-2">
@@ -220,7 +238,7 @@
           <div class="form-group row">
             <label class="col-sm-4 control-label text-end">Quantity</label>
             <div class="col-sm-4">
-              <input type="number"  name="totalQuantity" #totalQuantity="ngModel" [(ngModel)]="formData.totalQuantity"  readonly class="lblInput"/>
+              <input type="number"   readonly class="lblInput"  name="totalQuantity" #totalQuantity="ngModel" [(ngModel)]="formData.totalQuantity"/>
             </div>
           </div>
           <div class="row text-end">

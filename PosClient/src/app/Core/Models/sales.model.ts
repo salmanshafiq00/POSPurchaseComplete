@@ -5,12 +5,12 @@ export class Sales {
     public id:number;
     public customerId:number;
     public status:SalesStatus;
-    public salesDate:Date;
+    public salesDate:string;
     public invoiceNo: string;
-    public totalQuantity: number;
-    public subTotal: number;
-    public otherCharges: number;
-    public grandTotal: number;
+    public totalQuantity: number = 0;
+    public subTotal: number = 0;
+    public otherCharges: number = 0;
+    public grandTotal: number = 0;
     public note: string;
-    public salesDetails: SalesDetails[];
+    public salesDetails: SalesDetails[] = [];
 }

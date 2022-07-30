@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyInfo } from 'src/app/Core/Models/company-info.model';
-import { Item } from 'src/app/Core/Models/item.model';
 import { Purchase } from 'src/app/Core/Models/purchase.model';
 import { Supplier } from 'src/app/Core/Models/supplier.model';
 import { DataListRepositoryService } from 'src/app/Core/Services/data-list-repository.service';
@@ -23,16 +22,9 @@ export class PurchaseDetailsComponent implements OnInit {
     private service: RestDataService,
     public repo: DataListRepositoryService
   ) {
-    this.getAllItem();
+    
   }
 
-  getItemName(id: number): string {
-    if (this.repo.itemData != undefined) {
-      return this.repo.itemData.find((e) => e.id == id).name;
-    } else {
-      return 'item';
-    }
-  }
 
   ngOnInit(): void {
     this.getPurchaseInvoice();
@@ -65,12 +57,5 @@ export class PurchaseDetailsComponent implements OnInit {
     } else {
       this.supplierInfo = this.repo.supplierData.find((f) => f.id == id);
     }
-  }
-
-  private getAllItem() {
-    if (this.repo.itemData.length == 0)
-      this.service.GetAll<Item>(this.url + 'item').subscribe((res) => {
-        this.repo.itemData = res;
-      });
   }
 }

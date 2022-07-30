@@ -10,6 +10,8 @@ namespace POSSolution.Core.Models
         [ForeignKey("Item")]
         public int ItemId { get; set; }
 
+        public string ItemName { get; set; }
+
         public decimal Quantity { get; set; }
 
         [DataType(DataType.Currency), Column(TypeName = "money")]

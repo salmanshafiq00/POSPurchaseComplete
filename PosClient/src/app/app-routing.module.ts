@@ -31,8 +31,9 @@ import { UnitComponent } from './Modules/Product/unit/unit.component';
 import { PurchaseDetailsComponent } from './Modules/Purchase/purchase-details.component';
 import { PurchaseFormComponent } from './Modules/Purchase/purchase-form/purchase-form.component';
 import { PurchaseComponent } from './Modules/Purchase/purchase.component';
-import { PurchaseReturnFormComponent } from './Modules/Purchase/PurchaseReturn/purchase-return-form/purchase-return-form.component';
-import { PurchaseReturnComponent } from './Modules/Purchase/PurchaseReturn/purchasereturn.component';
+import { PurchaseReturnDetailsComponent } from './Modules/purchase-return/purchase-return-details.component';
+import { PurchaseReturnFormComponent } from './Modules//purchase-return/purchase-return-form/purchase-return-form.component';
+import { PurchaseReturnComponent } from './Modules/purchase-return/purchasereturn.component';
 import { SalesFormComponent } from './Modules/Sales/sales-form/sales-form.component';
 import { SalesComponent } from './Modules/Sales/sales.component';
 import { SalesReturnFormComponent } from './Modules/Sales/SalesReturn/sales-return-form/sales-return-form.component';
@@ -52,8 +53,9 @@ const routes: Routes = [
     {path: "purchase/form/:id", component:PurchaseFormComponent},
     {path: "purchase/details/:id", component:PurchaseDetailsComponent},
     {path: "purchase_return", component: PurchaseReturnComponent},
-    {path: "purchase_return/form", component: PurchaseReturnFormComponent},
-    {path: "purchase_return/form/:id", component: PurchaseReturnFormComponent},
+    {path: "purchase/:id/return/form", component: PurchaseReturnFormComponent},
+    {path: "purchase/:id/return/edit/:id", component: PurchaseReturnFormComponent},
+    {path: "purchase_return/details/:id", component: PurchaseReturnDetailsComponent},
   
     {path: "item", component: ItemComponent},
     {path: "item/form", component: ItemFormComponent },

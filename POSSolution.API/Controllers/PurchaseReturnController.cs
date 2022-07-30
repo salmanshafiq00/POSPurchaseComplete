@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using POSSolution.API.DTO;
 using POSSolution.Core.Models;
 using POSSolution.Infrastructure;
 using System;
@@ -43,6 +42,8 @@ namespace POSSolution.API.Controllers
                     "Error retrieving data from the database");
             }
         }
+
+
         // Api for create entity
         public override async Task<ActionResult<PurchaseReturn>> CreateAsync([FromBody] PurchaseReturn purchaseReturn)
         {
@@ -50,21 +51,23 @@ namespace POSSolution.API.Controllers
             {
                 try
                 {
-                    // Fetch purchased UnitCost
-                    foreach (PurchaseReturnDetails details in purchaseReturn.PurchaseReturnDetails)
-                    {
-                        if (_context.PurchaseDetails.Any(a => a.PurchaseId == purchaseReturn.PurchaseId))
-                        {
-                         
-                            details.UnitCost = _context.PurchaseDetails.Single(a => a.ItemId == details.ItemId).UnitCost;
-                        }
-                    }
 
                     await _context.PurchaseReturns.AddAsync(purchaseReturn);
                     await _context.SaveChangesAsync();
 
-                    List<StockCount> whList = new List<StockCount>();
+                    // Update the purchase quantity in PurchaseDetails
+                    List<PurchaseDetails> pdListOfSinlePurchase = _context.Purchases.Include("PurchaseDetails").SingleOrDefault(p => p.Id == purchaseReturn.PurchaseId).PurchaseDetails;
+                    List<PurchaseDetails> pdList = new List<PurchaseDetails>();
+                    foreach (PurchaseReturnDetails details in purchaseReturn.PurchaseReturnDetails)
+                    {
+                        PurchaseDetails pd = pdListOfSinlePurchase.SingleOrDefault(pd => pd.ItemId == details.ItemId);
+                        pd.Quantity -= details.Quantity;
+                        pdList.Add(pd);
+                    }
+                    _context.PurchaseDetails.UpdateRange(pdList);
+
                     // Update Correspondent StockCount entity
+                    List<StockCount> whList = new List<StockCount>();
                     foreach (PurchaseReturnDetails details in purchaseReturn.PurchaseReturnDetails)
                     {
                 
@@ -109,7 +112,18 @@ namespace POSSolution.API.Controllers
 
                         }
                     }
-                    
+
+                    // Update the purchase quantity in PurchaseDetails
+                    List<PurchaseDetails> pdListOfSinlePurchase = _context.Purchases.Include("PurchaseDetails").SingleOrDefault(p => p.Id == purchaseReturn.PurchaseId).PurchaseDetails;
+                    List<PurchaseDetails> pdList = new List<PurchaseDetails>();
+                    foreach (PurchaseReturnDetails details in purchaseReturn.PurchaseReturnDetails)
+                    {
+                        decimal diffQty =  _context.Purchases.Include(p => p.PurchaseDetails).Single(p => p.Id == purchaseReturn.PurchaseId).PurchaseDetails.SingleOrDefault(pd => pd.ItemId == details.ItemId).Quantity - details.Quantity;
+                        PurchaseDetails pd = pdListOfSinlePurchase.SingleOrDefault(pd => pd.ItemId == details.ItemId);
+                        pd.Quantity -= diffQty;
+                        pdList.Add(pd);
+                    }
+                    _context.PurchaseDetails.UpdateRange(pdList);
 
                     List<StockCount> whList = new List<StockCount>();
                     // Update Correspondent StockCount entity

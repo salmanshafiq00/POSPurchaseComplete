@@ -5,6 +5,7 @@ using POSSolution.API.DTO;
 using POSSolution.Core.Models;
 using POSSolution.Infrastructure;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,13 +20,25 @@ namespace POSSolution.API.Controllers
         {
             _context = context;
         }
-        [NonAction]
-        public override Task<ActionResult<Item>> GetAsync([FromRoute] int id)
+        [HttpGet("NoImages")]
+        public async Task<IActionResult> GetItemsNoImages()
         {
-            return base.GetAsync(id);
+            try
+            {
+                return Ok(await _dbSet.Select(i => new { Id = i.Id, Name = i.Name, ItemCode= i.ItemCode, CategoryId = i.CategoryId, BrandId = i.BrandId, UnitId = i.UnitId, SKU = i.SKU, Barcode = i.Barcode, Description = i.Description, ProfitMargin = i.ProfitMargin, DiscountId = i.DiscountId }).ToListAsync());
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                  "Error retrieving data from the database");
+            }
+
         }
-        [HttpGet("{id}")]
-        public async Task<IActionResult> ItemDetailsAsync([FromRoute] int id)
+
+
+        [HttpGet("ItemWithPrice")]
+        public IActionResult ItemWithPriceAsync()
         {
             try
             {
@@ -41,7 +54,8 @@ namespace POSSolution.API.Controllers
                         (itemCombined, stock) => new {
                             ItemId = itemCombined.item.Id,
                             ItemName = itemCombined.item.Name,
-                            UnitPrice = 100,
+                            ItemCode = itemCombined.item.ItemCode,
+                            ExpireDate = itemCombined.PurchaseDetails.ExpireDate,
                             DiscountAmount = itemCombined.PurchaseDetails.DiscountAmount,
                             TaxAmount = itemCombined.PurchaseDetails.TaxAmount,
                             SalesPrice = itemCombined.PurchaseDetails.SalesPrice,
@@ -49,17 +63,9 @@ namespace POSSolution.API.Controllers
 
                         }
 
-                    );
+                    ).OrderBy(pd => pd.ExpireDate);
 
-
-                if (result != null)
-                {
-                    return Ok(result);
-                }
-                else
-                {
-                    return NotFound($"{id} not found");
-                }
+                return  Ok(result);
             }
             catch (Exception)
             {

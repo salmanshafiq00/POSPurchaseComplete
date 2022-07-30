@@ -7,12 +7,13 @@ import { CompanyModule } from './Company/company.module';
 import { PurchaseModule } from './Purchase/purchase.module';
 import { SalesModule } from './Sales/sales.module';
 import { DataListRepositoryService } from '../Core/Services/data-list-repository.service';
+import { PurchaseReturnModule } from './purchase-return/purchase-return.module';
 
 @NgModule({
   declarations: [
   ],
   imports: [
-    CommonModule, CompanyModule,  LocationModule, PeopleModule , ProductModule, PurchaseModule , SalesModule
+    CommonModule, CompanyModule,  LocationModule, PeopleModule , ProductModule, PurchaseModule , SalesModule, PurchaseReturnModule
   ],
   providers: [DataListRepositoryService]
 })

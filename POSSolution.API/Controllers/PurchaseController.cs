@@ -136,11 +136,7 @@ namespace POSSolution.API.Controllers
                         foreach (PurchaseDetails details in purchase.PurchaseDetails)
                         {
 
-                            //int discountId = _context.Items.Single(i => i.Id == details.ItemId).DiscountId;
-                            //decimal discountAmount = 0;
-                            //decimal taxAmount = 0;
-                            //SalesDiscountTax dt = await _context.SalesDiscountTaxes.FirstOrDefaultAsync(d => d.Id == discountId);
-                            Item purchaseItem = _context.Items.Include(i => i.SalesDiscountTax).SingleOrDefault(it => it.Id == details.ItemId);
+                           Item purchaseItem = _context.Items.Include(i => i.SalesDiscountTax).SingleOrDefault(it => it.Id == details.ItemId);
                             SalesDiscountTax dt = purchaseItem.SalesDiscountTax;
                             decimal discountAmount = 0;
                             decimal taxAmount = 0;
@@ -162,6 +158,7 @@ namespace POSSolution.API.Controllers
                         }
                         _context.Purchases.Update(purchase);
 
+                        // Update correspondent stock quantity
                         List<StockCount> whList = new List<StockCount>();
                         foreach (PurchaseDetails details in purchase.PurchaseDetails)
                         {

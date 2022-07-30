@@ -13,7 +13,7 @@ namespace POSSolution.Core.Models
 
         public decimal Quantity { get; set; }
 
-        public DateTime ExpireDate { get; set; } // todo
+        //public DateTime ExpireDate { get; set; } // todo
 
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal UnitCost { get; set; }

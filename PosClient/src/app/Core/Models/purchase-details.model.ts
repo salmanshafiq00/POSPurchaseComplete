@@ -1,6 +1,7 @@
 export class PurchaseDetails {
     public id: number;
     public itemId : number;
+    public itemName: string;
     public quantity: number;
     public unitCost: number;
     public discountAmount?: number;

@@ -1,4 +1,3 @@
-import { TaxType } from "../Enums/tax-type.enum";
 
 export class Item {
     public id : number;

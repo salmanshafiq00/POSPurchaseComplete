@@ -16,6 +16,8 @@ import { State } from '../Models/state.model';
 import { Supplier } from '../Models/supplier.model';
 import { Unit } from '../Models/unit.model';
 import { User } from '../Models/user.model';
+import { ItemVM } from '../ViewModel/itemVM.model';
+import { ItemWithPriceVM } from '../ViewModel/ItemWithPriceVM.model';
 import { RestDataService } from './rest.service';
 
 @Injectable({
@@ -37,6 +39,8 @@ export class DataListRepositoryService {
   public discountData: SalesDiscountTax[] =[];
   public employeeData: Employee[] = [];
   public itemData: Item[] = [];
+  public itemDataNoImages = [];
+  public itemDataWithPrice = [];
   public purchaseData: Purchase[] = [];
   public purchaseReturnData: PurchaseReturn[] = [];
   public roleData: Role[] = [];
@@ -49,6 +53,15 @@ export class DataListRepositoryService {
 
   public getRecords(entity: string): any[] {
     switch (entity) {
+      case 'item':
+        this.service.GetAll<Item>(this.baseUrl + entity).subscribe(res => {this.itemData = res});
+        return this.itemData;
+      case 'item/NoImages':
+        this.service.GetAll<ItemVM>(this.baseUrl + entity).subscribe(res => {this.itemDataNoImages = res});
+        return this.itemDataNoImages;
+      case 'item/ItemWithPrice':
+        this.service.GetAll<ItemWithPriceVM>(this.baseUrl + entity).subscribe(res => {this.itemDataWithPrice = res});
+        return this.itemDataWithPrice;
       case 'customer':
         this.service.GetAll<Customer>(this.baseUrl + entity).subscribe(res => this.customerData = res);
         return this.customerData;
@@ -98,10 +111,6 @@ export class DataListRepositoryService {
         'companyinfo':
         this.service.GetAll<CompanyInfo>(this.baseUrl + entity).subscribe(res => {this.companyData = res});
         return this.companyData;
-      case
-        'item':
-        this.service.GetAll<Item>(this.baseUrl + entity).subscribe(res => {this.itemData = res});
-        return this.itemData;
       default:
         return this.emptyData;
     }
